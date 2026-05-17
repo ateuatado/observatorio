@@ -1,0 +1,455 @@
+/* =============================================================
+   OVP — Observatório de Violências Policiais
+   Arquivo: public/assets/css/ovp.css
+   Complemento ao Bootstrap 5 puro
+   ============================================================= */
+
+/* --- FONTES ------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+
+/* --- VARIÁVEIS --------------------------------------------- */
+:root {
+    --ovp-vermelho:     #8B1A1A;
+    --ovp-vermelho-claro: #B22222;
+    --ovp-cinza-escuro: #1C1C1E;
+    --ovp-cinza:        #3A3A3C;
+    --ovp-cinza-medio:  #6C6C70;
+    --ovp-cinza-claro:  #F2F2F7;
+    --ovp-bege:         #FAF7F2;
+    --ovp-branco:       #FFFFFF;
+    --ovp-borda:        #D1D1D6;
+    --ovp-sombra:       0 2px 12px rgba(0,0,0,.08);
+    --ovp-sombra-hover: 0 6px 24px rgba(0,0,0,.14);
+    --radius:           0.5rem;
+    --radius-lg:        0.75rem;
+    --font-body:        'Inter', system-ui, sans-serif;
+    --font-serif:       'Merriweather', Georgia, serif;
+}
+
+/* --- BASE --------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    font-family: var(--font-body);
+    color: var(--ovp-cinza-escuro);
+    background-color: var(--ovp-branco);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--ovp-cinza-escuro);
+}
+
+a { color: var(--ovp-vermelho); }
+a:hover { color: var(--ovp-vermelho-claro); }
+
+/* --- NAVBAR ------------------------------------------------- */
+.ovp-navbar {
+    background: var(--ovp-vermelho) !important;
+    border-bottom: 3px solid #6B1212;
+    padding: .85rem 0;
+}
+
+.ovp-navbar .navbar-brand {
+    color: #fff !important;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.ovp-navbar .navbar-brand span.badge-ano {
+    font-family: var(--font-body);
+    font-size: .65rem;
+    font-weight: 500;
+    background: rgba(255,255,255,.2);
+    padding: .2rem .5rem;
+    border-radius: 20px;
+    letter-spacing: 0;
+}
+
+.ovp-navbar .nav-link {
+    color: rgba(255,255,255,.88) !important;
+    font-size: .875rem;
+    font-weight: 500;
+    padding: .4rem .75rem !important;
+    border-radius: var(--radius);
+    transition: background .2s, color .2s;
+}
+
+.ovp-navbar .nav-link:hover,
+.ovp-navbar .nav-link.active {
+    background: rgba(255,255,255,.18);
+    color: #fff !important;
+}
+
+.ovp-navbar .btn-login {
+    background: #fff;
+    color: var(--ovp-vermelho) !important;
+    font-weight: 600;
+    font-size: .85rem;
+    padding: .4rem 1.1rem;
+    border-radius: 20px;
+    transition: all .2s;
+}
+
+.ovp-navbar .btn-login:hover {
+    background: var(--ovp-cinza-claro);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* --- HERO --------------------------------------------------- */
+.ovp-hero {
+    background: linear-gradient(135deg, var(--ovp-vermelho) 0%, #4A0E0E 100%);
+    color: #fff;
+    padding: 5rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ovp-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.ovp-hero h1 {
+    color: #fff;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+
+.ovp-hero .lead {
+    font-size: 1.05rem;
+    opacity: .9;
+    max-width: 560px;
+}
+
+.ovp-hero .hero-stat {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: transform .2s;
+}
+
+.ovp-hero .hero-stat:hover { transform: translateY(-3px); }
+
+.ovp-hero .hero-stat .stat-num {
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    display: block;
+    line-height: 1;
+}
+
+.ovp-hero .hero-stat .stat-label {
+    font-size: .8rem;
+    opacity: .8;
+    margin-top: .25rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+/* --- SEÇÃO DE CONTEÚDO ------------------------------------- */
+.ovp-section {
+    padding: 4rem 0;
+}
+
+.ovp-section-alt {
+    background: var(--ovp-cinza-claro);
+}
+
+.ovp-section-title {
+    font-size: 1.5rem;
+    margin-bottom: .4rem;
+}
+
+.ovp-section-subtitle {
+    color: var(--ovp-cinza-medio);
+    font-size: .9rem;
+    margin-bottom: 2rem;
+}
+
+.ovp-divider {
+    display: block;
+    width: 48px;
+    height: 4px;
+    background: var(--ovp-vermelho);
+    border-radius: 2px;
+    margin: .5rem 0 1.5rem;
+}
+
+/* --- CARDS -------------------------------------------------- */
+.ovp-card {
+    background: #fff;
+    border: 1px solid var(--ovp-borda);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--ovp-sombra);
+    transition: box-shadow .25s, transform .25s;
+    overflow: hidden;
+    height: 100%;
+}
+
+.ovp-card:hover {
+    box-shadow: var(--ovp-sombra-hover);
+    transform: translateY(-3px);
+}
+
+.ovp-card .card-type {
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--ovp-vermelho);
+    margin-bottom: .35rem;
+}
+
+.ovp-card .card-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ovp-cinza-escuro);
+    line-height: 1.4;
+    margin-bottom: .5rem;
+}
+
+.ovp-card .card-meta {
+    font-size: .78rem;
+    color: var(--ovp-cinza-medio);
+}
+
+.ovp-card-caso {
+    border-left: 4px solid var(--ovp-vermelho);
+}
+
+/* --- BADGE DE TIPO DE VIOLÊNCIA ---------------------------- */
+.badge-tipo {
+    font-size: .7rem;
+    font-weight: 600;
+    padding: .3em .7em;
+    border-radius: 20px;
+}
+
+.badge-execucao   { background: #FEE2E2; color: #991B1B; }
+.badge-chacina    { background: #FDE8D8; color: #9A3412; }
+.badge-tortura    { background: #FEF9C3; color: #854D0E; }
+.badge-abuso      { background: #DBEAFE; color: #1E40AF; }
+.badge-custodia   { background: #F3E8FF; color: #6B21A8; }
+
+/* --- FOOTER ------------------------------------------------- */
+.ovp-footer {
+    background: var(--ovp-cinza-escuro);
+    color: rgba(255,255,255,.75);
+    padding: 3rem 0 1.5rem;
+    font-size: .875rem;
+}
+
+.ovp-footer h6 {
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 1rem;
+}
+
+.ovp-footer a {
+    color: rgba(255,255,255,.65);
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.ovp-footer a:hover { color: #fff; }
+
+.ovp-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.ovp-footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.12);
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    font-size: .78rem;
+    color: rgba(255,255,255,.4);
+}
+
+/* --- ÁREA AUTENTICADA --------------------------------------- */
+.ovp-sidebar {
+    background: var(--ovp-cinza-escuro);
+    min-height: 100vh;
+    width: 240px;
+    flex-shrink: 0;
+    padding: 1.5rem 0;
+}
+
+.ovp-sidebar .sidebar-brand {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 1rem;
+}
+
+.ovp-sidebar .sidebar-brand span {
+    font-family: var(--font-serif);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.ovp-sidebar .nav-link {
+    color: rgba(255,255,255,.7);
+    font-size: .875rem;
+    padding: .55rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    transition: background .15s, color .15s;
+}
+
+.ovp-sidebar .nav-link:hover,
+.ovp-sidebar .nav-link.active {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+}
+
+.ovp-sidebar .nav-section {
+    font-size: .68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.3);
+    padding: 1.25rem 1.5rem .4rem;
+}
+
+.ovp-main-content {
+    flex: 1;
+    background: var(--ovp-cinza-claro);
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.ovp-topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--ovp-borda);
+    padding: .8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- UTILITÁRIOS -------------------------------------------- */
+.text-ovp-red { color: var(--ovp-vermelho); }
+.bg-ovp-red   { background: var(--ovp-vermelho); }
+.btn-ovp {
+    background: var(--ovp-vermelho);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: .875rem;
+    padding: .55rem 1.25rem;
+    transition: background .2s, transform .2s, box-shadow .2s;
+}
+.btn-ovp:hover {
+    background: var(--ovp-vermelho-claro);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139,26,26,.35);
+}
+
+.btn-ovp-outline {
+    background: transparent;
+    color: var(--ovp-vermelho);
+    border: 1.5px solid var(--ovp-vermelho);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: .875rem;
+    padding: .5rem 1.2rem;
+    transition: all .2s;
+}
+
+.btn-ovp-outline:hover {
+    background: var(--ovp-vermelho);
+    color: #fff;
+}
+
+/* --- FORM DE LOGIN ------------------------------------------ */
+.ovp-login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a0000 0%, #3d0808 50%, #1a0000 100%);
+}
+
+.ovp-login-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.ovp-login-logo {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.ovp-login-logo .logo-sigla {
+    display: inline-block;
+    background: var(--ovp-vermelho);
+    color: #fff;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 64px;
+    text-align: center;
+    margin-bottom: .75rem;
+}
+
+.ovp-login-logo h1 {
+    font-size: 1rem;
+    color: var(--ovp-cinza-escuro);
+    margin: 0;
+}
+
+.ovp-login-logo p {
+    font-size: .8rem;
+    color: var(--ovp-cinza-medio);
+    margin: .25rem 0 0;
+}
+
+/* --- ALERTS / MENSAGENS ------------------------------------ */
+.alert-ovp {
+    border-radius: var(--radius);
+    border: none;
+    font-size: .875rem;
+    padding: .8rem 1rem;
+}
+
+/* --- RESPONSIVE -------------------------------------------- */
+@media (max-width: 768px) {
+    .ovp-sidebar { display: none; }
+    .ovp-hero { padding: 3rem 0 2.5rem; }
+    .ovp-hero h1 { font-size: 1.6rem; }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+    bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+    backupGlobals="false"
+    colors="true"
+    columns="max"
+    cacheDirectory="build/.phpunit.cache">
+
+    <testsuites>
+        <testsuite name="OVP Unit Tests">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="OVP Feature Tests">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">./app</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">./app/Views</directory>
+            <file>./app/Config/Routes.php</file>
+            <file>./app/Config/Events.php</file>
+        </exclude>
+    </source>
+
+    <php>
+        <!-- URL base para os testes -->
+        <server name="app.baseURL" value="http://localhost/"/>
+        <server name="CODEIGNITER_SCREAM_DEPRECATIONS" value="0"/>
+
+        <!-- Caminhos CI4 -->
+        <const name="HOMEPATH"   value="./"/>
+        <const name="CONFIGPATH" value="./app/Config/"/>
+        <const name="PUBLICPATH" value="./public/"/>
+
+        <!-- Força ambiente de testes (SQLite in-memory) -->
+        <env name="CI_ENVIRONMENT"                value="testing"/>
+        <!-- Remove o prefixo padrão 'db_' do grupo tests do CI4 -->
+        <env name="database.tests.DBPrefix"       value=""/>
+        <!-- CSRF em modo session (obrigatório pelo Shield) -->
+        <env name="security.csrfProtection"       value="session"/>
+    </php>
+</phpunit>

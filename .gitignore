@@ -1,0 +1,36 @@
+# Ambiente e segredos
+.env
+.env.*
+!env
+
+# Dependências
+/vendor/
+
+# CI4 — gerado em tempo de execução
+/writable/cache/
+/writable/logs/
+/writable/session/
+/writable/uploads/
+/writable/debugbar/
+
+# Acervo de documentos sensíveis (PDFs do observatório)
+/arquivos/
+
+# Build e coverage
+/build/
+/coverage/
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
