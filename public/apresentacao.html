@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação OVPDH - Especificação do Sistema</title>
+    <style>
+        :root {
+            --primary: #8a1515; /* Vermelho escuro PUC */
+            --secondary: #1a1a1a;
+            --text: #333333;
+            --light: #f4f4f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Capa */
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            page-break-after: always;
+        }
+
+        .cover h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .cover h2 {
+            font-size: 1.5rem;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .cover .institution {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-top: 50px;
+        }
+
+        /* Seções */
+        .section {
+            padding: 40px 0;
+            page-break-after: always;
+        }
+
+        h2.section-title {
+            color: var(--primary);
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Cards/Caixas de destaque */
+        .card {
+            background-color: var(--light);
+            border-left: 5px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .card h4 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Listas */
+        ul {
+            font-size: 1.1rem;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--light);
+        }
+
+        /* Regras para Impressão em PDF */
+        @media print {
+            body {
+                background-color: white;
+            }
+            .cover {
+                height: auto;
+                padding: 30% 0; /* Centraliza na página impressa */
+            }
+            .section {
+                page-break-after: always;
+                padding: 0;
+                margin-top: 20px;
+            }
+            /* Evita quebras ruins dentro de cards */
+            .card, table, tr {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- CAPA -->
+        <div class="cover">
+            <h1>Sistema OVPDH</h1>
+            <h2>Observatório de Violência Policial e Direitos Humanos</h2>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: #666;">
+                Especificação técnica, arquitetura de dados e funcionalidades do sistema de gestão e publicação do acervo.
+            </p>
+            <div class="institution">
+                PUC São Paulo
+            </div>
+            <div style="margin-top: 20px; color: #888;">
+                Versão: 1.0 | <?= date('Y') ?>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 1: OBJETIVO E ARQUITETURA -->
+        <div class="section">
+            <h2 class="section-title">1. Visão Geral do Sistema</h2>
+            
+            <p>O sistema do <strong>Observatório de Violência Policial e Direitos Humanos (OVPDH)</strong> foi desenvolvido para ser o motor central de documentação, curadoria e exibição de casos de violência policial em Minas Gerais.</p>
+            
+            <div class="card">
+                <h4>Arquitetura e Hospedagem</h4>
+                <p>Para garantir total autonomia e controle sobre os dados sensíveis, o sistema opera em uma infraestrutura própria (VPS) independente do site institucional da PUC-SP. Ele atua como um repositório centralizado, onde o portal oficial pode apenas redirecionar ou consumir as informações publicadas.</p>
+            </div>
+
+            <h3>Público-Alvo</h3>
+            <ul>
+                <li><strong>Cidadãos e Jornalistas:</strong> Acessam o portal público para consultar o Acervo Histórico e Produções Acadêmicas.</li>
+                <li><strong>Voluntários e Colaboradores:</strong> Inserem e catalogam dados brutos de ocorrências no painel.</li>
+                <li><strong>Coordenadores e Admins:</strong> Revisam, aprovam e publicam as informações consolidadas.</li>
+            </ul>
+        </div>
+
+        <!-- SEÇÃO 2: FUNCIONALIDADES -->
+        <div class="section">
+            <h2 class="section-title">2. Principais Funcionalidades</h2>
+
+            <div class="card">
+                <h4>1. Gestão de Ocorrências (Core)</h4>
+                <p>O coração do sistema é o registro detalhado de violações. É possível cadastrar a data, local, descrição do evento e relacionar múltiplas <strong>vítimas</strong> e múltiplos <strong>agressores/órgãos</strong> em um único evento, garantindo uma modelagem de dados rica para futuras estatísticas de gênero, raça e localidade.</p>
+            </div>
+
+            <div class="card">
+                <h4>2. Fluxo de Curadoria (Workflow)</h4>
+                <p>Ocorrências não vão direto para o público. Elas passam por um fluxo de status: <em>Rascunho &rarr; Em Revisão &rarr; Aprovado &rarr; Publicado</em>. Todas as mudanças de status são registradas (logs de auditoria) na tabela de revisões, garantindo que se saiba quem aprovou cada caso.</p>
+            </div>
+
+            <div class="card">
+                <h4>3. Acervo e Produção Acadêmica</h4>
+                <p>O sistema também atua como biblioteca pública do observatório, disponibilizando artigos científicos, livros, relatórios e dossiês históricos elaborados pela equipe da PUC São Paulo para download ou consulta pública.</p>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3: ESTRUTURA DE DADOS -->
+        <div class="section">
+            <h2 class="section-title">3. Modelagem de Dados (Entidades)</h2>
+            <p>O banco de dados relacional foi estruturado para evitar redundâncias e permitir análises complexas (ex: "quantas vítimas negras masculinas sofreram violência da PMMG no bairro X?").</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tabela / Entidade</th>
+                        <th>Propósito / Atributos Principais</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>users</strong> (Shield)</td>
+                        <td>Gerecia a autenticação, senhas criptografadas, e-mails e níveis de acesso da equipe.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ocorrencias</strong></td>
+                        <td>O evento principal. Contém Título, Descrição, Data, Bairro, Cidade, Tipo de Violência e Status.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vitimas</strong></td>
+                        <td>Vinculada à ocorrência (1:N). Armazena Nome (ou flag Anônimo), Idade, Gênero, Raça e Desfecho (Óbito/Hospitalizado).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>agressores</strong></td>
+                        <td>Vinculada à ocorrência (1:N). Armazena o Tipo de Agente, Órgão (PM, PC, Guarda) e se foi identificado.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ocorrencia_revisoes</strong></td>
+                        <td>Guarda o histórico e comentários dos administradores ao mudar o status das ocorrências.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>produtos</strong> e <strong>historico</strong></td>
+                        <td>Dados estáticos de publicações científicas e dossiês históricos antigos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SEÇÃO 4: PRÓXIMOS PASSOS -->
+        <div class="section">
+            <h2 class="section-title">4. Roadmap de Evolução</h2>
+            <p>Baseado na comparação com o site institucional da PUC-SP, os seguintes módulos foram identificados como oportunidades de evolução para o sistema da VPS:</p>
+            
+            <ul>
+                <li><strong>Mapa de Violações Interativo:</strong> Criação de uma interface geográfica para visualizar a concentração de ocorrências por bairro e cidade em Minas Gerais.</li>
+                <li><strong>Canal Público de Denúncia:</strong> Desenvolvimento de um formulário seguro e possivelmente anônimo para que cidadãos reportem violações diretamente para análise da equipe.</li>
+                <li><strong>Módulo de Notícias e Opinião:</strong> Transformação do sistema em um portal informativo completo, permitindo a publicação de notas de repúdio, opiniões e análises da conjuntura.</li>
+            </ul>
+
+            <div style="margin-top: 50px; text-align: center; color: #888;">
+                <p>Fim do Documento</p>
+                <p><em>Imprima esta página ou salve como PDF no seu navegador (Ctrl+P)</em></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
