@@ -29,6 +29,11 @@ class OvpdhSeeder extends Seeder
         ];
 
         foreach ($usersData as $ud) {
+            $existing = $users->where('username', $ud['username'])->first();
+            if ($existing) {
+                continue;
+            }
+
             $user = new \CodeIgniter\Shield\Entities\User([
                 'username' => $ud['username'],
                 'email'    => $ud['email'],
