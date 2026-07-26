@@ -19,8 +19,8 @@ $routes->get('produtos', 'Public\Produtos::index');
 $routes->get('produtos/(:num)', 'Public\Produtos::show/$1');
 
 // Link PUC (redirect)
-$routes->get('pucminas', function() {
-    return redirect()->to('https://www.pucminas.br');
+$routes->get('pucsp', function() {
+    return redirect()->to('https://www.pucsp.br');
 });
 
 // =====================================================================

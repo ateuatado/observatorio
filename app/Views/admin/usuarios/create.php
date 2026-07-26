@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-6">
                 <label for="email">E-mail <span class="required-star">*</span></label>
-                <input type="email" name="email" id="email" class="form-control" required placeholder="Ex: maria@ovpdh.pucminas.br">
+                <input type="email" name="email" id="email" class="form-control" required placeholder="Ex: maria@ovpdh.pucsp.br">
             </div>
             <div class="col-md-6">
                 <label for="password">Senha <span class="required-star">*</span></label>

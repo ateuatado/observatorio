@@ -6,7 +6,7 @@
         <div class="section-label" style="color:var(--ovpdh-vermelho-claro);"><i class="bi bi-building"></i> Institucional</div>
         <h1 class="section-title" style="color:var(--ovpdh-branco);">Sobre o OVPDH</h1>
         <p style="color:rgba(255,255,255,.6); max-width:650px; font-size:.95rem; line-height:1.7;">
-            O Observatório de Violência Policial e Direitos Humanos (OVPDH) é um projeto acadêmico vinculado ao Programa de Pós-Graduação em Ciências Sociais da PUC Minas, fundado pela Profa. Dra. Helena Ferreira Campos.
+            O Observatório de Violência Policial e Direitos Humanos (OVPDH) é um projeto acadêmico vinculado ao Programa de Pós-Graduação em Ciências Sociais da PUC São Paulo, fundado pela Profa. Dra. Helena Ferreira Campos.
         </p>
     </div>
 </section>
@@ -93,7 +93,7 @@
         <div class="row g-4 justify-content-center">
             <div class="col-md-3 col-6">
                 <div style="border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:1.5rem; text-align:center; transition:all .25s;" onmouseover="this.style.borderColor='rgba(192,39,45,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
-                    <div style="font-size:1.5rem; font-weight:900; color:white; margin-bottom:.5rem;">PUC Minas</div>
+                    <div style="font-size:1.5rem; font-weight:900; color:white; margin-bottom:.5rem;">PUC São Paulo</div>
                     <div style="font-size:.75rem; color:rgba(255,255,255,.4);">Pontificia Universidade Católica de Minas Gerais</div>
                 </div>
             </div>
@@ -117,8 +117,8 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <a href="<?= base_url('pucminas') ?>" target="_blank" class="btn-ovpdh-primary">
-                <i class="bi bi-box-arrow-up-right"></i> Acessar site PUC Minas
+            <a href="<?= base_url('pucsp') ?>" target="_blank" class="btn-ovpdh-primary">
+                <i class="bi bi-box-arrow-up-right"></i> Acessar site PUC São Paulo
             </a>
         </div>
     </div>

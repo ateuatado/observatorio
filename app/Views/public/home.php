@@ -8,13 +8,13 @@
             <div class="col-lg-7">
                 <div class="hero-badge">
                     <i class="bi bi-shield-check"></i>
-                    Observatório Acadêmico — PUC Minas
+                    Observatório Acadêmico — PUC São Paulo
                 </div>
                 <h1 class="hero-title">
                     Documentando <span>Violência Policial</span> e Defendendo Direitos Humanos
                 </h1>
                 <p class="hero-subtitle">
-                    O OVPDH é um observatório acadêmico da PUC Minas dedicado ao registro sistemático, pesquisa e denúncia de casos de violência policial e violações de direitos humanos em Minas Gerais.
+                    O OVPDH é um observatório acadêmico da PUC São Paulo dedicado ao registro sistemático, pesquisa e denúncia de casos de violência policial e violações de direitos humanos em Minas Gerais.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
                     <a href="<?= base_url('historico') ?>" class="btn-ovpdh-primary">
@@ -48,7 +48,7 @@
                 <div class="hero-emblem">
                     <div class="hero-emblem-inner">
                         <div class="hero-emblem-sigla">OVPDH</div>
-                        <div class="hero-emblem-ano">PUC Minas · Desde 2013</div>
+                        <div class="hero-emblem-ano">PUC São Paulo · Desde 2013</div>
                     </div>
                 </div>
             </div>
@@ -218,7 +218,7 @@
             <a href="<?= base_url('sobre') ?>" class="btn-ovpdh-primary">
                 <i class="bi bi-info-circle"></i> Saiba mais
             </a>
-            <a href="mailto:ovpdh@pucminas.br" class="btn-ovpdh-outline" style="border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.8);">
+            <a href="mailto:ovpdh@pucsp.br" class="btn-ovpdh-outline" style="border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.8);">
                 <i class="bi bi-envelope"></i> Entre em contato
             </a>
         </div>

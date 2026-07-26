@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Observatório de Violência Policial e Direitos Humanos — PUC Minas. Documentação e pesquisa sobre violência policial e direitos humanos em Minas Gerais.">
-    <title><?= esc($title ?? 'OVPDH — PUC Minas') ?></title>
+    <meta name="description" content="Observatório de Violência Policial e Direitos Humanos — PUC São Paulo. Documentação e pesquisa sobre violência policial e direitos humanos em Minas Gerais.">
+    <title><?= esc($title ?? 'OVPDH — PUC São Paulo') ?></title>
 
     <!-- Bootstrap CSS (local) -->
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
@@ -23,7 +23,7 @@
         <a class="navbar-brand" href="<?= base_url('/') ?>">
             <div class="brand-logo-text">
                 <span class="brand-sigla">OVPDH</span>
-                <span class="brand-nome">Observatório de Violência Policial<br>e Direitos Humanos — PUC Minas</span>
+                <span class="brand-nome">Observatório de Violência Policial<br>e Direitos Humanos — PUC São Paulo</span>
             </div>
         </a>
 
@@ -54,8 +54,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('pucminas') ?>" target="_blank">
-                        <i class="bi bi-box-arrow-up-right me-1"></i>PUC Minas
+                    <a class="nav-link" href="<?= base_url('pucsp') ?>" target="_blank">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>PUC São Paulo
                     </a>
                 </li>
                 <li class="nav-item ms-2">
@@ -83,7 +83,7 @@
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="footer-brand-sigla">OVPDH</div>
-                <div class="footer-heading mt-1">Observatório de Violência Policial<br>e Direitos Humanos — PUC Minas</div>
+                <div class="footer-heading mt-1">Observatório de Violência Policial<br>e Direitos Humanos — PUC São Paulo</div>
                 <p class="mt-3" style="font-size:.85rem; line-height:1.6; color: rgba(255,255,255,.4);">
                     Documentamos, pesquisamos e denunciamos casos de violência policial e violações de direitos humanos em Minas Gerais, produzindo conhecimento para a transformação social.
                 </p>
@@ -111,7 +111,7 @@
             <div class="col-6 col-lg-2">
                 <div class="footer-heading">Institucional</div>
                 <ul class="list-unstyled d-flex flex-column gap-2">
-                    <li><a href="<?= base_url('pucminas') ?>" target="_blank">PUC Minas</a></li>
+                    <li><a href="<?= base_url('pucsp') ?>" target="_blank">PUC São Paulo</a></li>
                     <li><a href="#">Contato</a></li>
                     <li><a href="#">Política de Privacidade</a></li>
                     <li><a href="<?= base_url('login') ?>">Área Restrita</a></li>
@@ -121,14 +121,14 @@
                 <div class="footer-heading">Contato</div>
                 <div class="d-flex flex-column gap-2" style="font-size:.85rem; color:rgba(255,255,255,.4);">
                     <div><i class="bi bi-geo-alt me-2 text-vermelho"></i>Belo Horizonte, MG</div>
-                    <div><i class="bi bi-building me-2 text-vermelho"></i>PUC Minas — Programa de Pós-Graduação</div>
-                    <div><i class="bi bi-envelope me-2 text-vermelho"></i>ovpdh@pucminas.br</div>
+                    <div><i class="bi bi-building me-2 text-vermelho"></i>PUC São Paulo — Programa de Pós-Graduação</div>
+                    <div><i class="bi bi-envelope me-2 text-vermelho"></i>ovpdh@pucsp.br</div>
                 </div>
             </div>
         </div>
         <hr class="footer-divider">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2" style="font-size:.78rem; color:rgba(255,255,255,.3);">
-            <div>© <?= date('Y') ?> OVPDH — Observatório de Violência Policial e Direitos Humanos — PUC Minas. Todos os direitos reservados.</div>
+            <div>© <?= date('Y') ?> OVPDH — Observatório de Violência Policial e Direitos Humanos — PUC São Paulo. Todos os direitos reservados.</div>
             <div>Desenvolvido com <i class="bi bi-heart-fill text-vermelho"></i> para os Direitos Humanos</div>
         </div>
     </div>

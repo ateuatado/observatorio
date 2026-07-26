@@ -32,7 +32,7 @@ class Produtos extends BaseController
             ->get()->getResultArray();
 
         $data = [
-            'title'    => 'Produções Acadêmicas — OVPDH PUC Minas',
+            'title'    => 'Produções Acadêmicas — OVPDH PUC São Paulo',
             'produtos' => $this->model->getAtivos(50),
             'tipos'    => array_column($tipos, 'tipo'),
             'anos'     => array_column($anos, 'ano'),

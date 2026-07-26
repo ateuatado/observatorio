@@ -24,7 +24,7 @@ class Historico extends BaseController
             ->get()->getResultArray();
 
         $data = [
-            'title'      => 'Acervo Histórico — OVPDH PUC Minas',
+            'title'      => 'Acervo Histórico — OVPDH PUC São Paulo',
             'historicos' => $this->model->getAtivos(50),
             'categorias' => array_column($categorias, 'categoria'),
         ];

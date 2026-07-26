@@ -27,7 +27,7 @@
             <div class="sidebar-logo-icon">O</div>
             <div class="sidebar-logo-text">
                 <div class="sigla">OVPDH</div>
-                <div class="nome">Observatório de Violência<br>Policial e DH — PUC Minas</div>
+                <div class="nome">Observatório de Violência<br>Policial e DH — PUC São Paulo</div>
             </div>
         </div>
 

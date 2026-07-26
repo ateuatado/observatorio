@@ -16,7 +16,7 @@ class Home extends BaseController
         $ocorrenciaModel = new OcorrenciaModel();
 
         $data = [
-            'title'         => 'Observatório de Violência Policial e Direitos Humanos — PUC Minas',
+            'title'         => 'Observatório de Violência Policial e Direitos Humanos — PUC São Paulo',
             'recentProdutos'=> $produtoModel->getRecentes(3),
             'recentHistorico'=> $historicoModel->getAtivos(3),
             'totalOcorrencias' => $ocorrenciaModel->where('status', 'publicado')->countAllResults(),
