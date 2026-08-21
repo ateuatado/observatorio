@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Proposta de evolução da taxonomia e curadoria de dados do OVPDH.">
+    <title>Taxonomia e Curadoria de Dados | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento para decisão</p>
+            <div class="report-rule"></div>
+            <h1>Taxonomia, automação e curadoria de dados</h1>
+            <p class="report-subtitle">Proposta de evolução do acervo do Observatório de Violência Policial e Direitos Humanos</p>
+            <div class="report-meta">
+                <span>Versão 1.0</span>
+                <span aria-hidden="true">•</span>
+                <span>21 de agosto de 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="apresentacao">
+            <p class="section-label">01 — Decisão proposta</p>
+            <h2 id="apresentacao">Preservar a fonte, qualificar a evidência e publicar somente o que foi curado.</h2>
+            <p>O OVPDH registra informações sobre violências de Estado e violações de direitos humanos produzidas pela imprensa. Para que esse trabalho possa crescer com rigor, a base de dados deve distinguir a matéria jornalística, o que foi extraído dela e a conclusão construída pela equipe de curadoria.</p>
+            <p>A proposta não trata uma notícia como verdade automática. Ela a preserva como fonte de informação e permite que cada conclusão pública seja sustentada por evidências, contexto e uma decisão humana registrada.</p>
+            <aside class="report-note"><strong>Resultado esperado:</strong> mais capacidade de coleta, classificação e análise, sem abrir mão de responsabilidade metodológica, rastreabilidade e proteção de informações sensíveis.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="por-que-mudar">
+            <p class="section-label">02 — Por que evoluir agora</p>
+            <h2 id="por-que-mudar">A estrutura atual é valiosa, mas precisa separar melhor as etapas do conhecimento.</h2>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <article class="info-card info-card-public">
+                        <span class="card-number">HOJE</span>
+                        <h3>Acervo orientado à ocorrência</h3>
+                        <p>O banco reúne ocorrências, vítimas, autores, violações, fontes e indicadores. Ele já permite análises relevantes, mas a fonte jornalística, a extração inicial e a decisão curatorial ficam muito próximas no mesmo processo.</p>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="info-card info-card-private">
+                        <span class="card-number">FUTURO</span>
+                        <h3>Acervo orientado à evidência</h3>
+                        <p>Cada matéria é preservada; o sistema registra sugestões automáticas como hipóteses; e o dossiê publicado consolida apenas o que a curadoria decidiu validar e tornar público.</p>
+                    </article>
+                </div>
+            </div>
+            <p class="report-caption">A evolução pode ser gradual: a estrutura atual permanece como base dos indicadores enquanto a nova camada curatorial é implantada e amadurecida.</p>
+        </section>
+
+        <section class="report-section" aria-labelledby="fluxo">
+            <p class="section-label">03 — Fluxo de trabalho</p>
+            <h2 id="fluxo">Automação para ganhar escala; curadoria humana para decidir.</h2>
+            <div class="status-flow" aria-label="Fluxo: fonte, extração, alegações, dossiê curado e publicação">
+                <div class="status-step"><span>1</span><strong>Fonte</strong><small>Matéria preservada</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step"><span>2</span><strong>Extração</strong><small>Sugestões automáticas</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step"><span>3</span><strong>Curadoria</strong><small>Revisão humana</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step status-published"><span>4</span><strong>Publicação</strong><small>Dado validado</small></div>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="report-table">
+                    <thead><tr><th>Etapa</th><th>O que acontece</th><th>Responsável principal</th></tr></thead>
+                    <tbody>
+                        <tr><td>Coleta</td><td>Captura de URL, veículo, data, título e conteúdo da matéria, por listas de fontes, RSS, APIs ou inserção manual.</td><td>Sistema e equipe</td></tr>
+                        <tr><td>Preparação</td><td>Deduplicação, preservação do texto original, normalização de dados básicos e identificação de versões.</td><td>Sistema</td></tr>
+                        <tr><td>Triagem</td><td>Extração de pessoas, instituições, datas, locais, trechos relevantes e classificações sugeridas, com grau de confiança.</td><td>Sistema</td></tr>
+                        <tr><td>Curadoria</td><td>Conferência das evidências, agrupamento de coberturas sobre um mesmo evento, classificação final e decisão de visibilidade.</td><td>Curadoria humana</td></tr>
+                        <tr><td>Publicação</td><td>Disponibilização do dossiê e alimentação dos indicadores públicos somente após aprovação.</td><td>Curadoria autorizada</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="estrutura">
+            <p class="section-label">04 — Estrutura proposta</p>
+            <h2 id="estrutura">O dossiê de evento conecta fontes, evidências e classificações.</h2>
+            <p>O dossiê de evento será a unidade pública principal: uma representação curada de um acontecimento que pode reunir diversas matérias sobre o mesmo caso. Abaixo dele, o sistema preserva as fontes e o histórico de como cada conclusão foi formada.</p>
+            <div class="table-responsive mt-4">
+                <table class="report-table">
+                    <thead><tr><th>Entidade</th><th>Função</th></tr></thead>
+                    <tbody>
+                        <tr><td>Documento-fonte</td><td>Guarda a matéria original: URL, veículo, autoria, data de publicação, conteúdo capturado, hash e data de coleta.</td></tr>
+                        <tr><td>Extração</td><td>Registra cada processamento automático, com versão do método, resultado bruto e nível de confiança.</td></tr>
+                        <tr><td>Alegação</td><td>Representa um fato candidato extraído da fonte, ainda sujeito a confirmação: local, data, participante, violência ou instituição mencionada.</td></tr>
+                        <tr><td>Dossiê de evento</td><td>Consolida o que a curadoria entende como um mesmo evento e define a versão que poderá ser apresentada ao público.</td></tr>
+                        <tr><td>Participação no evento</td><td>Vincula pessoas, grupos e instituições ao dossiê, com papéis explícitos como vítima, autor alegado, testemunha ou denunciante.</td></tr>
+                        <tr><td>Evidência e decisão</td><td>Conecta cada conclusão ao trecho e à fonte que a sustentam, com autoria, data e justificativa da revisão.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="taxonomia">
+            <p class="section-label">05 — Taxonomia escalável</p>
+            <h2 id="taxonomia">Categorias controladas, hierárquicas e capazes de evoluir sem apagar o passado.</h2>
+            <p>Em vez de depender apenas de tabelas fixas para cada categoria, o OVPDH poderá manter vocabulários controlados com termos, definições, sinônimos, relações hierárquicas e vigência. As classificações continuam estruturadas — não são campos livres — mas podem crescer sem uma reforma do banco a cada novo recorte analítico.</p>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <article class="info-card info-card-public">
+                        <span class="card-number">EXEMPLO</span>
+                        <h3>Hierarquia de classificação</h3>
+                        <p>Violência de Estado → Violência policial → Uso excessivo da força → Disparo de arma de fogo.</p>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="info-card info-card-private">
+                        <span class="card-number">REGRA</span>
+                        <h3>Histórico preservado</h3>
+                        <p>Um termo pode ser renomeado, substituído ou descontinuado sem alterar retrospectivamente a classificação que sustentou um relatório anterior.</p>
+                    </article>
+                </div>
+            </div>
+            <p class="mt-4">As primeiras taxonomias prioritárias são: tipo de violação, conduta, instituição/agente de Estado, território, grupo afetado, meio ou instrumento, lesão, situação processual e tipo de fonte.</p>
+            <aside class="report-note"><strong>Regra de qualidade:</strong> toda classificação deve informar sua origem — automática ou humana —, seu estado de revisão, sua confiança e, quando aplicável, a evidência que a justifica.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="governanca">
+            <p class="section-label">06 — Governança e proteção</p>
+            <h2 id="governanca">A automação sugere; pessoas autorizadas assumem a responsabilidade pela decisão.</h2>
+            <div class="table-responsive">
+                <table class="report-table report-table-profiles">
+                    <thead><tr><th>Princípio</th><th>Aplicação no sistema</th></tr></thead>
+                    <tbody>
+                        <tr><td>Rastreabilidade</td><td>Uma informação publicada poderá ser relacionada à fonte e, quando necessário, ao trecho que a sustenta.</td></tr>
+                        <tr><td>Incerteza explícita</td><td>Dados ainda não confirmados permanecem como alegações internas, sem serem apresentados como fato consolidado.</td></tr>
+                        <tr><td>Revisão humana</td><td>Modelos e regras automáticas fazem triagem e sugestão; a classificação e a publicação dependem de curadoria.</td></tr>
+                        <tr><td>Auditoria</td><td>Alterações relevantes — inclusive classificações, aprovações, recusas e despublicações — ficam registradas.</td></tr>
+                        <tr><td>Dados sensíveis</td><td>O acesso e a exposição pública seguem regras de anonimização, necessidade de uso e decisão curatorial.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="proximos-passos">
+            <p class="section-label">07 — Decisões para a próxima etapa</p>
+            <h2 id="proximos-passos">O que precisamos pactuar antes da implementação.</h2>
+            <ol>
+                <li>Adotar o <strong>dossiê de evento</strong> como a unidade pública principal do acervo.</li>
+                <li>Definir os níveis de certeza e os critérios para considerar uma informação apta à publicação.</li>
+                <li>Validar a primeira versão das taxonomias prioritárias, com definições e exemplos de uso.</li>
+                <li>Definir quem pode criar, alterar, descontinuar ou aprovar termos taxonômicos.</li>
+                <li>Escolher as fontes jornalísticas e os critérios do piloto de coleta automatizada.</li>
+                <li>Estabelecer regras de anonimização, proteção e retenção de dados sensíveis.</li>
+            </ol>
+            <p class="closing-text">A recomendação é realizar um piloto com poucas fontes e uma taxonomia inicial, ajustando o processo de curadoria antes de expandir a automação.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer">
+        <div class="container report-container">OVPDH — Proposta de taxonomia, automação e curadoria · 2026</div>
+    </footer>
+</body>
+</html>
