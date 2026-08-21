@@ -1,50 +1,61 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Constituição do Projeto — Observatório de Violência Policial e Direitos Humanos (OVPDH)
 
-## Core Principles
+## Princípios fundamentais
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Stack tecnológica definida e autossuficiente
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+O sistema DEVE utilizar PHP 8.2 ou superior, CodeIgniter 4, CodeIgniter Shield, MySQL ou MariaDB e Bootstrap distribuído localmente.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Bibliotecas de CSS, JavaScript, fontes e imagens necessárias à aplicação DEVEM ser servidas pelo próprio projeto, a partir de `public/assets/`; CDNs e dependências de execução hospedadas na internet NÃO DEVEM ser utilizados. Dependências de backend DEVEM ser declaradas e bloqueadas por `composer.json` e `composer.lock`.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Alterações de stack, inclusão de bibliotecas ou serviços externos exigem justificativa na especificação, avaliação de privacidade e segurança, e aprovação antes da implementação.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### II. MVC rigoroso e responsabilidades explícitas
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+O projeto DEVE preservar o modelo MVC do CodeIgniter 4. Controllers coordenam requisições, autorização e respostas; Models concentram acesso, persistência e regras relativas aos dados; Views apresentam dados já preparados, sem decisões de negócio ou consultas ao banco.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Nenhuma funcionalidade que lê ou grava dados do domínio pode contornar as Models por meio de consultas diretas em Controllers ou Views. Lógicas reutilizáveis e regras de negócio que excedam a coordenação de uma requisição DEVEM ser extraídas para Services, Libraries ou classes de domínio com responsabilidade clara e testes próprios.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### III. Código limpo, seguro e sustentável
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Toda alteração DEVE privilegiar clareza, coesão, baixo acoplamento e simplicidade. Nomes DEVEM expressar intenção; métodos e classes DEVEM ter responsabilidade única; duplicação relevante DEVE ser eliminada; e validações, autorização e tratamento de falhas DEVEM ser explícitos.
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+Código novo DEVE seguir os padrões e convenções do CodeIgniter 4 e PHP, sem introduzir soluções improvisadas que dificultem manutenção. Dados sensíveis, especialmente dados de vítimas e ocorrências em rascunho, DEVEM ser protegidos por autenticação, autorização por permissões e exposição mínima necessária.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### IV. Banco de dados evolutivo e íntegro
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Toda mudança de esquema ou dado estrutural DEVE ser feita por migration e, quando apropriado, seeder versionado. Alterações manuais diretamente no banco não são uma forma válida de evolução do sistema.
+
+Migrations DEVEM ser pequenas, ordenadas, reproduzíveis em ambiente limpo e ter `down()` seguro sempre que tecnicamente possível. Elas DEVEM declarar chaves, índices, tipos e restrições compatíveis com a integridade do domínio. Operações destrutivas, irreversíveis ou potencialmente demoradas DEVEM ter plano documentado de backup, migração e reversão antes de chegar ao VPS.
+
+### V. Ativos de interface separados das Views
+
+Arquivos de Views DEVEM conter somente a marcação e a apresentação estritamente necessárias. É vedado incluir CSS ou JavaScript inline, seja em tags `<style>` e `<script>`, seja em atributos de evento HTML.
+
+Folhas de estilo, scripts, imagens, fontes e demais ativos DEVEM ser organizados em `public/assets/` — por exemplo, `css/`, `js/`, `images/` e `fonts/` — e referenciados pelos layouts apropriados. Essa regra vale também para páginas públicas e administrativas.
+
+### VI. Entregas especificadas, testadas e publicáveis
+
+Cada mudança funcional DEVE começar por uma especificação clara, com critérios de aceite verificáveis, e ser planejada em tarefas pequenas e independentes antes da implementação. A implementação DEVE incluir testes proporcionais ao risco: ao menos testes de Model/Service para regras de domínio e testes de integração para rotas, permissões, persistência e fluxos críticos.
+
+Antes de disponibilizar uma mudança, devem ser executados os testes aplicáveis, verificada a migração em ambiente controlado e revisados os critérios de aceite. Falhas de segurança, exposição indevida de dados ou perda de integridade bloqueiam a publicação.
+
+## Operação e publicação no VPS
+
+O VPS é o ambiente de demonstração para parceiros e DEVE acompanhar as versões aprovadas do sistema. Publicações DEVEM partir de uma revisão identificável no Git, nunca de alterações locais não versionadas.
+
+Antes de cada publicação devem ser preservados backup verificável do banco e dos arquivos enviados por usuários, além de um caminho de retorno para a versão anterior. As migrations DEVEM ser executadas de modo controlado e sua conclusão deve ser verificada. Configurações, credenciais e chaves do ambiente DEVEM permanecer fora do versionamento e nunca ser exibidas em logs, commits ou telas.
+
+## Processo de desenvolvimento e qualidade
+
+O Spec Kit é a fonte de verdade para o planejamento: `spec.md` define o comportamento e os critérios de aceite; `plan.md` define a abordagem técnica; `tasks.md` define a execução granular. Nenhuma implementação deve contradizer esses documentos sem que a especificação seja atualizada e revisada primeiro.
+
+Revisões devem verificar a aderência a esta constituição, ao MVC, às permissões do Shield, às migrations, à separação dos ativos de interface e aos testes aplicáveis. Mudanças devem ser pequenas, rastreáveis e fáceis de revisar.
+
+## Governança
+
+Esta constituição prevalece sobre preferências locais de implementação e sobre instruções de feature que a contradigam. Exceções exigem justificativa registrada na especificação ou no plano, avaliação de impacto e aprovação explícita antes de serem implementadas.
+
+Emendas DEVEM atualizar este documento com uma versão semântica, a data e uma descrição da alteração relevante. Revisões de código e de especificação DEVEM confirmar sua conformidade.
+
+**Versão**: 1.0.0 | **Ratificada em**: 2026-08-20 | **Última alteração**: 2026-08-20

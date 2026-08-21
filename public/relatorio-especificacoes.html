@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Relatório de especificações do sistema OVPDH.">
+    <title>Relatório de Especificações | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento de especificação</p>
+            <div class="report-rule"></div>
+            <h1>Observatório de Violência Policial e Direitos Humanos</h1>
+            <p class="report-subtitle">Relatório de Especificações do Sistema OVPDH</p>
+            <div class="report-meta">
+                <span>Versão 1.0</span>
+                <span aria-hidden="true">•</span>
+                <span>20 de agosto de 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="apresentacao">
+            <p class="section-label">01 — Apresentação</p>
+            <h2 id="apresentacao">Um sistema para organizar, revisar e divulgar informações com responsabilidade.</h2>
+            <p>O OVPDH apoiará o registro, a curadoria e a divulgação responsável de informações sobre violência policial e direitos humanos. O projeto prevê uma área pública de consulta e uma área interna, protegida, para o trabalho da equipe do Observatório.</p>
+            <p>Seu público inclui pesquisadores, jornalistas, parceiros institucionais e a comunidade em geral. Nenhum registro preliminar ou não verificado será divulgado ao público.</p>
+        </section>
+
+        <section class="report-section" aria-labelledby="organizacao">
+            <p class="section-label">02 — Organização do sistema</p>
+            <h2 id="organizacao">Duas áreas, com responsabilidades distintas</h2>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <article class="info-card info-card-public">
+                        <span class="card-number">A</span>
+                        <h3>Área pública</h3>
+                        <p>Apresentará informações institucionais, acervo histórico, produções acadêmicas e somente registros oficialmente publicados.</p>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="info-card info-card-private">
+                        <span class="card-number">B</span>
+                        <h3>Área interna</h3>
+                        <p>Permitirá o cadastro, a pesquisa, a edição, a revisão e a administração de registros e usuários autorizados.</p>
+                    </article>
+                </div>
+            </div>
+            <aside class="report-note"><strong>Proteção de dados:</strong> a separação impede que informações incompletas, sensíveis ou em análise apareçam antes da revisão.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="ocorrencias">
+            <p class="section-label">03 — Registros de ocorrências</p>
+            <h2 id="ocorrencias">A ocorrência é o centro do acervo</h2>
+            <p>Cada ocorrência reunirá informações estruturadas sobre um fato, como local, data, tipo de violência e relato. Uma ocorrência poderá ter várias vítimas e vários agressores ou instituições associados.</p>
+            <div class="pending-panel">
+                <h3>Em definição na próxima etapa</h3>
+                <p>Os campos detalhados das fichas, os campos obrigatórios e as regras de anonimização serão definidos quando a equipe disponibilizar os dados e necessidades de coleta.</p>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="fluxo">
+            <p class="section-label">04 — Curadoria e publicação</p>
+            <h2 id="fluxo">Todo registro percorre um processo de verificação</h2>
+            <div class="status-flow" aria-label="Fluxo: Rascunho, Em revisão, Aprovado e Publicado">
+                <div class="status-step"><span>1</span><strong>Rascunho</strong><small>Em preparação</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step"><span>2</span><strong>Em revisão</strong><small>Em análise</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step"><span>3</span><strong>Aprovado</strong><small>Consulta interna</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step status-published"><span>4</span><strong>Publicado</strong><small>Visível ao público</small></div>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="report-table">
+                    <thead><tr><th>Situação</th><th>Significado</th></tr></thead>
+                    <tbody>
+                        <tr><td>Rascunho</td><td>Registro em preparação. Pode ser corrigido ou complementado e não é público.</td></tr>
+                        <tr><td>Em revisão</td><td>Registro enviado para análise por pessoa autorizada.</td></tr>
+                        <tr><td>Aprovado</td><td>Registro validado pela curadoria. Pode ser pesquisado internamente, mas não aparece no site público.</td></tr>
+                        <tr><td>Publicado</td><td>Registro autorizado para divulgação e visível no site público.</td></tr>
+                        <tr><td>Rejeitado</td><td>Registro não aceito na revisão. A justificativa é obrigatória e ele pode ser corrigido e submetido novamente.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="report-caption">Um registro publicado pode ser despublicado e retorna a <strong>aprovado</strong>. Um registro aprovado pode ser devolvido a <strong>rascunho</strong> para correção. Todas essas ações ficam registradas no histórico.</p>
+        </section>
+
+        <section class="report-section" aria-labelledby="perfis">
+            <p class="section-label">05 — Perfis de acesso</p>
+            <h2 id="perfis">Quatro perfis para uma operação simples e controlada</h2>
+            <div class="table-responsive">
+                <table class="report-table report-table-profiles">
+                    <thead><tr><th>Perfil</th><th>Responsabilidades</th></tr></thead>
+                    <tbody>
+                        <tr><td>Usuário comum</td><td>Pesquisa, internamente, registros aprovados. Não altera registros.</td></tr>
+                        <tr><td>Curador</td><td>Cadastra, edita e exclui registros; conduz a revisão, aprovação, rejeição, publicação e despublicação. Não realiza curadoria de registro criado por ele próprio.</td></tr>
+                        <tr><td>Administrador</td><td>Executa todas as ações de curadoria e administra sistema, usuários, perfis e permissões.</td></tr>
+                        <tr><td>Superadministrador</td><td>Realiza alterações do site institucional. Suas funções detalhadas serão definidas em feature própria.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <aside class="report-note"><strong>Imparcialidade:</strong> o impedimento de autoavaliação pelo curador ajuda a preservar a confiança no processo. Exceções administrativas ficam registradas para auditoria.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="tecnologia">
+            <p class="section-label">06 — Tecnologia e manutenção</p>
+            <h2 id="tecnologia">Uma base técnica controlada e sustentável</h2>
+            <div class="row g-3 technology-grid">
+                <div class="col-sm-6 col-lg-3"><div>PHP 8.2+</div><small>linguagem do sistema</small></div>
+                <div class="col-sm-6 col-lg-3"><div>CodeIgniter 4</div><small>estrutura da aplicação</small></div>
+                <div class="col-sm-6 col-lg-3"><div>Shield</div><small>autenticação e perfis</small></div>
+                <div class="col-sm-6 col-lg-3"><div>MySQL / MariaDB</div><small>banco de dados</small></div>
+            </div>
+            <p class="mt-4">O Bootstrap e todos os recursos visuais serão servidos localmente, sem dependência de arquivos carregados da internet. O desenvolvimento seguirá o padrão MVC e as mudanças de banco serão realizadas por migrations, permitindo reproduzir e atualizar a estrutura de forma controlada.</p>
+            <p>O sistema será mantido em VPS para acompanhamento dos parceiros. Atualizações serão associadas a versões identificadas no Git, com backup, migrations controladas e possibilidade de retorno em caso de problema.</p>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="proximos-passos">
+            <p class="section-label">07 — Próximos passos</p>
+            <h2 id="proximos-passos">O que ainda precisa ser decidido</h2>
+            <ol>
+                <li>Campos de ocorrências, vítimas e agressores.</li>
+                <li>Campos obrigatórios em cada etapa do fluxo.</li>
+                <li>Regras de anonimização e acesso a dados sensíveis.</li>
+                <li>Critérios para exclusão e preservação do histórico.</li>
+                <li>Funções concretas do superadministrador no site institucional.</li>
+            </ol>
+            <p class="closing-text">Após essas definições, o projeto poderá ser dividido em tarefas pequenas, testáveis e acompanháveis.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer">
+        <div class="container report-container">OVPDH — Relatório de especificações · 2026</div>
+    </footer>
+</body>
+</html>

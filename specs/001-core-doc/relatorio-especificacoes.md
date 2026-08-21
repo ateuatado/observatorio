@@ -1,0 +1,93 @@
+# Relatório de Especificações do Sistema OVPDH
+
+**Projeto:** Observatório de Violência Policial e Direitos Humanos (OVPDH)  
+**Data:** 20 de agosto de 2026  
+**Situação da especificação:** Em elaboração — regras centrais já definidas; campos detalhados das fichas ainda pendentes.
+
+## 1. Apresentação
+
+O OVPDH será um sistema de informação para apoiar o registro, a organização, a revisão e a divulgação responsável de dados sobre violência policial e direitos humanos. Seu objetivo é oferecer uma área pública de consulta para a sociedade e uma área restrita de trabalho para a equipe do Observatório.
+
+O sistema é pensado para atender pesquisadores, jornalistas, parceiros institucionais e a comunidade em geral, sem expor informações que ainda não tenham sido verificadas pela equipe responsável.
+
+## 2. Organização geral do sistema
+
+O sistema terá duas áreas principais:
+
+- **Área pública:** apresentará informações institucionais sobre o Observatório, o acervo histórico, as produções acadêmicas e somente os registros que tenham sido oficialmente publicados.
+- **Área interna:** será acessada por usuários autorizados para cadastrar, pesquisar, editar, revisar e administrar os registros e os usuários do sistema.
+
+Essa separação evita que informações preliminares, incompletas ou sensíveis sejam expostas antes da revisão.
+
+## 3. Registros de ocorrências
+
+A ocorrência é o elemento central do sistema. Cada registro reunirá, de forma estruturada, as informações sobre um fato de violência, como local, data, tipo de violência e relato. Também poderá ter várias vítimas e vários agressores ou instituições relacionados ao mesmo fato.
+
+Os campos detalhados de cada ficha serão definidos em uma etapa posterior, quando as informações e necessidades da equipe estiverem disponíveis. Nessa etapa também serão definidos quais campos são obrigatórios para o salvamento, para o envio à revisão e para a publicação.
+
+## 4. Etapas de revisão e publicação
+
+Para assegurar a qualidade e a confiabilidade do acervo, toda ocorrência seguirá um ciclo de trabalho:
+
+| Situação | Significado |
+| --- | --- |
+| **Rascunho** | Registro em preparação. Ainda pode ser corrigido ou complementado e não é público. |
+| **Em revisão** | Registro enviado para análise de outra pessoa autorizada. |
+| **Aprovado** | Registro validado pela curadoria. Pode ser consultado internamente por usuários comuns, mas ainda não aparece no site público. |
+| **Publicado** | Registro autorizado para divulgação e visível no site público. |
+| **Rejeitado** | Registro que não foi aceito na revisão. A justificativa da rejeição é obrigatória; ele pode ser corrigido e submetido novamente. |
+
+Após a aprovação, um registro pode ser publicado. Caso seja necessário retirar uma informação do site, ele pode ser despublicado e volta à situação de aprovado. Também é possível desaprovar um registro para que retorne a rascunho e seja corrigido.
+
+Todas essas ações ficam registradas no histórico do sistema, com identificação da pessoa responsável, data, horário, situação anterior, nova situação e comentário quando houver. Isso permite acompanhar as decisões tomadas sobre cada registro.
+
+## 5. Perfis de acesso
+
+Para evitar excesso de níveis de acesso, foram definidos quatro perfis principais:
+
+| Perfil | Responsabilidades |
+| --- | --- |
+| **Usuário comum** | Pesquisa, na área interna, registros que já estejam aprovados. Não altera registros. |
+| **Curador** | Cadastra, edita e exclui registros; envia registros para revisão; aprova, rejeita, publica, despublica e devolve registros para correção. Não realiza curadoria de um registro criado por ele próprio. |
+| **Administrador** | Realiza todas as ações de curadoria e administra o sistema, os usuários, os perfis e as permissões. Suas ações também são registradas. |
+| **Superadministrador** | Realiza alterações relacionadas ao site institucional. As funções exatas desse perfil serão detalhadas em uma especificação própria. |
+
+O impedimento de o curador revisar o próprio registro busca preservar a imparcialidade do processo. Em situações excepcionais, o administrador poderá atuar no próprio registro, ficando a ação registrada para auditoria.
+
+## 6. Proteção e divulgação dos dados
+
+Somente registros com situação **publicado** serão disponibilizados no site público. Registros em rascunho, em revisão, aprovados ou rejeitados permanecem fora da área pública.
+
+O sistema adotará autenticação para a área interna e permissões de acesso para cada perfil. A forma de tratamento de dados de vítimas que necessitem de anonimato será definida junto com a modelagem detalhada dos campos, pois essa decisão depende das informações que serão coletadas e das necessidades de proteção identificadas pela equipe.
+
+## 7. Tecnologia e qualidade do desenvolvimento
+
+O sistema será desenvolvido com as seguintes tecnologias:
+
+- PHP 8.2 ou superior;
+- CodeIgniter 4;
+- CodeIgniter Shield para autenticação e permissões;
+- MySQL ou MariaDB para o banco de dados;
+- Bootstrap instalado localmente para a interface.
+
+O projeto não dependerá de arquivos de estilo, scripts, fontes ou imagens carregados da internet. Esses recursos ficarão armazenados no próprio sistema, o que reduz dependências externas e aumenta a previsibilidade de funcionamento.
+
+O desenvolvimento seguirá o padrão MVC: as telas apresentam os dados, os controladores organizam as requisições e as Models realizam o acesso e a organização dos dados. Mudanças no banco serão registradas por migrations, permitindo reproduzir a estrutura do sistema com segurança em outros ambientes.
+
+## 8. Publicação e manutenção
+
+O sistema ficará em uma VPS para que parceiros possam acompanhá-lo. As atualizações serão publicadas a partir de versões identificadas no repositório Git. Antes de atualizações que afetem dados, serão previstos backup do banco de dados e dos arquivos enviados, execução controlada das migrations e possibilidade de retorno à versão anterior.
+
+Credenciais e configurações sensíveis não serão incluídas no código versionado.
+
+## 9. Próximas definições necessárias
+
+Antes de iniciar a implementação detalhada das fichas de ocorrência, ainda precisam ser definidos:
+
+1. Os campos de ocorrências, vítimas e agressores.
+2. Quais campos são obrigatórios em cada etapa do fluxo.
+3. As regras de anonimização e acesso a dados sensíveis de vítimas.
+4. Os critérios para exclusão de registros e sua preservação no histórico.
+5. As funções concretas do superadministrador na manutenção do site institucional.
+
+Com essas definições, será possível elaborar o plano técnico e dividir a construção do sistema em tarefas pequenas, testáveis e acompanháveis.
