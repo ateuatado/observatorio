@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Inventário do banco legado PostgreSQL restaurado para homologação do OVPDH.">
+    <title>Inventário do legado PostgreSQL | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+    <style>
+        .number-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin: 2rem 0; }
+        .number-card { background: #f7f4f1; border: 1px solid var(--report-line); border-radius: .7rem; padding: 1.15rem; }
+        .number-card strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; line-height: 1.1; }
+        .number-card span { color: var(--report-muted); display: block; font-size: .86rem; margin-top: .4rem; }
+        .domain-grid { display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); margin-top: 1.5rem; }
+        .domain-grid div { border-bottom: 1px solid var(--report-line); padding: .75rem .35rem; }
+        .domain-grid strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem; }
+        .domain-grid span { color: var(--report-muted); font-size: .9rem; }
+        .status-steps { display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); margin: 1.5rem 0; }
+        .status-steps article { border: 1px solid var(--report-line); border-radius: .6rem; padding: 1rem; }
+        .status-steps strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; }
+        .status-steps small { color: var(--report-muted); display: block; margin-top: .25rem; }
+        .caution-list { display: grid; gap: .8rem; grid-template-columns: repeat(2, 1fr); list-style: none; margin: 1.5rem 0 0; padding: 0; }
+        .caution-list li { background: #fdf4e9; border-left: 4px solid #d97706; padding: .9rem 1rem; }
+        .next-list { counter-reset: next; display: grid; gap: .85rem; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+        .next-list li { display: grid; gap: 1rem; grid-template-columns: 34px 1fr; }
+        .next-list li::before { background: var(--report-wine); border-radius: 50%; color: #fff; content: counter(next); counter-increment: next; display: grid; font-size: .8rem; font-weight: 700; height: 28px; place-items: center; width: 28px; }
+        @media (max-width: 767.98px) { .number-grid, .domain-grid, .status-steps, .caution-list { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento 04 — Inventário técnico</p>
+            <div class="report-rule"></div>
+            <h1>O acervo legado em números</h1>
+            <p class="report-subtitle">Leitura inicial do banco PostgreSQL restaurado em homologação, com foco em preservação, qualidade e próximos passos.</p>
+            <div class="report-meta"><span>Versão de trabalho 1.0</span><span aria-hidden="true">•</span><span>23 de agosto de 2026</span></div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="resultado">
+            <p class="section-label">01 — Resultado da restauração</p>
+            <h2 id="resultado">O banco está disponível para estudo em uma cópia local de homologação.</h2>
+            <p>O backup legado foi restaurado no banco PostgreSQL <strong>observatorio</strong>. As estruturas e dados não espaciais estão disponíveis para análise. A parte geográfica permanece isolada até a instalação da extensão PostGIS compatível.</p>
+            <div class="number-grid">
+                <div class="number-card"><strong>96</strong><span>tabelas restauradas, distribuídas entre os esquemas público e histórico</span></div>
+                <div class="number-card"><strong>65</strong><span>chaves estrangeiras no esquema principal, demonstrando relações importantes</span></div>
+                <div class="number-card"><strong>29 MB</strong><span>tamanho atual do banco de homologação</span></div>
+            </div>
+            <aside class="report-note"><strong>Atenção:</strong> o esquema <em>old</em> precisa ser comparado ao esquema <em>public</em> antes de qualquer importação na nova aplicação. Importar ambos sem validação pode duplicar o acervo.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="volumes">
+            <p class="section-label">02 — Volumes do acervo</p>
+            <h2 id="volumes">O legado registra fatos, pessoas, instituições e evidências conectados entre si.</h2>
+            <div class="domain-grid" aria-label="Contagens por domínio">
+                <div><strong>3.685</strong><span>ocorrências</span></div>
+                <div><strong>4.656</strong><span>violações</span></div>
+                <div><strong>5.093</strong><span>vítimas</span></div>
+                <div><strong>4.280</strong><span>autores institucionais</span></div>
+                <div><strong>5.534</strong><span>fontes</span></div>
+                <div><strong>1.397</strong><span>depoimentos</span></div>
+                <div><strong>5.493</strong><span>relações vítima–violação</span></div>
+                <div><strong>5.070</strong><span>relações autor–violação</span></div>
+                <div><strong>3.651</strong><span>relações fonte–violação</span></div>
+            </div>
+            <p class="report-caption">A estrutura confirma que a nova implementação deve manter relacionamentos N:N: uma ocorrência pode conter diversas violações, fontes, vítimas e autores institucionais.</p>
+        </section>
+
+        <section class="report-section" aria-labelledby="status">
+            <p class="section-label">03 — Situação de curadoria no legado</p>
+            <h2 id="status">A maior parte das ocorrências está na fase de curadoria.</h2>
+            <div class="status-steps">
+                <article><strong>Incluído · 300</strong><small>Registro inicial</small></article>
+                <article><strong>Curadoria · 1.758</strong><small>Em análise</small></article>
+                <article><strong>Revisar · 379</strong><small>Com pendência de correção</small></article>
+                <article><strong>Aprovado · 1.016</strong><small>Validado no fluxo antigo</small></article>
+                <article><strong>Cancelado · 228</strong><small>Fora do fluxo corrente</small></article>
+                <article><strong>Teste · 4</strong><small>Exige verificação antes da migração</small></article>
+            </div>
+            <aside class="report-note"><strong>Decisão pendente:</strong> esses estados não devem ser convertidos automaticamente. Em especial, <em>Aprovado</em> não significa necessariamente <em>Publicado</em> no novo sistema.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="qualidade">
+            <p class="section-label">04 — Qualidade e cobertura dos dados</p>
+            <h2 id="qualidade">O acervo é robusto, mas precisa de qualificação gradual — não de apagamento.</h2>
+            <ul class="caution-list">
+                <li><strong>52,9%</strong> das violações usam o valor histórico “Dado ausente (bd antigo)”. Esse valor deve ser preservado e entrar em fila de qualificação humana.</li>
+                <li>Há <strong>28 UFs</strong> e <strong>5.571 municípios</strong> no catálogo territorial, o que amplia as possibilidades de análise regional.</li>
+                <li>Entre as violações classificadas, aparecem com maior frequência morte (873) e agressão física/lesão corporal (788).</li>
+                <li>As fontes são diversas: G1 (1.151), AAA (600), Folha de São Paulo (442) e Estadão (292) são as mais recorrentes.</li>
+            </ul>
+        </section>
+
+        <section class="report-section" aria-labelledby="espacial">
+            <p class="section-label">05 — Pendência espacial</p>
+            <h2 id="espacial">Geolocalização será tratada como uma etapa própria.</h2>
+            <p>O backup utiliza PostGIS para armazenar informações geográficas. Como essa extensão não está instalada no PostgreSQL local, as tabelas <code>ovpdh_gis</code>, o catálogo espacial e as views de mapa não foram carregados. Nenhum outro dado foi perdido por isso.</p>
+            <p>Após instalar uma versão compatível do PostGIS em homologação, essa parte será restaurada em lote separado e validada antes de integrar mapas ou filtros geográficos ao novo sistema.</p>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="proximos">
+            <p class="section-label">06 — Próximas decisões técnicas</p>
+            <h2 id="proximos">Agora sabemos o que precisa ser preservado antes de escrever migrations.</h2>
+            <ol class="next-list">
+                <li><div><strong>Comparar <code>public</code> e <code>old</code></strong><p>Definir se o segundo é uma cópia histórica, uma versão anterior ou contém registros exclusivos.</p></div></li>
+                <li><div><strong>Instalar PostGIS em homologação</strong><p>Restaurar e validar os dados espaciais de forma isolada.</p></div></li>
+                <li><div><strong>Atualizar o MER</strong><p>Incluir violações, fontes, depoimentos, meios, lesões e catálogos vindos do legado.</p></div></li>
+                <li><div><strong>Homologar o mapa de status</strong><p>A curadoria decide como cada estado histórico será tratado no novo fluxo.</p></div></li>
+                <li><div><strong>Escrever migrations e importador</strong><p>Somente após as decisões anteriores, com dados de origem rastreáveis.</p></div></li>
+            </ol>
+            <p class="closing-text mt-4">O legado não é apenas uma base para importar: ele é a memória metodológica que deve orientar a evolução do novo Observatório.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer"><div class="container report-container">OVPDH — Documento 04 · Inventário do legado PostgreSQL · 23 de agosto de 2026</div></footer>
+</body>
+</html>
