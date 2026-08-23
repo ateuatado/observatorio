@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Diagnóstico do legado e plano de migração incremental do OVPDH.">
+    <title>Plano de migração do legado | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+    <style>
+        .signal-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin: 2rem 0; }
+        .signal { border: 1px solid var(--report-line); border-radius: .7rem; padding: 1.25rem; }
+        .signal strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem; }
+        .signal span { color: var(--report-muted); display: block; font-size: .9rem; margin-top: .3rem; }
+        .comparison { display: grid; gap: 1rem; grid-template-columns: 1fr 74px 1fr; margin-top: 1.75rem; }
+        .comparison article { border: 1px solid var(--report-line); border-radius: .7rem; padding: 1.25rem; }
+        .comparison article h3 { color: var(--report-wine); font-family: Georgia, 'Times New Roman', serif; }
+        .comparison article ul { margin-bottom: 0; padding-left: 1.2rem; }
+        .comparison .bridge { align-items: center; color: var(--report-red); display: flex; font-size: 2rem; justify-content: center; }
+        .phase-list { counter-reset: phase; display: grid; gap: .8rem; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+        .phase-list li { align-items: start; border-bottom: 1px solid var(--report-line); display: grid; gap: 1rem; grid-template-columns: 36px 1fr; padding: 0 0 .9rem; }
+        .phase-list li::before { background: var(--report-wine); border-radius: 50%; color: #fff; content: counter(phase); counter-increment: phase; display: grid; font-size: .85rem; font-weight: 700; height: 28px; place-items: center; width: 28px; }
+        .phase-list strong { display: block; }
+        .phase-list p { margin: .2rem 0 0; }
+        .risk-list { display: grid; gap: .85rem; grid-template-columns: repeat(2, 1fr); list-style: none; margin: 1.5rem 0 0; padding: 0; }
+        .risk-list li { background: #f8fafc; border-left: 4px solid #334155; padding: .9rem 1rem; }
+        .checksum { background: #f4f6f8; border-radius: .5rem; font-family: Consolas, monospace; font-size: .78rem; overflow-wrap: anywhere; padding: .75rem; }
+        @media (max-width: 767.98px) { .signal-grid, .risk-list { grid-template-columns: 1fr; } .comparison { grid-template-columns: 1fr; } .comparison .bridge { transform: rotate(90deg); } }
+    </style>
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento 03 — Diagnóstico e migração</p>
+            <div class="report-rule"></div>
+            <h1>Plano de migração do legado</h1>
+            <p class="report-subtitle">Como aproveitar o acervo existente com segurança, sem apagar dados nem interromper a construção do novo sistema.</p>
+            <div class="report-meta"><span>Versão de trabalho 1.0</span><span aria-hidden="true">•</span><span>23 de agosto de 2026</span></div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="descoberta">
+            <p class="section-label">01 — Resultado do diagnóstico</p>
+            <h2 id="descoberta">O acervo legado é valioso e mais detalhado que a estrutura inicial do novo sistema.</h2>
+            <p>Foi identificado um backup legado PostgreSQL do banco <strong>pcvi</strong>. Ele contém ocorrências, vítimas, autores institucionais, violações, fontes, depoimentos, classificações e indicadores analíticos. A aplicação nova, construída em CodeIgniter, possui uma base inicial mais simples.</p>
+            <div class="signal-grid">
+                <div class="signal"><strong>PostgreSQL</strong><span>tecnologia do banco legado identificado</span></div>
+                <div class="signal"><strong>3 esquemas</strong><span>dados atuais, histórico e indicadores analíticos</span></div>
+                <div class="signal"><strong>Sem alteração</strong><span>o diagnóstico foi somente de leitura</span></div>
+            </div>
+            <aside class="report-note"><strong>Decisão recomendada:</strong> não converter o banco diretamente em produção. Primeiro, restaurar uma cópia isolada, inventariar os dados e só então importar versões aprovadas para o novo sistema.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="comparacao">
+            <p class="section-label">02 — O que temos e o que preservaremos</p>
+            <h2 id="comparacao">A nova aplicação evolui o legado; não o substitui por uma versão reduzida.</h2>
+            <div class="comparison">
+                <article><h3>Acervo legado</h3><ul><li>Ocorrências e status</li><li>Violações, condutas e enquadramentos</li><li>Vítimas, autores institucionais e território</li><li>Fontes, depoimentos e audiovisual</li><li>Views de indicadores já consolidadas</li></ul></article>
+                <div class="bridge" aria-hidden="true">→</div>
+                <article><h3>Novo sistema</h3><ul><li>Cadastro e curadoria com perfis definidos</li><li>Área pública segura</li><li>Auditoria e proteção de dados</li><li>Pesquisa e indicadores evolutivos</li><li>Migrations versionadas e operação sustentável</li></ul></article>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="mapeamento">
+            <p class="section-label">03 — Mapa de preservação</p>
+            <h2 id="mapeamento">Cada domínio legado terá um destino explícito.</h2>
+            <div class="table-responsive">
+                <table class="report-table">
+                    <thead><tr><th>Informação legada</th><th>Destino no novo modelo</th><th>Regra de segurança</th></tr></thead>
+                    <tbody>
+                        <tr><td>Ocorrências, data, endereço e status</td><td>Ocorrências, território e origem legada</td><td>Preservar ID, status e texto original.</td></tr>
+                        <tr><td>Violações, condutas, instrumentos e lesões</td><td>Novas tabelas de violações e relações N:N</td><td>Não reduzir a informação a um único campo de tipo.</td></tr>
+                        <tr><td>Vítimas e classificações</td><td>Vítimas, catálogos e relações</td><td>Revisar anonimização antes de liberar qualquer acesso público.</td></tr>
+                        <tr><td>Autores e instituições</td><td>Agressores e instituições vinculados</td><td>Preservar fonte e vínculo com a violação quando houver.</td></tr>
+                        <tr><td>Fontes e depoimentos</td><td>Fontes estruturadas e conteúdo restrito</td><td>Manter origem e controlar acesso a dados sensíveis.</td></tr>
+                        <tr><td>Views analíticas</td><td>Indicadores validados no novo sistema</td><td>Comparar resultados com a leitura histórica antes da publicação.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="etapas">
+            <p class="section-label">04 — Migração em etapas</p>
+            <h2 id="etapas">Uma sequência que protege dados e permite voltar atrás.</h2>
+            <ol class="phase-list">
+                <li><div><strong>Preservar e restaurar uma cópia</strong><p>Guardar o backup original, registrar sua integridade e restaurá-lo somente em ambiente de homologação.</p></div></li>
+                <li><div><strong>Inventariar dados e indicadores</strong><p>Medir registros, relações, catálogos, status e fórmulas analíticas que precisam ser preservadas.</p></div></li>
+                <li><div><strong>Validar o mapa de dados</strong><p>A equipe confirma a correspondência entre campos legados e o novo modelo antes de qualquer carga.</p></div></li>
+                <li><div><strong>Criar estruturas aditivas</strong><p>As novas tabelas são criadas por migrations, sem apagar colunas ou tabelas do sistema atual.</p></div></li>
+                <li><div><strong>Importar em cópia e conferir</strong><p>A carga é testada, registra sua origem e produz relatório de contagens, pendências e erros.</p></div></li>
+                <li><div><strong>Aplicar em produção com backup</strong><p>Só depois da validação funcional e da aprovação da equipe, com possibilidade de reversão documentada.</p></div></li>
+            </ol>
+        </section>
+
+        <section class="report-section" aria-labelledby="garantias">
+            <p class="section-label">05 — Garantias mínimas</p>
+            <h2 id="garantias">Nenhuma informação deve desaparecer silenciosamente.</h2>
+            <ul class="risk-list">
+                <li>O backup legado permanece intacto e verificável.</li>
+                <li>Todo registro importado recebe referência ao seu ID e sistema de origem.</li>
+                <li>Valores antigos fora dos novos catálogos continuam visíveis como dados legados, aguardando classificação humana.</li>
+                <li>Dados pessoais, depoimentos e informações sensíveis continuam restritos.</li>
+                <li>Contagens e indicadores são comparados antes da liberação.</li>
+                <li>A importação é feita em lote identificável, permitindo correção sem apagar a base de origem.</li>
+            </ul>
+            <p class="report-caption mt-4">Identificação de integridade do backup analisado:</p>
+            <div class="checksum">SHA-256: 96B900C4DCDD529F8DA6DFA0D53EADF52C1D6EB4053A43901449F1F2AE2D568D</div>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="proximo">
+            <p class="section-label">06 — Próxima atividade</p>
+            <h2 id="proximo">Restaurar a cópia de homologação e medir o acervo.</h2>
+            <p>O próximo trabalho técnico é instalar ou acessar um PostgreSQL de homologação, restaurar o backup e extrair um inventário quantitativo: número de registros, chaves estrangeiras, catálogos, status e views analíticas. Essa etapa é somente de leitura sobre a cópia restaurada.</p>
+            <p class="closing-text">Com esse inventário, a equipe poderá aprovar o mapa de migração antes de qualquer alteração no banco de produção.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer"><div class="container report-container">OVPDH — Documento 03 · Plano de migração do legado · 23 de agosto de 2026</div></footer>
+</body>
+</html>
