@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Síntese visual das especificações consolidadas do sistema OVPDH.">
+    <title>Especificações consolidadas | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+    <style>
+        .summary-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin: 2rem 0; }
+        .summary-item { background: #f7f4f1; border: 1px solid var(--report-line); border-radius: .7rem; padding: 1.25rem; }
+        .summary-item strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 1.7rem; line-height: 1.15; }
+        .summary-item span { color: var(--report-muted); display: block; font-size: .86rem; margin-top: .3rem; }
+        .decision-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); margin-top: 1.5rem; }
+        .decision-card { border: 1px solid var(--report-line); border-radius: .7rem; padding: 1.35rem; }
+        .decision-card h3 { color: var(--report-wine); font-family: Georgia, 'Times New Roman', serif; }
+        .decision-card p { margin-bottom: 0; }
+        .flow-caption { color: var(--report-muted); font-size: .9rem; margin-top: .75rem; text-align: center; }
+        .flow-branch { background: #fdf4e9; border: 1px solid #f0c98f; color: #7a3e00; min-width: 135px; padding: 1rem .75rem; text-align: center; }
+        .flow-branch strong, .flow-branch small { display: block; }
+        .flow-branch small { font-size: .75rem; margin-top: .2rem; }
+        .safeguard-list { display: grid; gap: .8rem; grid-template-columns: repeat(2, 1fr); list-style: none; margin: 1.5rem 0 0; padding: 0; }
+        .safeguard-list li { background: #f8fafc; border-left: 4px solid #334155; padding: .85rem 1rem; }
+        .roadmap { counter-reset: phase; display: grid; gap: 1rem; margin-top: 1.5rem; }
+        .roadmap article { align-items: start; border: 1px solid var(--report-line); border-radius: .7rem; display: grid; gap: 1rem; grid-template-columns: 42px 1fr; padding: 1.2rem; }
+        .roadmap article::before { background: var(--report-wine); border-radius: 50%; color: #fff; content: counter(phase); counter-increment: phase; display: grid; font-weight: 700; height: 32px; place-items: center; width: 32px; }
+        .roadmap h3 { margin: 0 0 .25rem; }
+        .roadmap p { margin: 0; }
+        .legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.25rem; }
+        .legend span { align-items: center; display: inline-flex; font-size: .85rem; gap: .4rem; }
+        .legend i { border-radius: 50%; display: inline-block; height: 10px; width: 10px; }
+        @media (max-width: 767.98px) {
+            .summary-grid, .decision-grid, .safeguard-list { grid-template-columns: 1fr; }
+            .status-flow.status-flow-wide { align-items: center; flex-direction: column; }
+            .status-flow.status-flow-wide .flow-arrow { margin: .25rem 0; transform: rotate(90deg); }
+            .status-flow.status-flow-wide .flow-branch { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento para decisão coletiva</p>
+            <div class="report-rule"></div>
+            <h1>Especificações consolidadas do OVPDH</h1>
+            <p class="report-subtitle">Uma visão clara do que o sistema fará, como protegerá os dados e como poderá evoluir sem perder o patrimônio já construído.</p>
+            <div class="report-meta">
+                <span>Versão de trabalho 1.0</span>
+                <span aria-hidden="true">•</span>
+                <span>23 de agosto de 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="proposito">
+            <p class="section-label">01 — Propósito</p>
+            <h2 id="proposito">Registrar, revisar e comunicar violações com responsabilidade.</h2>
+            <p>O Observatório de Violência Policial e Direitos Humanos registra informações sobre abusos de legalidades e graves violações aos direitos humanos cometidas pelo Estado. O sistema organiza esses registros, apoia a curadoria da equipe e divulga ao público somente informações já verificadas e autorizadas.</p>
+            <div class="summary-grid" aria-label="Resumo do sistema">
+                <div class="summary-item"><strong>2 áreas</strong><span>uma pública e outra interna, com acessos diferentes</span></div>
+                <div class="summary-item"><strong>5 estados</strong><span>para acompanhar o ciclo de cada ocorrência</span></div>
+                <div class="summary-item"><strong>1 regra central</strong><span>nenhum dado sensível aparece publicamente sem revisão</span></div>
+            </div>
+            <aside class="report-note"><strong>O que muda na prática:</strong> o sistema deixa claro quem pode registrar, quem revisa, o que pode ser publicado e como proteger informações sobre pessoas envolvidas.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="areas">
+            <p class="section-label">02 — Como o sistema se organiza</p>
+            <h2 id="areas">Duas áreas, um mesmo compromisso com a informação confiável.</h2>
+            <div class="decision-grid">
+                <article class="info-card info-card-public">
+                    <span class="card-number">ÁREA PÚBLICA</span>
+                    <h3>Informação para a sociedade</h3>
+                    <p>Apresenta ocorrências publicadas, indicadores agregados, acervo histórico e produções acadêmicas. Não mostra rascunhos, comentários internos nem dados pessoais protegidos.</p>
+                </article>
+                <article class="info-card info-card-private">
+                    <span class="card-number">ÁREA INTERNA</span>
+                    <h3>Trabalho da equipe</h3>
+                    <p>Permite cadastrar ocorrências, anexar fontes, pesquisar dados, fazer curadoria, administrar usuários e acompanhar o histórico de decisões.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="ocorrencia">
+            <p class="section-label">03 — O centro do sistema</p>
+            <h2 id="ocorrencia">Cada ocorrência reúne o fato, as pessoas afetadas, os agentes e as fontes.</h2>
+            <p>O formulário registra título, data, local, tipos de violência, relato e fontes. A ele podem ser vinculadas várias vítimas e vários agentes ou instituições. A ficha pode ser salva incompleta como rascunho; para seguir à curadoria, precisa cumprir os campos obrigatórios.</p>
+            <div class="table-responsive mt-4">
+                <table class="report-table">
+                    <thead><tr><th>Bloco de informação</th><th>O que reúne</th><th>Cuidados principais</th></tr></thead>
+                    <tbody>
+                        <tr><td>Ocorrência</td><td>Data, território, relato, classificação e fontes.</td><td>Ao menos uma fonte identificável antes do envio à curadoria.</td></tr>
+                        <tr><td>Vítimas</td><td>Informações disponíveis sobre pessoas ou grupos afetados.</td><td>Nome é restrito e a anonimização é padrão quando houver risco.</td></tr>
+                        <tr><td>Agressores e instituições</td><td>Tipo de agente estatal, órgão e identificação quando sustentada por fonte.</td><td>Não é necessário haver identificação individual para registrar o fato.</td></tr>
+                        <tr><td>Fontes</td><td>URLs, documentos, processos, entrevistas e evidências.</td><td>O texto legado é preservado e novas fontes poderão ser organizadas uma a uma.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="fluxo">
+            <p class="section-label">04 — Curadoria e publicação</p>
+            <h2 id="fluxo">O registro só se torna público depois de passar por revisão.</h2>
+            <div class="status-flow status-flow-wide" aria-label="Fluxo de uma ocorrência">
+                <div class="status-step"><span>1</span><strong>Rascunho</strong><small>Em preparação</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step"><span>2</span><strong>Em revisão</strong><small>Na fila de curadoria</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step"><span>3</span><strong>Aprovado</strong><small>Consulta interna</small></div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="status-step status-published"><span>4</span><strong>Publicado</strong><small>Visível ao público</small></div>
+            </div>
+            <p class="flow-caption">Se houver pendências, a curadoria rejeita o registro com justificativa. Ele volta para correção e pode ser enviado novamente.</p>
+            <div class="legend" aria-label="Legenda do fluxo">
+                <span><i style="background:#8b1a1e"></i> Trabalho em preparação ou análise</span>
+                <span><i style="background:#166534"></i> Conteúdo autorizado para o público</span>
+                <span><i style="background:#d97706"></i> Rejeição exige orientação registrada</span>
+            </div>
+            <aside class="report-note"><strong>Auditoria:</strong> envio, aprovação, rejeição, publicação, despublicação e exclusão lógica deixam uma marca permanente no histórico do registro.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="papeis">
+            <p class="section-label">05 — Quem pode fazer o quê</p>
+            <h2 id="papeis">A colaboração é aberta à equipe; as decisões de curadoria permanecem protegidas.</h2>
+            <div class="table-responsive">
+                <table class="report-table report-table-profiles">
+                    <thead><tr><th>Perfil</th><th>Atuação definida</th></tr></thead>
+                    <tbody>
+                        <tr><td>Usuário comum</td><td>Cria ocorrências próprias, salva rascunhos, corrige registros rejeitados, envia para curadoria e acompanha seus status. Consulta registros aprovados internamente.</td></tr>
+                        <tr><td>Curador</td><td>Revisa, aprova, rejeita, publica e despublica registros. Não toma decisões de curadoria sobre registro de sua própria autoria.</td></tr>
+                        <tr><td>Administrador</td><td>Executa funções de curadoria e administra usuários, perfis, permissões e configurações. Exceções sobre registros próprios exigem justificativa auditável.</td></tr>
+                        <tr><td>Superadministrador</td><td>Administra o conteúdo institucional e editorial do site; não recebe automaticamente acesso a ocorrências ou usuários.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="pesquisa">
+            <p class="section-label">06 — Pesquisa e indicadores</p>
+            <h2 id="pesquisa">Dados organizados para consulta e análise, sem expor quem precisa ser protegido.</h2>
+            <div class="decision-grid">
+                <article class="decision-card">
+                    <h3>Pesquisa interna</h3>
+                    <p>Permite combinar período, território, tipos de violência, órgãos, status, dados agregáveis das vítimas e texto livre. Cada perfil enxerga apenas o que sua permissão permite.</p>
+                </article>
+                <article class="decision-card">
+                    <h3>Indicadores</h3>
+                    <p>Mostram tendências por período, lugar, tipo de violência, agente, raça/cor, gênero, idade e desfecho. Recortes muito pequenos são ocultados ou agrupados para evitar reidentificação.</p>
+                </article>
+            </div>
+            <p class="report-caption">Na área pública, só entram registros publicados e indicadores com metodologia, período de referência e proteção contra exposição indevida.</p>
+        </section>
+
+        <section class="report-section" aria-labelledby="legado">
+            <p class="section-label">07 — Respeito ao acervo já existente</p>
+            <h2 id="legado">A evolução será cumulativa: o legado continua visível e utilizável.</h2>
+            <p>As tabelas já existentes de ocorrências, vítimas, agressores, revisões, acervo histórico e produtos serão preservadas. Os identificadores e os dados anteriores não serão recriados nem apagados para adaptar o sistema novo.</p>
+            <div class="table-responsive mt-4">
+                <table class="report-table">
+                    <thead><tr><th>Compromisso</th><th>Como será cumprido</th></tr></thead>
+                    <tbody>
+                        <tr><td>Nenhuma quebra de dados</td><td>Alterações serão feitas por migrations novas e incrementais; migrations antigas não serão reescritas.</td></tr>
+                        <tr><td>Classificações mais ricas</td><td>Novas tabelas de tipos de violência e fontes serão adicionadas sem apagar os campos de texto livre já preenchidos.</td></tr>
+                        <tr><td>Status antigos preservados</td><td>O status legado <em>arquivado</em> continua válido e fora da área pública; <em>rejeitado</em> é acrescentado sem invalidar registros anteriores.</td></tr>
+                        <tr><td>Dados antigos nas consultas</td><td>Valores ainda não padronizados aparecem como “legado não classificado”, com o texto original disponível para posterior curadoria.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="protecao">
+            <p class="section-label">08 — Proteção de dados e continuidade</p>
+            <h2 id="protecao">Segurança não é um detalhe: é parte do método do Observatório.</h2>
+            <ul class="safeguard-list">
+                <li>Contas individuais, permissões por perfil e por autoria do registro.</li>
+                <li>Conexão segura, sessões protegidas e arquivos enviados em local não executável.</li>
+                <li>Dados sensíveis acessados apenas quando necessários ao trabalho autorizado.</li>
+                <li>Histórico de alterações imutável, inclusive para permissões e dados pessoais.</li>
+                <li>Backups protegidos, separados do servidor e testados por restauração.</li>
+                <li>Retenção definida em política institucional, sem exclusões automáticas prematuras.</li>
+            </ul>
+        </section>
+
+        <section class="report-section" aria-labelledby="acervo">
+            <p class="section-label">09 — Conhecimento público</p>
+            <h2 id="acervo">O sistema também organiza memória e produção acadêmica.</h2>
+            <div class="decision-grid">
+                <article class="info-card info-card-public">
+                    <span class="card-number">ACERVO HISTÓRICO</span>
+                    <h3>Dossiês e documentos</h3>
+                    <p>Reúne título, descrição, período, categoria, autoria, documento e miniatura. A busca pública permite filtrar por período, categoria e créditos.</p>
+                </article>
+                <article class="info-card info-card-public">
+                    <span class="card-number">PRODUÇÕES ACADÊMICAS</span>
+                    <h3>Artigos, livros e relatórios</h3>
+                    <p>Organiza autoria, tipo, ano, resumo, veículo, DOI, links e arquivos autorizados. Materiais só aparecem depois da gestão editorial.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="gamificacao">
+            <p class="section-label">10 — Possibilidade futura</p>
+            <h2 id="gamificacao">Participação acadêmica com qualidade antes de quantidade.</h2>
+            <p>O sistema fica preparado para, futuramente, apoiar atividades supervisionadas de estudantes de graduação e programas da faculdade. A gamificação não será parte da primeira versão e só poderá ser implantada com aprovação institucional.</p>
+            <aside class="report-note"><strong>Regra de ouro:</strong> pontos ou distintivos só poderão considerar contribuições validadas pela curadoria. Não haverá competição pública baseada em casos sensíveis, nem incentivo para cadastrar registros sem fonte ou sem qualidade.</aside>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="proximos-passos">
+            <p class="section-label">11 — Próxima etapa de trabalho</p>
+            <h2 id="proximos-passos">Da decisão coletiva para a implementação segura.</h2>
+            <div class="roadmap">
+                <article><div><h3>Homologar esta especificação</h3><p>O grupo confirma campos, perfis, critérios de publicação e pontos institucionais ainda sujeitos a decisão.</p></div></article>
+                <article><div><h3>Planejar a evolução do banco</h3><p>São produzidas migrations compatíveis com o legado, começando por estruturas novas e sem apagar dados existentes.</p></div></article>
+                <article><div><h3>Construir o fluxo mínimo</h3><p>Cadastro, envio à curadoria, revisão, auditoria e consulta interna formam o primeiro núcleo funcional.</p></div></article>
+                <article><div><h3>Validar com a equipe</h3><p>O piloto usa registros de teste e cenários reais de trabalho antes de qualquer mudança definitiva em produção.</p></div></article>
+            </div>
+            <p class="closing-text mt-4">O resultado esperado é um sistema confiável, compreensível para quem o utiliza e cuidadoso com as pessoas e histórias que documenta.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer">
+        <div class="container report-container">OVPDH — Especificações consolidadas · Documento de trabalho</div>
+    </footer>
+</body>
+</html>
