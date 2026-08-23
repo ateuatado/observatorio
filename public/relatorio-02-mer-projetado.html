@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Modelo Entidade-Relacionamento projetado para o OVPDH.">
+    <title>MER projetado | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+    <style>
+        .mer-key { display: flex; flex-wrap: wrap; gap: .65rem 1.25rem; margin: 1.25rem 0 2rem; }
+        .mer-key span { align-items: center; display: inline-flex; font-size: .9rem; gap: .45rem; }
+        .mer-key i { border-radius: 50%; display: inline-block; height: 12px; width: 12px; }
+        .mer-key .current { background: #8b1a1e; }
+        .mer-key .planned { background: #166534; }
+        .mer-key .future { background: #6b7280; }
+        .mer-group { border: 1px solid var(--report-line); border-radius: .75rem; margin: 1.5rem 0; padding: 1.5rem; }
+        .mer-group h3 { color: var(--report-wine); font-family: Georgia, 'Times New Roman', serif; margin-bottom: 1rem; }
+        .mer-line { align-items: center; display: grid; gap: .75rem; grid-template-columns: minmax(135px, 1fr) minmax(120px, .9fr) minmax(135px, 1fr); margin: .75rem 0; }
+        .mer-entity { background: #fffafa; border: 1px solid #d9b5b6; border-radius: .55rem; padding: .85rem 1rem; }
+        .mer-entity.planned { background: #f1faf3; border-color: #9ac8a2; }
+        .mer-entity.future { background: #f5f5f5; border-color: #c9c9c9; color: #5d6673; }
+        .mer-entity strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; }
+        .mer-entity.planned strong { color: #166534; }
+        .mer-entity.future strong { color: #4b5563; }
+        .mer-entity small { display: block; line-height: 1.4; margin-top: .25rem; }
+        .mer-link { color: var(--report-muted); font-size: .88rem; line-height: 1.35; text-align: center; }
+        .mer-link b { color: var(--report-red); display: block; font-size: 1.1rem; }
+        .diagram-note { color: var(--report-muted); font-size: .88rem; margin: .75rem 0 0; }
+        .entity-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin-top: 1.5rem; }
+        .entity-card { border: 1px solid var(--report-line); border-top: 4px solid var(--report-wine); border-radius: .65rem; padding: 1rem; }
+        .entity-card.planned { border-top-color: #166534; }
+        .entity-card.future { border-top-color: #6b7280; }
+        .entity-card h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.1rem; margin-bottom: .5rem; }
+        .entity-card ul { color: var(--report-muted); font-size: .88rem; margin: 0; padding-left: 1.1rem; }
+        .entity-card li { margin-bottom: .25rem; }
+        .mini-flow { align-items: stretch; display: flex; margin: 2rem 0 1rem; }
+        .mini-flow .step { background: #fafafa; border: 1px solid var(--report-line); flex: 1; padding: .9rem; text-align: center; }
+        .mini-flow .step strong { display: block; font-family: Georgia, 'Times New Roman', serif; }
+        .mini-flow .arrow { align-self: center; color: var(--report-red); font-size: 1.35rem; margin: 0 .5rem; }
+        @media (max-width: 767.98px) {
+            .mer-line { grid-template-columns: 1fr; }
+            .mer-link b { transform: rotate(90deg); }
+            .entity-grid { grid-template-columns: 1fr; }
+            .mini-flow { align-items: center; flex-direction: column; }
+            .mini-flow .step { width: 100%; }
+            .mini-flow .arrow { margin: .25rem 0; transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento 02 — Modelo de dados</p>
+            <div class="report-rule"></div>
+            <h1>MER projetado do OVPDH</h1>
+            <p class="report-subtitle">Uma visão das entidades do banco, suas relações e a evolução segura do acervo já existente.</p>
+            <div class="report-meta"><span>Versão de trabalho 1.0</span><span aria-hidden="true">•</span><span>23 de agosto de 2026</span></div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="leitura">
+            <p class="section-label">01 — Como ler este documento</p>
+            <h2 id="leitura">O modelo amplia o sistema sem descartar o que já foi registrado.</h2>
+            <p>O MER — Modelo Entidade-Relacionamento — mostra quais conjuntos de informações o banco guarda e como eles se conectam. Ele serve como mapa antes da programação das migrations e das telas.</p>
+            <div class="mer-key" aria-label="Legenda">
+                <span><i class="current"></i> Já existe e será preservado</span>
+                <span><i class="planned"></i> Evolução prevista para a próxima etapa</span>
+                <span><i class="future"></i> Reservado para fase futura</span>
+            </div>
+            <aside class="report-note"><strong>Princípio de proteção:</strong> novas tabelas organizam melhor os dados, mas não apagam colunas, identificadores ou textos históricos já existentes.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="nucleo">
+            <p class="section-label">02 — Núcleo do banco</p>
+            <h2 id="nucleo">Uma ocorrência é o ponto de encontro das informações.</h2>
+            <div class="mer-group" aria-label="Diagrama do núcleo de ocorrências">
+                <h3>Relações principais</h3>
+                <div class="mer-line">
+                    <div class="mer-entity"><strong>USUÁRIOS</strong><small>Conta, perfil e autenticação</small></div>
+                    <div class="mer-link"><b>1 ─── N</b>cria e revisa</div>
+                    <div class="mer-entity"><strong>OCORRÊNCIAS</strong><small>Fato, local, data, relato, status e autoria</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity"><strong>VÍTIMAS</strong><small>Pessoas ou grupos afetados</small></div>
+                    <div class="mer-link"><b>N ─── 1</b>pertencem a</div>
+                    <div class="mer-entity"><strong>OCORRÊNCIAS</strong><small>Uma ocorrência pode ter várias vítimas</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity"><strong>AGRESSORES</strong><small>Agentes e instituições estatais</small></div>
+                    <div class="mer-link"><b>N ─── 1</b>pertencem a</div>
+                    <div class="mer-entity"><strong>OCORRÊNCIAS</strong><small>Uma ocorrência pode ter vários agressores</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity"><strong>REVISÕES</strong><small>Ações, status e comentários</small></div>
+                    <div class="mer-link"><b>N ─── 1</b>registram a história de</div>
+                    <div class="mer-entity"><strong>OCORRÊNCIAS</strong><small>Cada decisão fica auditável</small></div>
+                </div>
+                <p class="diagram-note">A notação “1 ─ N” significa “um registro de um lado pode estar associado a vários registros do outro lado”.</p>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="evolucao">
+            <p class="section-label">03 — Evolução planejada</p>
+            <h2 id="evolucao">Classificar melhor sem substituir informações legadas.</h2>
+            <div class="mer-group" aria-label="Diagrama das novas tabelas de classificação">
+                <h3>Novas relações normalizadas</h3>
+                <div class="mer-line">
+                    <div class="mer-entity planned"><strong>TIPOS DE VIOLÊNCIA</strong><small>Catálogo aprovado pela equipe</small></div>
+                    <div class="mer-link"><b>1 ─ N ─ 1</b>por meio da tabela de vínculo</div>
+                    <div class="mer-entity planned"><strong>OCORRÊNCIA × TIPO</strong><small>Permite vários tipos em uma ocorrência</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity planned"><strong>FONTES DA OCORRÊNCIA</strong><small>URL, documento, entrevista e evidência</small></div>
+                    <div class="mer-link"><b>N ─── 1</b>documentam</div>
+                    <div class="mer-entity"><strong>OCORRÊNCIAS</strong><small>O campo textual de fontes permanece preservado</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity planned"><strong>CONDIÇÕES DA VÍTIMA</strong><small>Catálogo de grupos e condições</small></div>
+                    <div class="mer-link"><b>1 ─ N ─ 1</b>por meio da tabela de vínculo</div>
+                    <div class="mer-entity planned"><strong>VÍTIMA × CONDIÇÃO</strong><small>Permite várias condições por vítima</small></div>
+                </div>
+            </div>
+            <aside class="report-note"><strong>Por que usar tabelas de vínculo?</strong> Elas evitam limitar uma ocorrência a apenas um tipo de violência ou uma vítima a apenas uma condição, mantendo os dados prontos para pesquisa e indicadores.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="entidades">
+            <p class="section-label">04 — Dicionário visual de entidades</p>
+            <h2 id="entidades">O que cada parte do modelo guarda.</h2>
+            <div class="entity-grid">
+                <article class="entity-card"><h3>Ocorrências</h3><ul><li>Identificador, título e relato</li><li>Data e território</li><li>Status e autoria</li><li>Fontes e evidências legadas</li></ul></article>
+                <article class="entity-card"><h3>Vítimas</h3><ul><li>Nome protegido quando necessário</li><li>Idade, gênero e raça/cor</li><li>Condição e desfecho</li><li>Vínculo com a ocorrência</li></ul></article>
+                <article class="entity-card"><h3>Agressores</h3><ul><li>Tipo de agente estatal</li><li>Órgão ou instituição</li><li>Identificação quando sustentada</li><li>Vínculo com a ocorrência</li></ul></article>
+                <article class="entity-card"><h3>Revisões</h3><ul><li>Usuário responsável</li><li>Ação realizada</li><li>Status anterior e novo</li><li>Comentário e data/hora</li></ul></article>
+                <article class="entity-card planned"><h3>Fontes</h3><ul><li>Tipo de fonte</li><li>Referência e URL</li><li>Descrição</li><li>Data de acesso</li></ul></article>
+                <article class="entity-card planned"><h3>Catálogos</h3><ul><li>Tipos de violência</li><li>Condições da vítima</li><li>Termos ativos e revisáveis</li><li>Sem apagar valores legados</li></ul></article>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="fluxo-dados">
+            <p class="section-label">05 — Vida de um dado no sistema</p>
+            <h2 id="fluxo-dados">Do registro inicial ao conhecimento público.</h2>
+            <div class="mini-flow" aria-label="Fluxo de dados">
+                <div class="step"><strong>Cadastro</strong><small>Ocorrência, vítimas, agentes e fontes</small></div>
+                <div class="arrow" aria-hidden="true">→</div>
+                <div class="step"><strong>Curadoria</strong><small>Revisões e decisão registrada</small></div>
+                <div class="arrow" aria-hidden="true">→</div>
+                <div class="step"><strong>Pesquisa</strong><small>Consultas e indicadores agregados</small></div>
+                <div class="arrow" aria-hidden="true">→</div>
+                <div class="step"><strong>Publicação</strong><small>Somente conteúdo autorizado</small></div>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="futuro">
+            <p class="section-label">06 — Estrutura futura, sem impacto agora</p>
+            <h2 id="futuro">A participação acadêmica poderá ser adicionada quando houver decisão institucional.</h2>
+            <div class="mer-group" aria-label="Diagrama da futura participação acadêmica">
+                <h3>Fase futura de gamificação supervisionada</h3>
+                <div class="mer-line">
+                    <div class="mer-entity future"><strong>PROGRAMAS ACADÊMICOS</strong><small>Curso, disciplina ou projeto</small></div>
+                    <div class="mer-link"><b>1 ─── N</b>organiza</div>
+                    <div class="mer-entity future"><strong>PARTICIPAÇÕES</strong><small>Usuário e período de atividade</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity future"><strong>PARTICIPAÇÕES</strong><small>Estudante vinculado ao programa</small></div>
+                    <div class="mer-link"><b>1 ─── N</b>realiza</div>
+                    <div class="mer-entity future"><strong>CONTRIBUIÇÕES</strong><small>Cadastro ou pesquisa validada</small></div>
+                </div>
+                <div class="mer-line">
+                    <div class="mer-entity future"><strong>CONTRIBUIÇÕES</strong><small>Só após validação</small></div>
+                    <div class="mer-link"><b>1 ─── N</b>pode originar</div>
+                    <div class="mer-entity future"><strong>PONTUAÇÕES</strong><small>Histórico pedagógico auditável</small></div>
+                </div>
+            </div>
+            <p class="report-caption">Essa estrutura não cria competição nesta fase. Ela apenas evita retrabalho caso a participação acadêmica supervisionada seja aprovada no futuro.</p>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="implantacao">
+            <p class="section-label">07 — Regras para implementar sem quebrar o legado</p>
+            <h2 id="implantacao">A evolução técnica deve ser cuidadosa e verificável.</h2>
+            <ol>
+                <li>Criar backup validado antes de qualquer migration em produção.</li>
+                <li>Adicionar novas tabelas e campos por migrations incrementais, sem reescrever as existentes.</li>
+                <li>Preservar IDs, textos livres, status antigos e arquivos já registrados.</li>
+                <li>Testar as alterações em ambiente de homologação com cópia protegida dos dados.</li>
+                <li>Aplicar a migração e conferir quantidades, acessos e indicadores antes de liberar a nova função.</li>
+            </ol>
+            <p class="closing-text">O modelo está pronto para validação coletiva e, depois disso, para orientar as primeiras migrations de implementação.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer"><div class="container report-container">OVPDH — Documento 02 · MER projetado · 23 de agosto de 2026</div></footer>
+</body>
+</html>
