@@ -43,7 +43,7 @@
         <section class="report-intro" aria-labelledby="resultado">
             <p class="section-label">01 — Resultado da restauração</p>
             <h2 id="resultado">O banco está disponível para estudo em uma cópia local de homologação.</h2>
-            <p>O backup legado foi restaurado no banco PostgreSQL <strong>observatorio</strong>. As estruturas e dados não espaciais estão disponíveis para análise. A parte geográfica permanece isolada até a instalação da extensão PostGIS compatível.</p>
+            <p>O backup legado foi restaurado no banco PostgreSQL <strong>observatorio</strong>. As estruturas, dados, relações e views analíticas estão disponíveis para análise. A extensão PostGIS foi ativada e a parte geográfica também foi restaurada.</p>
             <div class="number-grid">
                 <div class="number-card"><strong>96</strong><span>tabelas restauradas, distribuídas entre os esquemas público e histórico</span></div>
                 <div class="number-card"><strong>65</strong><span>chaves estrangeiras no esquema principal, demonstrando relações importantes</span></div>
@@ -95,10 +95,10 @@
         </section>
 
         <section class="report-section" aria-labelledby="espacial">
-            <p class="section-label">05 — Pendência espacial</p>
-            <h2 id="espacial">Geolocalização será tratada como uma etapa própria.</h2>
-            <p>O backup utiliza PostGIS para armazenar informações geográficas. Como essa extensão não está instalada no PostgreSQL local, as tabelas <code>ovpdh_gis</code>, o catálogo espacial e as views de mapa não foram carregados. Nenhum outro dado foi perdido por isso.</p>
-            <p>Após instalar uma versão compatível do PostGIS em homologação, essa parte será restaurada em lote separado e validada antes de integrar mapas ou filtros geográficos ao novo sistema.</p>
+            <p class="section-label">05 — Georreferenciamento habilitado</p>
+            <h2 id="espacial">A base espacial está pronta para estudo e evolução.</h2>
+            <p>O PostGIS 3.6 foi ativado no PostgreSQL local. A tabela <code>ovpdh_gis</code> contém 937 geometrias do tipo ponto, em coordenadas WGS 84 (SRID 4326), vinculadas às ocorrências. As 153 views analíticas do legado também estão disponíveis.</p>
+            <p>O próximo cuidado é validar a cobertura territorial e a qualidade das coordenadas antes de integrar mapas ou filtros geográficos à área pública.</p>
         </section>
 
         <section class="report-section report-next" aria-labelledby="proximos">
@@ -106,7 +106,7 @@
             <h2 id="proximos">Agora sabemos o que precisa ser preservado antes de escrever migrations.</h2>
             <ol class="next-list">
                 <li><div><strong>Comparar <code>public</code> e <code>old</code></strong><p>Definir se o segundo é uma cópia histórica, uma versão anterior ou contém registros exclusivos.</p></div></li>
-                <li><div><strong>Instalar PostGIS em homologação</strong><p>Restaurar e validar os dados espaciais de forma isolada.</p></div></li>
+                <li><div><strong>Validar coordenadas e cobertura</strong><p>Conferir SRID, pontos geográficos e regras de exposição territorial.</p></div></li>
                 <li><div><strong>Atualizar o MER</strong><p>Incluir violações, fontes, depoimentos, meios, lesões e catálogos vindos do legado.</p></div></li>
                 <li><div><strong>Homologar o mapa de status</strong><p>A curadoria decide como cada estado histórico será tratado no novo fluxo.</p></div></li>
                 <li><div><strong>Escrever migrations e importador</strong><p>Somente após as decisões anteriores, com dados de origem rastreáveis.</p></div></li>

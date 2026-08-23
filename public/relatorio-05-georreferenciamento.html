@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Registro da habilitação de georreferenciamento do OVPDH em homologação.">
+    <title>Georreferenciamento em homologação | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/relatorio-especificacoes.css">
+    <style>
+        .geo-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin: 2rem 0; }
+        .geo-stat { background: #f1faf3; border: 1px solid #9ac8a2; border-radius: .7rem; padding: 1.2rem; }
+        .geo-stat strong { color: #166534; display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; line-height: 1.1; }
+        .geo-stat span { color: var(--report-muted); display: block; font-size: .88rem; margin-top: .35rem; }
+        .flow-grid { display: grid; gap: .75rem; grid-template-columns: repeat(4, 1fr); margin: 1.5rem 0; }
+        .flow-grid article { border: 1px solid var(--report-line); border-radius: .6rem; padding: 1rem; }
+        .flow-grid strong { color: var(--report-wine); display: block; font-family: Georgia, 'Times New Roman', serif; }
+        .rules { display: grid; gap: .85rem; grid-template-columns: repeat(2, 1fr); list-style: none; margin: 1.5rem 0 0; padding: 0; }
+        .rules li { background: #f8fafc; border-left: 4px solid #334155; padding: .9rem 1rem; }
+        @media (max-width: 767.98px) { .geo-grid, .flow-grid, .rules { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="report-cover">
+        <div class="container report-container">
+            <p class="report-kicker">Documento 05 — Georreferenciamento</p>
+            <div class="report-rule"></div>
+            <h1>O acervo agora tem dimensão territorial</h1>
+            <p class="report-subtitle">Registro da ativação do PostGIS e da restauração dos dados geográficos em homologação.</p>
+            <div class="report-meta"><span>Versão de trabalho 1.0</span><span aria-hidden="true">•</span><span>23 de agosto de 2026</span></div>
+        </div>
+    </header>
+
+    <main class="container report-container report-content">
+        <section class="report-intro" aria-labelledby="resultado">
+            <p class="section-label">01 — Resultado</p>
+            <h2 id="resultado">PostGIS foi ativado e os dados geográficos do legado foram restaurados.</h2>
+            <p>O banco de homologação <strong>observatorio</strong> agora possui capacidade espacial. As geometrias estão vinculadas às ocorrências e as views analíticas do legado voltaram a ficar disponíveis para estudo.</p>
+            <div class="geo-grid">
+                <div class="geo-stat"><strong>PostGIS 3.6</strong><span>extensão espacial habilitada</span></div>
+                <div class="geo-stat"><strong>937 pontos</strong><span>geometrias vinculadas a ocorrências</span></div>
+                <div class="geo-stat"><strong>SRID 4326</strong><span>referência WGS 84, própria para latitude e longitude</span></div>
+            </div>
+            <aside class="report-note"><strong>Importante:</strong> o banco está pronto para análise territorial, mas a exposição pública de pontos exige regras de privacidade e generalização espacial.</aside>
+        </section>
+
+        <section class="report-section" aria-labelledby="modelo">
+            <p class="section-label">02 — Como o legado armazena o lugar</p>
+            <h2 id="modelo">Uma geometria de ponto complementa a ocorrência.</h2>
+            <div class="table-responsive">
+                <table class="report-table">
+                    <thead><tr><th>Campo</th><th>Conteúdo</th><th>Uso previsto</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>id_id</code></td><td>Identificador da ocorrência</td><td>Vínculo entre o ponto e o registro documentado.</td></tr>
+                        <tr><td><code>geolocalizacao</code></td><td>Geometria PostGIS</td><td>Mapas, filtros territoriais e análises espaciais.</td></tr>
+                        <tr><td><code>latitude</code> e <code>longitude</code></td><td>Coordenadas numéricas</td><td>Conferência e interoperabilidade com ferramentas externas.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="uso">
+            <p class="section-label">03 — O que essa base possibilita</p>
+            <h2 id="uso">Território pode se tornar uma dimensão de pesquisa e prevenção.</h2>
+            <div class="flow-grid">
+                <article><strong>Mapa interno</strong><span>Visualização de registros conforme a permissão da equipe.</span></article>
+                <article><strong>Filtros espaciais</strong><span>Consulta por município, bairro, área ou proximidade.</span></article>
+                <article><strong>Indicadores territoriais</strong><span>Leitura de padrões por período e região.</span></article>
+                <article><strong>Mapa público seguro</strong><span>Dados agregados ou aproximados, nunca exposição automática de pontos sensíveis.</span></article>
+            </div>
+        </section>
+
+        <section class="report-section" aria-labelledby="protecao">
+            <p class="section-label">04 — Proteção territorial</p>
+            <h2 id="protecao">Coordenada exata também pode ser dado sensível.</h2>
+            <ul class="rules">
+                <li>O ponto exato fica restrito à área interna quando puder identificar pessoas ou locais vulneráveis.</li>
+                <li>A área pública deve usar município, bairro, grade territorial ou deslocamento controlado do ponto quando necessário.</li>
+                <li>A geometria precisa ser validada junto com latitude, longitude e referência territorial declarada.</li>
+                <li>Importações devem manter o ID de origem e registrar coordenadas inválidas ou suspeitas para revisão.</li>
+            </ul>
+        </section>
+
+        <section class="report-section report-next" aria-labelledby="proximo">
+            <p class="section-label">05 — Próxima atividade</p>
+            <h2 id="proximo">Validar a qualidade espacial antes de desenhar os mapas.</h2>
+            <p>A equipe deve conferir os 937 pontos quanto a SRID, limites geográficos, duplicidades, precisão e risco de exposição. Com essa validação, atualizaremos o MER e definiremos a primeira tela de mapa interno, seguida dos indicadores territoriais públicos seguros.</p>
+            <p class="closing-text">Georreferenciar não é apenas colocar pontos em um mapa: é relacionar território, evidência e proteção de dados.</p>
+        </section>
+    </main>
+
+    <footer class="report-footer"><div class="container report-container">OVPDH — Documento 05 · Georreferenciamento em homologação · 23 de agosto de 2026</div></footer>
+</body>
+</html>

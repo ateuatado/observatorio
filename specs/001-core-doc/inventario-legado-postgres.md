@@ -2,11 +2,11 @@
 
 **Documento**: 04  
 **Data**: 23 de agosto de 2026  
-**Status**: Homologação restaurada para análise; PostGIS pendente
+**Status**: Homologação restaurada para análise; PostGIS habilitado
 
 ## Escopo da restauração
 
-O backup `pcvi_backup_260821` foi restaurado no banco local PostgreSQL `observatorio`, criado para homologação. Foram carregadas todas as tabelas, dados e relacionamentos não espaciais. A extensão PostGIS não está instalada no servidor local; por isso, as tabelas `ovpdh_gis`, o objeto `spatial_ref_sys` e as views dependentes de geolocalização ficaram pendentes.
+O backup `pcvi_backup_260821` foi restaurado no banco local PostgreSQL `observatorio`, criado para homologação. Foram carregadas todas as tabelas, dados, relacionamentos e views analíticas. A extensão PostGIS 3.6 foi ativada e a carga espacial foi concluída em lote separado.
 
 | Item | Resultado |
 | --- | --- |
@@ -79,15 +79,17 @@ O valor `Dado ausente (bd antigo)` deve ser mantido como origem histórica e inc
 6. Ocorrência → localidade, UF e período do dia.
 7. Ocorrência, violação, fonte e vítima → autoria de inclusão e alteração.
 
-## Pendência espacial
+## Georreferenciamento habilitado
 
-A extensão PostGIS e as tabelas `ovpdh_gis` não foram restauradas. As views de geolocalização também permanecem pendentes. A instalação do PostGIS deve ocorrer somente em homologação, em versão compatível com o PostgreSQL local; depois disso, a carga espacial deve ser executada e validada separadamente.
+A tabela `public.ovpdh_gis` contém 937 geometrias do tipo `POINT`, com SRID 4326 (latitude/longitude em WGS 84), vinculadas a ocorrências por `id_id`. As 153 views analíticas do esquema `analitico` estão disponíveis para estudo.
+
+O esquema `old` não possui geometrias carregadas. A validação da cobertura territorial e da qualidade das coordenadas deve ocorrer antes de qualquer mapa público.
 
 ## Próximas ações recomendadas
 
 1. Comparar contagens e chaves entre os esquemas `public` e `old`.
-2. Instalar PostGIS na homologação e restaurar os objetos espaciais em lote separado.
+2. Validar a cobertura territorial, o SRID e a qualidade das coordenadas.
 3. Extrair o dicionário completo de colunas, chaves e catálogos controlados.
 4. Validar o mapa de status com a curadoria.
-5. Atualizar o MER para incorporar violações, fontes, depoimentos e classificações do legado.
+5. Atualizar o MER para incorporar violações, fontes, depoimentos, classificações e geometrias do legado.
 6. Só então escrever as migrations do novo modelo e o script de importação versionado.
