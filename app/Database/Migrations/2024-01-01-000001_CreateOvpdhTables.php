@@ -25,8 +25,10 @@ class CreateOvpdhTables extends Migration
             'longitude'       => ['type' => 'DECIMAL', 'constraint' => '10,7', 'null' => true],
             'fontes'          => ['type' => 'TEXT', 'null' => true],
             'evidencias'      => ['type' => 'TEXT', 'null' => true],
-            'status'          => ['type' => 'ENUM', 'constraint' => ['rascunho','em_revisao','aprovado','publicado','arquivado'], 'default' => 'rascunho'],
-            'prioridade'      => ['type' => 'ENUM', 'constraint' => ['normal','alta','urgente'], 'default' => 'normal'],
+            // VARCHAR mantém a migration compatível com PostgreSQL. As transições
+            // permitidas são validadas pela camada de domínio da aplicação.
+            'status'          => ['type' => 'VARCHAR', 'constraint' => 20, 'default' => 'rascunho'],
+            'prioridade'      => ['type' => 'VARCHAR', 'constraint' => 20, 'default' => 'normal'],
             'user_id'         => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'revisor_id'      => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'revisado_em'     => ['type' => 'DATETIME', 'null' => true],
