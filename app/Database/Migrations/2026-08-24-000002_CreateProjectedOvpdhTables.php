@@ -13,10 +13,10 @@ class CreateProjectedOvpdhTables extends Migration
             throw new RuntimeException('A estrutura projetada do OVPDH requer PostgreSQL com PostGIS habilitado.');
         }
 
-        $postgisHabilitado = $this->db->query("SELECT EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'postgis') AS habilitado")
-            ->getRow('array');
+        $postgisHabilitado = $this->db->query("SELECT COUNT(*) AS total FROM pg_extension WHERE extname = 'postgis'")
+            ->getRowArray();
 
-        if (! ($postgisHabilitado['habilitado'] ?? false)) {
+        if ((int) ($postgisHabilitado['total'] ?? 0) !== 1) {
             throw new RuntimeException('A extensão PostGIS deve estar habilitada antes de executar esta migration.');
         }
 
