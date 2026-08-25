@@ -1,12 +1,13 @@
 # Inventário do Legado PostgreSQL — OVPDH
 
-**Documento**: 04  
-**Data**: 23 de agosto de 2026  
-**Status**: Homologação restaurada para análise; PostGIS habilitado
+**Documento**: 04
+
+**Atualizado em**: 24 de agosto de 2026
+**Status**: Backup e homologação inventariados; modelo lógico extraído
 
 ## Escopo da restauração
 
-O backup `pcvi_backup_260821` foi restaurado no banco local PostgreSQL `observatorio`, criado para homologação. Foram carregadas todas as tabelas, dados, relacionamentos e views analíticas. A extensão PostGIS 3.6 foi ativada e a carga espacial foi concluída em lote separado.
+O backup `pcvi_backup_260821` foi restaurado anteriormente no PostgreSQL de homologação `observatorio`. Em 24 de agosto, o arquivo custom `PGDMP` também foi inspecionado diretamente com as ferramentas PostgreSQL 18, sem restauração adicional e sem alteração do conteúdo. Essa segunda leitura confirmou tabelas, colunas e contagens abaixo.
 
 | Item | Resultado |
 | --- | --- |
@@ -14,7 +15,7 @@ O backup `pcvi_backup_260821` foi restaurado no banco local PostgreSQL `observat
 | Esquemas restaurados | `public`, `old` e `analitico` |
 | Tabelas em `public` | 48 |
 | Tabelas em `old` | 48 |
-| Views analíticas carregadas | 4 |
+| Views no esquema `analitico` presentes no backup | 153 |
 | Chaves estrangeiras em `public` | 65 |
 | Tamanho após restauração | 29 MB |
 
@@ -30,11 +31,44 @@ O esquema `old` deve ser tratado como referência histórica. Antes de qualquer 
 | Autores institucionais | 4.280 |
 | Fontes | 5.534 |
 | Depoimentos | 1.397 |
+| Denúncias recebidas | 56 |
 | Relações vítima–violação | 5.493 |
 | Relações autor–violação | 5.070 |
 | Relações fonte–violação | 3.651 |
+| Relações violação–meio/instrumento | 4.795 |
+| Relações violação–lesão/região do corpo | 1.308 |
 
 O volume confirma que o modelo é relacional e não deve ser transformado em uma única tabela de ocorrências. Uma ocorrência pode conter várias violações, vítimas, autores e fontes; essas relações devem ser preservadas na evolução do novo banco.
+
+## Estrutura dos principais registros
+
+| Tabela legado | Campos de domínio confirmados |
+| --- | --- |
+| `ovpdh_ocorrencia` | data, importância, observação, observação de curadoria, período do dia, status, endereço, município, referência imprecisa e autorias/datas de inclusão e alteração |
+| `ovpdh_violacao` | ocorrência, tipo, conduta, enquadramento jurídico, justificativa, observação e autorias/datas |
+| `ovpdh_vitima` | ocorrência, tipo de entidade, nome, idade, raça/cor, gênero, escolaridade, habitação, nacionalidade, ocupação, orientação sexual, religião/credo, deficiência, tutela estatal e observação |
+| `ovpdh_autor` | ocorrência, classe/tipo institucional, cargo/função, nome sigiloso, observação e autorias/datas |
+| `ovpdh_fonte` | ocorrência, data, título, acesso, tipo, audiovisual, indicação de denúncia, observação e autorias/datas |
+| `ovpdh_depoimento` | fonte, tipo de depoente, nome, texto, observação e autorias/datas |
+| `ovpdh_denuncia` | narrativa, data/local, autor informado, denunciante/contato, pedidos de apoio jurídico, psicológico e assistencial, status e observações de curadoria |
+| `ovpdh_gis` | ocorrência, ponto PostGIS 4326, latitude e longitude |
+
+O cadastro-alvo precisa preservar também as relações vítima–violação, autor–violação e fonte–violação. A migration projetada em 24 de agosto ainda não contém as três tabelas de relação nem o domínio de denúncias/depoimentos.
+
+## Catálogos confirmados
+
+| Grupo | Catálogo | Linhas |
+| --- | --- | ---: |
+| Território | UFs / municípios | 28 / 5.571 |
+| Ocorrência | status / período do dia | 6 / 4 |
+| Violação | tipos / condutas / meios / regiões-lesões | 28 / 17 / 17 / 7 |
+| Jurídico | classes / tipos | 26 / 111 |
+| Vítima | tipos de entidade / raça-cor / gênero / escolaridade | 5 / 7 / 7 / 5 |
+| Vítima | habitação / nacionalidade / ocupação / orientação sexual / religião | 5 / 7 / 49 / 6 / 12 |
+| Agente | classes / tipos institucionais | 19 / 45 |
+| Fonte | tipos de fonte / audiovisual / depoente | 262 / 4 / 23 |
+
+Os valores `Dado ausente (bd antigo)`, `Outra` e categorias históricas devem ser preservados como valores de origem. Eles não devem ser fundidos automaticamente com `não informado`.
 
 ## Fluxo legado de status
 
@@ -78,6 +112,7 @@ O valor `Dado ausente (bd antigo)` deve ser mantido como origem histórica e inc
 5. Violação ↔ meios/instrumentos e violação ↔ lesões/parte do corpo.
 6. Ocorrência → localidade, UF e período do dia.
 7. Ocorrência, violação, fonte e vítima → autoria de inclusão e alteração.
+8. Denúncia → contato restrito, tipo de denunciante, apoio solicitado e eventual ocorrência originada.
 
 ## Georreferenciamento habilitado
 
@@ -87,9 +122,9 @@ O esquema `old` não possui geometrias carregadas. A validação da cobertura te
 
 ## Próximas ações recomendadas
 
-1. Comparar contagens e chaves entre os esquemas `public` e `old`.
+1. Comparar contagens, chaves e alterações entre os esquemas `public` e `old`.
 2. Validar a cobertura territorial, o SRID e a qualidade das coordenadas.
-3. Extrair o dicionário completo de colunas, chaves e catálogos controlados.
-4. Validar o mapa de status com a curadoria.
-5. Atualizar o MER para incorporar violações, fontes, depoimentos, classificações e geometrias do legado.
-6. Só então escrever as migrations do novo modelo e o script de importação versionado.
+3. Homologar catálogos e política de dados sensíveis com a curadoria.
+4. Validar o mapa de status e o tratamento das 56 denúncias legadas.
+5. Produzir o mapa físico campo a campo origem → destino a partir de `arquitetura-dados.md`.
+6. Criar migrations complementares; depois implementar o importador versionado e idempotente.

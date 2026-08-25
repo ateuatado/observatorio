@@ -89,6 +89,21 @@ O Administrador deve poder gerenciar os membros da equipe, criando novas contas 
 - **FR-017**: O sistema DEVE permitir que o usuário comum crie, edite e envie para revisão somente ocorrências de sua autoria.
 - **FR-018**: O sistema DEVE disponibilizar pesquisa interna com filtros compatíveis com o perfil de acesso do usuário.
 - **FR-019**: O sistema DEVE gerar indicadores agregados sem expor dados pessoais ou permitir reidentificação de vítimas.
+- **FR-027**: O sistema DEVE registrar uma ou várias violações dentro de cada ocorrência, com tipo, conduta, enquadramento jurídico, meios/instrumentos e regiões/lesões quando informados.
+- **FR-028**: O sistema DEVE permitir vincular cada vítima, agente/instituição e fonte às violações específicas às quais se relaciona.
+- **FR-029**: O sistema DEVE registrar fontes individualmente e permitir depoimentos e arquivos associados, com classe de acesso própria.
+- **FR-030**: Valores usados em filtros e indicadores DEVEM usar catálogos administráveis e preservar de forma distinta `não informado`, `não coletado`, `não se aplica` e `dado ausente no legado`.
+- **FR-031**: O sistema DEVE armazenar localização territorial padronizada e, quando houver, geometria PostGIS com precisão, fonte e regra de visibilidade pública.
+- **FR-032**: Toda entidade e relação importada do legado DEVE manter tabela, identificador de origem, lote, resultado e evidência da transformação.
+- **FR-033**: Denúncias recebidas DEVEM permanecer separadas das ocorrências verificadas; a conversão ou vinculação não pode apagar o registro de entrada nem expor o contato do denunciante.
+- **FR-034**: Relato público, observações internas, dados identificáveis e localização exata DEVEM ser campos ou estruturas distinguíveis, com autorização independente.
+- **FR-035**: Nomes individuais de vítimas, agentes, denunciantes, depoentes e testemunhas NÃO DEVEM ser exibidos publicamente.
+- **FR-036**: A publicação de documento sensível DEVE usar uma cópia derivada na qual o conteúdo protegido tenha sido removido permanentemente; sobreposição visual de tarja não é anonimização suficiente.
+- **FR-037**: Acesso acadêmico a dados restritos DEVE ser concedido por projeto e ocorrência, com prazo, justificativa, supervisor e auditoria.
+- **FR-038**: O sistema DEVE impedir sobrescrita silenciosa de alterações concorrentes e manter comparação de versões para campos relevantes.
+- **FR-039**: A edição de ocorrência publicada DEVE criar versão de trabalho sem alterar a versão pública até nova aprovação e publicação.
+- **FR-040**: Curadores DEVEM poder sugerir valores de catálogo durante o cadastro; somente administradores podem homologar, fundir, renomear ou inativar esses valores.
+- **FR-041**: O sistema DEVE permitir criar coleções editoriais de ocorrências publicadas, com título, descrição, ordem e estado de publicação, sem copiar dados restritos para a coleção.
 
 ### Dados e validações da ocorrência
 
@@ -98,13 +113,18 @@ Os campos abaixo definem a primeira versão do formulário de ocorrência. Os ca
 | --- | --- | --- | --- |
 | Título | Identificação breve da ocorrência. | Sim | Entre 10 e 255 caracteres. |
 | Data da ocorrência | Data em que o fato ocorreu. | Sim | Não pode ser futura. Quando a data exata for desconhecida, registrar período aproximado no relato. |
+| Precisão/período da data | Indica se a data é exata, aproximada ou um intervalo. | Sim | Não se deve inventar uma data exata para fatos com referência temporal imprecisa. |
+| Período do dia | Manhã, tarde, noite ou madrugada. | Não | Usa catálogo; não é deduzido automaticamente quando a fonte não informa. |
 | Cidade | Município onde ocorreu o fato. | Sim | Seleção padronizada; permitir cadastrar localidade não encontrada para revisão. |
 | Bairro/localidade | Bairro, comunidade, distrito ou equivalente. | Não | Texto de até 150 caracteres. |
 | UF | Unidade federativa do local. | Sim | Sigla válida de UF brasileira. |
+| Endereço/referência do local | Informação de trabalho para localizar o fato. | Não | Endereço exato é restrito por padrão; a apresentação pública usa nível territorial aprovado. |
 | Tipos de violência | Classificações aplicáveis ao fato. | Sim | Ao menos uma classificação deve ser selecionada. |
 | Relato | Descrição factual do caso e das fontes disponíveis. | Sim | Mínimo de 50 caracteres. Não deve incluir dados pessoais desnecessários. |
+| Resumo público | Texto revisado para apresentação externa. | Sim para publicar | Não reutiliza automaticamente observações internas nem dados restritos. |
 | Fonte(s) | Referências usadas no registro, como URL, documento, processo ou entrevista. | Sim | Ao menos uma fonte identificável. |
 | Observações internas | Anotações de trabalho que não são públicas. | Não | Nunca exibidas na área pública. |
+| Relevância interna | Marca de priorização do trabalho. | Não | Não é apresentada como julgamento público de gravidade sem critério homologado. |
 
 ### Dados de vítimas
 
@@ -112,36 +132,44 @@ Uma ocorrência pode não ter vítima individual identificada, mas deve registra
 
 | Campo | Obrigatório para revisão | Regra de validação |
 | --- | --- | --- |
-| Nome | Não | Campo restrito; deixar vazio quando não divulgado ou quando houver risco à pessoa. |
-| Anonimizada | Sim | Define se o nome pode aparecer para usuários não autorizados; o padrão é `sim`. |
-| Faixa etária/idade | Não | Idade entre 0 e 120 ou faixa etária padronizada. |
+| Nome | Não | Campo sempre restrito e nunca exibido publicamente; deixar vazio quando desnecessário ou não sustentado por fonte. |
+| Anonimizada | Sim | Compatibilidade e controle interno. Na área pública, toda vítima é anonimizada independentemente deste valor. |
+| Faixa etária/idade | Não | Idade entre 0 e 120 internamente; somente faixa etária ampla pode ser publicada. |
 | Gênero | Não | Seleção padronizada, com opção “não informado”. |
 | Raça/cor | Não | Seleção padronizada, com opção “não informado”. |
 | Condição | Não | Ex.: criança/adolescente, pessoa com deficiência, população em situação de rua; permitir múltiplas opções. |
 | Desfecho | Não | Ex.: ferimento, ameaça, prisão, desaparecimento, morte, não informado. |
 
-### Dados de agressores e instituições
+### Dados de agentes e instituições envolvidos
 
-Uma ocorrência pode ter nenhum, um ou vários agentes ou instituições vinculados. A ausência de identificação individual não impede o registro da ocorrência.
+Uma ocorrência pode ter nenhum, um ou vários agentes ou instituições envolvidos. O vínculo registra uma participação atribuída e sustentada pelas fontes, sem antecipar conclusão jurídica. A ausência de identificação individual não impede o registro da ocorrência.
 
 | Campo | Obrigatório para revisão | Regra de validação |
 | --- | --- | --- |
 | Tipo de agente | Sim, quando houver agressor registrado | Categoria padronizada do agente estatal envolvido. |
 | Órgão/instituição | Não | Nome do órgão, corporação ou instituição relacionada. |
 | Identificado | Sim, quando houver agressor registrado | Indica se há identificação individual confirmada. |
-| Nome/identificação | Não | Campo restrito; só deve ser preenchido quando houver fonte que o sustente. |
+| Nome/identificação | Não | Campo sempre restrito; só deve ser preenchido quando houver fonte que o sustente e nunca é exibido publicamente. |
 | Observações | Não | Contexto sobre a participação atribuída ao agente ou instituição. |
 
 ### Regras de proteção de dados
 
-- Dados pessoais de vítimas, testemunhas e pessoas vulneráveis não são exibidos na área pública.
-- O nome de vítima só pode ser exibido internamente a curadores e administradores quando necessário ao trabalho de documentação; registros anonimizados devem ocultá-lo por padrão.
+- Nomes de vítimas, agentes públicos, denunciantes, depoentes e testemunhas nunca são exibidos na área pública.
+- Curadores e administradores autorizados podem consultar os dados completos no ambiente privado; cada consulta ou download de dado restrito gera auditoria.
+- Participantes acadêmicos veem dados anonimizados por padrão. O acesso à identidade depende de autorização específica por projeto e ocorrência, com prazo, justificativa, supervisão e auditoria.
+- Instituição, corporação, unidade, patente, cargo ou função do agente podem ser publicados após curadoria, desde que a combinação não permita identificação individual indireta; quando houver risco, o dado deve ser generalizado.
+- Município e UF podem ser públicos. Bairro ou comunidade dependem de curadoria. Endereço exato, número e coordenada precisa são sempre restritos; mapas públicos usam área ou ponto generalizado.
+- Faixa etária, gênero, raça/cor e condição ou grupo afetado podem ser publicados quando relevantes e quando a combinação não permitir reidentificação. Idade exata, profissão, religião, orientação sexual e deficiência permanecem restritas por padrão.
 - Campos sensíveis devem ser evitados quando não forem essenciais para documentar a violação.
-- A publicação exige revisão de dados identificáveis, fontes e texto do relato para evitar exposição indevida ou risco às pessoas envolvidas.
+- Relato interno e resumo público são conteúdos independentes; o sistema nunca copia automaticamente o relato interno para publicação.
+- Documentos sensíveis mantêm um original restrito e uma versão pública derivada. A tarja deve remover permanentemente o conteúdo na cópia pública, e não apenas cobri-lo visualmente.
+- A publicação exige prévia exata da página pública e revisão de dados identificáveis, fontes, documentos, localização e risco de reidentificação.
 
 ### Listas padronizadas iniciais
 
-As listas a seguir devem ser apresentadas como opções de cadastro. Todas devem incluir `não informado` quando aplicável, para diferenciar ausência de informação de dado não coletado. A equipe administrativa poderá revisar e ampliar essas listas sem alterar os registros já existentes.
+As listas a seguir devem ser apresentadas como opções pesquisáveis por digitação, com sugestões recentes e agrupadas quando necessário. Todas devem incluir `não informado` quando aplicável, distinguindo ausência de informação, dado não coletado, dado não aplicável e dado ausente no legado.
+
+Quando nenhuma opção servir, o curador pode selecionar `outro` e sugerir um valor. A sugestão entra em uma pendência de qualificação e preserva o texto original; somente administrador pode aprovar, fundir, renomear ou inativar itens do catálogo. Alterações de apresentação nunca mudam o identificador histórico usado pelos registros existentes.
 
 #### Tipos de violência
 
@@ -227,9 +255,11 @@ As listas a seguir devem ser apresentadas como opções de cadastro. Todas devem
 | Perfil | Acesso permitido |
 | --- | --- |
 | Usuário comum | Consulta interna de registros `aprovado`; cria, edita e exclui somente seus próprios registros em `rascunho` ou `rejeitado`; envia seus próprios registros para revisão. Não revisa, aprova, rejeita, publica ou despublica ocorrências. |
-| Curador | Cria, edita e exclui registros de trabalho; envia registros para revisão; aprova, desaprova, publica, despublica e rejeita registros. Não pode executar ações de curadoria sobre um registro do qual seja autor. |
+| Curador | Cria e edita registros de trabalho; envia registros para revisão; aprova, desaprova, publica, despublica, rejeita e arquiva registros. Consulta dados restritos com auditoria. Não pode executar ações de curadoria sobre registro do qual seja autor. |
 | Administrador | Todas as ações de curador, além da gestão do sistema, usuários, perfis e permissões. Pode atuar em registros próprios quando necessário, com auditoria obrigatória. |
 | Superadministrador | Alterações relativas ao site. O escopo exato de administração de conteúdo institucional será detalhado em feature própria; este perfil não recebe automaticamente permissões sobre ocorrências ou usuários. |
+
+Participante acadêmico utiliza uma conta individual de usuário comum. Por padrão, recebe apenas dados anonimizados. Acesso restrito adicional é concedido por projeto e ocorrência, com prazo, justificativa, curador supervisor e escopo explícito; a autorização pode ser revogada sem apagar o histórico do trabalho realizado.
 
 ### Ciclo de vida das ocorrências
 
@@ -242,8 +272,11 @@ As listas a seguir devem ser apresentadas como opções de cadastro. Todas devem
 | `aprovado` | Desaprovar para correção | `rascunho` | Curador ou administrador; curador não pode ser o autor do registro |
 | `publicado` | Despublicar | `aprovado` | Curador ou administrador; curador não pode ser o autor do registro |
 | `rejeitado` | Editar e reenviar | `rascunho` | Autor do registro, curador ou administrador |
+| qualquer estado não publicado | Arquivar | `arquivado` | Curador ou administrador, com justificativa |
 
 Cada transição exige uma entrada no histórico de revisão. A justificativa é obrigatória para rejeição; comentários nas demais ações são opcionais.
+
+Uma ocorrência publicada não é alterada diretamente. A edição abre uma nova versão de trabalho vinculada à versão pública vigente. A versão anterior continua visível até a nova revisão ser aprovada e publicada. Em caso de risco ou erro grave, curador ou administrador pode despublicar imediatamente, com justificativa obrigatória.
 
 ### Telas e fluxos principais
 
@@ -259,13 +292,31 @@ Após a autenticação, o sistema apresenta atalhos conforme o perfil:
 #### Cadastro de ocorrência
 
 1. O usuário seleciona **Nova ocorrência**.
-2. Preenche os dados do fato, vítimas, agressores/instituições e fontes.
-3. O sistema permite salvar como `rascunho` a qualquer momento.
-4. Ao selecionar **Enviar para curadoria**, o sistema valida os campos obrigatórios.
-5. Se a validação for aprovada, o status passa para `em_revisao`, uma entrada é criada no histórico e o registro aparece na fila de curadoria.
-6. Se houver pendências, o sistema destaca os campos a corrigir e mantém o registro como `rascunho`.
+2. O sistema cria um `rascunho`, registra autoria e data e pode gerar título provisório.
+3. O cadastro é organizado em identificação do fato, violações, vítimas/grupos, agentes/instituições, fontes/evidências, privacidade/versão pública e curadoria.
+4. O sistema permite salvar como `rascunho` a qualquer momento e mostra a completude de cada seção sem exigir preenchimento linear.
+5. Quando houver somente uma violação, vítimas, agentes e fontes podem ser vinculados automaticamente a ela. Com várias violações, o usuário informa os vínculos; itens sem relação geram alerta, mas podem permanecer no rascunho.
+6. Ao selecionar **Enviar para curadoria**, o sistema valida data ou período aproximado, município, relato interno, ao menos uma violação, informação disponível sobre vítima/grupo, uma fonte e classificação de privacidade.
+7. Se a validação for aprovada, o status passa para `em_revisao`, uma entrada é criada no histórico e o registro aparece na fila de curadoria.
+8. Se houver pendências, o sistema destaca a seção e os campos a corrigir e mantém o registro como `rascunho`.
 
 O usuário comum só pode alterar ou excluir registros de sua autoria enquanto estiverem em `rascunho` ou `rejeitado`. Depois do envio, ele pode acompanhar o status e os comentários da curadoria, mas não pode editar o conteúdo até que o registro retorne para correção.
+
+#### Colaboração, atribuição e conflitos
+
+- A autoria original da ocorrência é imutável.
+- Cada ocorrência tem no máximo um responsável atual, pode ter vários colaboradores e mantém histórico de todas as atribuições.
+- O responsável organiza o trabalho; autoria e responsabilidade não concedem permissão para revisar o próprio registro.
+- Cada alteração registra usuário, data/hora, seção e versão de origem.
+- O sistema usa controle otimista de concorrência. Se duas pessoas alterarem o mesmo dado a partir de versões diferentes, nenhuma edição é sobrescrita silenciosamente; o conflito deve ser apresentado para decisão.
+- Alterações em relato, privacidade, vínculos e dados sensíveis oferecem comparação entre valor anterior e novo aos usuários autorizados.
+
+#### Exclusão e preservação
+
+- Um rascunho nunca submetido pode sofrer exclusão lógica pelos perfis autorizados.
+- Depois da primeira submissão, a ocorrência não pode ser apagada pela interface: pode ser rejeitada, arquivada, corrigida ou despublicada conforme o fluxo.
+- Violações, vítimas, agentes e fontes removidos de uma ocorrência já submetida são desassociados ou marcados como removidos, preservando a versão e a auditoria anteriores.
+- Exclusão física fica restrita a procedimento administrativo excepcional, sujeito à política institucional, justificativa e registro de auditoria.
 
 #### Minhas ocorrências
 
@@ -286,11 +337,15 @@ Um curador não pode decidir sobre registros de sua própria autoria. O administ
 
 #### Publicação e consulta interna
 
-Registros `aprovado` podem ser consultados internamente por usuários autenticados. Somente curadores e administradores podem publicá-los ou despublicá-los. Antes de publicar, o sistema exibe uma confirmação e exige revisão dos campos públicos, dados pessoais e fontes.
+Registros `aprovado` podem ser consultados internamente por usuários autenticados conforme o escopo de acesso. Somente curadores e administradores podem publicá-los ou despublicá-los. Antes de publicar, o sistema exige resumo público, precisão territorial pública, conferência dos documentos e dados identificáveis e uma prévia exata do conteúdo externo.
+
+Ao editar um registro `publicado`, o sistema cria uma nova versão de trabalho. A versão pública vigente não muda até que a revisão nova seja aprovada e publicada; cada publicação registra autor, instante e versão substituída.
 
 #### Área pública
 
 A área pública exibe apenas ocorrências `publicado` e apenas os campos autorizados para divulgação. Ela deve oferecer busca e filtros por período, cidade, UF e tipo de violência, sem expor dados pessoais ou observações internas.
+
+Coleções editoriais podem agrupar ocorrências publicadas por tema, território ou período. Uma coleção não torna uma ocorrência pública: se o caso for despublicado, ele deixa de aparecer na coleção automaticamente, preservando apenas o vínculo editorial interno.
 
 ### Pesquisa e indicadores
 
@@ -356,13 +411,18 @@ Uma contribuição acadêmica deve manter vínculo com a ocorrência, o autor, o
 
 ### Key Entities
 
-- **Users (Shield)**: Autenticação, e-mail, senha e perfil de acesso (`usuario_comum`, `curador`, `administrador` ou `superadministrador`).
-- **Ocorrencias**: Entidade central (ID, Título, Descrição, Data, Tipo, Bairro, Cidade, Status, User ID autor).
-- **Vitimas**: Pessoas afetadas pela ocorrência (ID, Ocorrencia_ID, Nome, Anonimo (bool), Idade, Genero, Raça, Condição, Desfecho).
-- **Agressores**: Agentes do Estado identificados na ocorrência (ID, Ocorrencia_ID, Tipo_Agente, Órgão, Identificado).
-- **Ocorrencia_Revisoes**: Histórico de curadoria (ID, Ocorrencia_ID, User_ID, Ação, Status_Anterior, Status_Novo, Comentário).
-- **Produtos**: Artigos, livros, relatórios do observatório (ID, Titulo, Autores, Tipo, Resumo, Link, etc).
-- **Historico**: Dossiês e documentos históricos (ID, Titulo, Descricao, Periodo, Categoria, PDF).
+- **Identidade e acesso**: usuários e permissões do Shield, atribuições de trabalho e eventos imutáveis de auditoria.
+- **Denúncias e triagem**: entrada ainda não verificada, contato restrito, apoios solicitados e vínculos posteriores com ocorrências.
+- **Ocorrências**: unidade documental do fato, com data/período, local, texto interno/público, status, autoria e curadoria.
+- **Violações**: classificações específicas dentro de uma ocorrência, com conduta, enquadramento, meios e lesões/regiões do corpo.
+- **Vítimas e grupos afetados**: pessoas ou coletividades, atributos demográficos necessários, condições e dados identificáveis restritos.
+- **Agentes e instituições envolvidos**: classe/tipo institucional, unidade, cargo e identificação sustentada por fonte.
+- **Fontes, depoimentos e arquivos**: evidências estruturadas e sua relação com as violações documentadas.
+- **Território e geografia**: UF, município, local de trabalho e geometria PostGIS com precisão e visibilidade.
+- **Curadoria e qualidade**: revisões, atribuições, pendências de qualificação, lotes e rastreabilidade do legado.
+- **Conteúdo público**: acervo histórico e produções acadêmicas com estado editorial e arquivos.
+
+O MER consolidado está em `mer-projetado.md`; regras, campos e decisões de implementação estão em `arquitetura-dados.md`.
 
 ### Modelo de dados e compatibilidade com o legado
 
@@ -373,8 +433,8 @@ O sistema já possui as tabelas `ocorrencias`, `vitimas`, `agressores`, `ocorren
 | Entidade existente | Uso preservado | Evolução não destrutiva |
 | --- | --- | --- |
 | `ocorrencias` | Mantém ID, título, descrição, data, local, fontes, evidências, status e autoria já registrados. | Adicionar campos somente quando necessários, como `observacoes_internas`; normalizar classificações em tabelas auxiliares sem remover `tipo_violencia` e `fontes`. |
-| `vitimas` | Mantém todos os registros e campos pessoais já existentes. | Acrescentar classificação de faixa etária se necessário. O campo `anonimo` existente continua sendo a referência de visibilidade. |
-| `agressores` | Mantém agente, órgão, unidade, identificação e observações já registrados. | Padronizar categorias por tabelas de referência ou validação, preservando o texto legado original. |
+| `vitimas` | Mantém todos os registros e campos pessoais já existentes. | Normalizar tipo de entidade e demografia; separar identificação restrita. `anonimo` é preservado, mas não substitui a política de acesso campo a campo. |
+| `agressores` | Mantém agente, órgão, unidade, identificação e observações já registrados. | Padronizar classe/tipo institucional, separar identificação restrita e criar vínculo N:N com violações. |
 | `ocorrencia_revisoes` | Mantém o histórico de ações já registrado. | Novas ações e comentários são apenas acrescentados; entradas existentes jamais são alteradas ou apagadas. |
 | `historico` e `produtos` | Mantêm o acervo e as publicações existentes, inclusive caminhos de arquivos. | Evolução independente, sem mudança de identificadores ou de URLs de arquivos sem redirecionamento. |
 
@@ -387,6 +447,17 @@ O sistema já possui as tabelas `ocorrencias`, `vitimas`, `agressores`, `ocorren
 | `ocorrencia_fontes` | 1:N com `ocorrencias` | Registra cada fonte de forma estruturada: tipo, referência/URL, descrição e data de acesso. |
 | `condicoes_vitima` | catálogo | Mantém condições e grupos afetados padronizados. |
 | `vitima_condicoes` | N:N com `vitimas` | Permite registrar múltiplas condições para uma vítima. |
+| `condutas`, `classes_juridicas`, `tipos_juridicos` | catálogos | Preservam contexto da ação e enquadramento já existentes no legado. |
+| `vitima_violacoes` | N:N | Registra quais violações atingiram cada vítima. |
+| `agressor_violacoes` | N:N | Registra quais violações são atribuídas a cada agente ou instituição. |
+| `fonte_violacoes` | N:N | Registra quais violações são sustentadas por cada fonte. |
+| `depoimentos` | 1:N com fontes | Preserva depoimentos e tipo de depoente sob regra de acesso própria. |
+| `denuncias` e estruturas restritas | entrada/triagem | Preserva relatos recebidos, contatos e apoios solicitados sem tratá-los como ocorrência verificada. |
+| `ufs`, `municipios`, `ocorrencia_locais` | território | Padroniza território e separa endereço exato de referência pública. |
+| `arquivos` e relações | metadados | Controla checksum, MIME, acesso, direitos e anexos de fontes/conteúdos. |
+| `migracao_lotes`, `registros_origem_legado` | rastreabilidade | Torna cada importação auditável e idempotente. |
+| `pendencias_qualificacao` | qualidade | Organiza valores ausentes, conflitantes ou não mapeados sem alterar a evidência original. |
+| `colecoes` e `colecao_ocorrencias` | editorial N:N | Agrupa versões publicadas de ocorrências em recortes temáticos, territoriais ou históricos. |
 
 As tabelas acadêmicas futuras (`programas_academicos`, `participacoes_academicas`, `contribuicoes_academicas`, `pontuacoes_academicas` e `conquistas_academicas`) só devem ser criadas quando o módulo de gamificação for aprovado institucionalmente.
 
@@ -404,15 +475,16 @@ As tabelas acadêmicas futuras (`programas_academicos`, `participacoes_academica
 
 #### Compatibilidade de status
 
-O legado usa os status `rascunho`, `em_revisao`, `aprovado`, `publicado` e `arquivado`; a nova especificação acrescenta `rejeitado`. O status `arquivado` deve ser preservado, sem conversão automática, e continuar fora da consulta pública e dos indicadores correntes. A inclusão de `rejeitado` deve ampliar a lista de valores aceitos, nunca invalidar registros existentes.
+O PostgreSQL legado usa `Incluído`, `Curadoria`, `Revisar`, `Aprovado`, `Cancelado` e `Teste`. O modelo canônico usa `rascunho`, `em_revisao`, `aprovado`, `publicado`, `rejeitado` e `arquivado`. O mapeamento depende de homologação da curadoria: em especial, `Aprovado` nunca vira `publicado` automaticamente, e `Revisar` pode representar correção ou rejeição. O valor original e o mapeamento aplicado devem permanecer rastreáveis.
 
 #### Critérios de aceite da migração
 
-1. A quantidade de registros legados em cada tabela é a mesma antes e depois da migration.
-2. Todos os IDs existentes continuam acessíveis pelas mesmas rotas ou por redirecionamento compatível.
-3. Ocorrências, vítimas, agressores, produtos e documentos históricos existentes aparecem nas respectivas áreas com as mesmas regras de acesso anteriores.
-4. Nenhum dado pessoal passa a ser público em consequência da migration.
-5. Relatórios novos incluem os registros legados quando houver dados suficientes para o filtro; quando não houver, o sistema os identifica como não classificados, sem ocultá-los.
+1. Cada linha de origem possui registro de migração ou justificativa explícita para não importação.
+2. Contagens de entidades e relações são conciliadas por tabela, status e lote.
+3. IDs de origem permanecem pesquisáveis internamente, mesmo quando o destino usa outro ID canônico.
+4. Ocorrências, violações, vítimas, agentes, fontes, depoimentos, denúncias e geometrias preservam suas relações.
+5. Nenhum dado pessoal, depoimento ou ponto exato passa a ser público em consequência da migração.
+6. Relatórios novos incluem registros legados quando houver dados suficientes; quando não houver, exibem pendência de qualificação sem inferência automática.
 
 ### Segurança, privacidade e operação
 
@@ -436,9 +508,11 @@ O legado usa os status `rascunho`, `em_revisao`, `aprovado`, `publicado` e `arqu
 | Enviar para curadoria | Apenas próprios | Sim | Sim | Não |
 | Aprovar ou rejeitar | Não | Sim, exceto autoria própria | Sim, inclusive autoria própria com justificativa | Não |
 | Publicar/despublicar | Não | Sim, exceto autoria própria | Sim, inclusive autoria própria com justificativa | Não |
-| Ver dados pessoais de vítimas | Apenas quando necessários em registro próprio | Sim, conforme necessidade de curadoria | Sim | Não por padrão |
+| Ver nomes, contatos, endereços exatos, depoimentos ou originais restritos | Não por padrão; somente autorização acadêmica específica | Sim, com auditoria | Sim, com auditoria | Não por padrão |
 | Ver histórico de revisão | Apenas próprios | Todos | Todos | Não |
-| Excluir logicamente | Apenas próprios em `rascunho`/`rejeitado` | Registros de trabalho autorizados | Todos | Não |
+| Excluir logicamente | Apenas próprio nunca submetido | Apenas rascunho nunca submetido | Apenas rascunho nunca submetido; demais casos seguem procedimento excepcional | Não |
+| Sugerir valor de catálogo | Sim durante cadastro próprio | Sim | Sim | Não |
+| Homologar/fundir/inativar catálogo | Não | Não | Sim | Não |
 
 Permissões adicionais devem ser concedidas por regra explícita e auditável; nunca por acesso direto ao banco de dados ou por esconder botões na interface.
 
@@ -446,15 +520,17 @@ Permissões adicionais devem ser concedidas por regra explícita e auditável; n
 
 | Classe | Exemplos | Tratamento mínimo |
 | --- | --- | --- |
-| Público | Dados de ocorrências já publicadas e conteúdos institucionais aprovados. | Pode ser exibido no site público após revisão. |
-| Interno | Rascunhos, comentários de curadoria, fontes de trabalho e indicadores internos. | Acesso apenas a usuários autenticados e autorizados. |
-| Restrito | Nome, identificação, contato e relato sensível de vítimas, testemunhas ou agentes; anexos com dados identificáveis. | Acesso por necessidade de trabalho, sem exibição pública e com registro de acesso quando tecnicamente viável. |
+| Público | Resumo aprovado, município/UF, localização generalizada, categorias demográficas não identificáveis, instituição/unidade/cargo generalizados e fontes públicas autorizadas. | Só integra a projeção pública após revisão e prévia. |
+| Interno | Rascunhos, relato de trabalho, comentários de curadoria, fontes de trabalho e indicadores internos. | Acesso apenas a usuários autenticados e autorizados. |
+| Restrito | Nomes de vítimas, agentes, denunciantes, depoentes e testemunhas; contatos; idade exata; endereço/coordenada exatos; atributos sensíveis; depoimentos e arquivos originais identificáveis. | Nunca é público; acesso por necessidade de trabalho e sempre auditado. |
 
 O sistema deve coletar somente os dados pessoais necessários para documentar a ocorrência e deve oferecer orientação no formulário sobre anonimização e dados sensíveis. Solicitações de acesso, correção ou eliminação de dados devem ser avaliadas pela coordenação responsável; nenhuma exclusão deve ocorrer automaticamente quando houver obrigação de preservação, interesse público, pesquisa ou outra base legal aplicável.
 
 #### Auditoria
 
-A trilha de auditoria deve registrar, no mínimo: usuário, data/hora, endereço de origem quando disponível, ação, entidade afetada, identificador do registro, valores de status anterior e novo, comentário e resultado da operação. Alterações em dados pessoais ou em permissões também devem gerar evento de auditoria.
+A trilha de auditoria deve registrar, no mínimo: usuário, data/hora, endereço de origem quando disponível, ação, entidade afetada, identificador do registro, valores de status anterior e novo, comentário e resultado da operação. Alterações em dados pessoais, permissões, autorizações acadêmicas e catálogos também geram evento.
+
+Toda visualização ou download de nome, contato, endereço exato, coordenada precisa, depoimento ou documento original restrito gera evento de acesso. O log registra quem, quando, qual registro e qual modalidade de acesso, mas nunca copia o conteúdo sensível consultado.
 
 O histórico de revisão de uma ocorrência é imutável para usuários da aplicação. Correções administrativas excepcionais devem criar um novo evento que explique a correção, sem apagar a evidência do evento anterior.
 
@@ -532,14 +608,25 @@ Cada alteração editorial deve guardar autoria e data/hora. A remoção de item
 - Todo arquivo público deve ter título descritivo; imagens devem conter texto alternativo; PDFs devem ser preferencialmente pesquisáveis e acessíveis.
 - A substituição de arquivo deve preservar referência ao arquivo anterior no histórico editorial ou permitir sua recuperação administrativa.
 
+### Artefatos de planejamento
+
+- `plan.md`: arquitetura modular, layouts CodeIgniter, escopo da Etapa 1, dependências e portões de qualidade.
+- `tasks.md`: backlog granular versionado, com IDs estáveis, histórias, caminhos de arquivo, checkpoints e trilhas paralelas.
+- `arquitetura-dados.md`: modelo conceitual e lógico homologado.
+- `mer-projetado.md`: relações e prioridades de implementação do banco.
+
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
-- **SC-001**: Dados perfeitamente normalizados no SGBD relacional, permitindo extração de estatísticas precisas por cidade, gênero e raça.
+- **SC-001**: Dados usados em filtros e indicadores estruturados em PostgreSQL, com catálogos rastreáveis e relações preservadas para estatísticas por território, violação e atributos autorizados.
 - **SC-002**: Separação clara entre Visão Pública (site institucional) e Visão Administrativa (gestão de dados interna).
 - **SC-003**: Garantia de integridade referencial (Ex: Vítimas são apagadas ou preservadas corretamente ao apagar uma ocorrência).
+- **SC-004**: 100% das linhas importadas possuem resultado e identificação de origem; nenhuma relação N:N é descartada silenciosamente.
+- **SC-005**: Prévia de publicação não contém campos classificados como restritos nem coordenadas mais precisas que a política aprovada.
 
 ## Assumptions
-- Assumimos que o banco de dados principal será o MySQL/MariaDB hospedado na mesma VPS.
+- O banco de dados canônico será PostgreSQL com PostGIS, hospedado na VPS e reproduzido em homologação.
+- O MySQL local atual contém apenas dados demonstrativos e será tratado separadamente na transição.
 - Assumimos que o portal principal da PUC-SP apenas fará links (redirecionamentos) para as páginas públicas desta VPS, sem integração direta de APIs no momento.
 - A autenticação é restrita à equipe do observatório; cidadãos comuns não criam contas de usuário, no máximo poderão preencher um formulário público no futuro (ainda não especificado).
+- O backup PostgreSQL `pcvi_backup_260821` é a fonte histórica candidata; o esquema `old` não será importado junto com `public` sem comparação e regra de deduplicação.

@@ -1,8 +1,9 @@
 # Relatório de Especificações do Sistema OVPDH
 
-**Projeto:** Observatório de Violência Policial e Direitos Humanos (OVPDH)  
-**Data:** 20 de agosto de 2026  
-**Situação da especificação:** Em elaboração — regras centrais já definidas; campos detalhados das fichas ainda pendentes.
+**Projeto:** Observatório de Violência Policial e Direitos Humanos (OVPDH)
+
+**Atualizado em:** 24 de agosto de 2026
+**Situação da especificação:** Modelo de dados lógico consolidado; decisões de curadoria e privacidade pendentes de homologação.
 
 ## 1. Apresentação
 
@@ -21,9 +22,11 @@ Essa separação evita que informações preliminares, incompletas ou sensíveis
 
 ## 3. Registros de ocorrências
 
-A ocorrência é o elemento central do sistema. Cada registro reunirá, de forma estruturada, as informações sobre um fato de violência, como local, data, tipo de violência e relato. Também poderá ter várias vítimas e vários agressores ou instituições relacionados ao mesmo fato.
+A ocorrência é o agregado central do sistema. Cada registro reúne data/período, local, relato interno, resumo público e seu estado de curadoria. Uma ocorrência contém uma ou várias violações e pode envolver várias vítimas, agentes ou instituições e fontes.
 
-Os campos detalhados de cada ficha serão definidos em uma etapa posterior, quando as informações e necessidades da equipe estiverem disponíveis. Nessa etapa também serão definidos quais campos são obrigatórios para o salvamento, para o envio à revisão e para a publicação.
+O legado confirmou relações específicas entre vítima–violação, agente–violação e fonte–violação. Por isso, o formulário não deve reduzir o caso a uma lista plana: ele será organizado em etapas para ocorrência, violações, pessoas/grupos afetados, agentes/instituições, fontes/evidências e privacidade/publicação.
+
+O backup também contém 56 denúncias recebidas. Denúncia é entrada de triagem, não ocorrência verificada; contato e pedidos de apoio permanecem restritos, e qualquer conversão mantém o protocolo original.
 
 ## 4. Etapas de revisão e publicação
 
@@ -58,7 +61,9 @@ O impedimento de o curador revisar o próprio registro busca preservar a imparci
 
 Somente registros com situação **publicado** serão disponibilizados no site público. Registros em rascunho, em revisão, aprovados ou rejeitados permanecem fora da área pública.
 
-O sistema adotará autenticação para a área interna e permissões de acesso para cada perfil. A forma de tratamento de dados de vítimas que necessitem de anonimato será definida junto com a modelagem detalhada dos campos, pois essa decisão depende das informações que serão coletadas e das necessidades de proteção identificadas pela equipe.
+O sistema adotará autenticação para a área interna e permissões de acesso para cada perfil. Relato público, observações internas, identificação pessoal, depoimentos, endereço exato e geometria terão classificações de acesso distintas.
+
+Ficou definido que nomes individuais nunca serão públicos. Curadores consultam dados completos com auditoria; alunos veem dados anonimizados por padrão e só recebem acesso restrito por projeto e ocorrência. Município e UF podem ser públicos, bairro depende de curadoria e endereço/coordenada exatos são restritos. Documentos públicos sensíveis serão cópias efetivamente expurgadas, mantendo o original protegido.
 
 ## 7. Tecnologia e qualidade do desenvolvimento
 
@@ -67,7 +72,7 @@ O sistema será desenvolvido com as seguintes tecnologias:
 - PHP 8.2 ou superior;
 - CodeIgniter 4;
 - CodeIgniter Shield para autenticação e permissões;
-- MySQL ou MariaDB para o banco de dados;
+- PostgreSQL com PostGIS para o banco de dados e georreferenciamento;
 - Bootstrap instalado localmente para a interface.
 
 O projeto não dependerá de arquivos de estilo, scripts, fontes ou imagens carregados da internet. Esses recursos ficarão armazenados no próprio sistema, o que reduz dependências externas e aumenta a previsibilidade de funcionamento.
@@ -82,12 +87,12 @@ Credenciais e configurações sensíveis não serão incluídas no código versi
 
 ## 9. Próximas definições necessárias
 
-Antes de iniciar a implementação detalhada das fichas de ocorrência, ainda precisam ser definidos:
+Antes de iniciar as migrations complementares, ainda precisam ser homologados:
 
-1. Os campos de ocorrências, vítimas e agressores.
-2. Quais campos são obrigatórios em cada etapa do fluxo.
-3. As regras de anonimização e acesso a dados sensíveis de vítimas.
-4. Os critérios para exclusão de registros e sua preservação no histórico.
+1. O mapa dos status legados para o fluxo novo.
+2. A finalidade e a necessidade dos atributos demográficos sensíveis.
+3. Os critérios mínimos de suficiência de fontes.
+4. Os parâmetros técnicos para generalização geográfica.
 5. As funções concretas do superadministrador na manutenção do site institucional.
 
-Com essas definições, será possível elaborar o plano técnico e dividir a construção do sistema em tarefas pequenas, testáveis e acompanháveis.
+O documento `arquitetura-dados.md` consolida as entidades, relações, regras físicas e consequências para a interface. A ficha interna já foi organizada em sete seções e pode seguir para wireframes; as decisões pendentes condicionam a migração e os detalhes de validação, não o esqueleto da interface.

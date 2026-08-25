@@ -41,20 +41,35 @@ Preparar o OVPDH para operar sobre PostgreSQL com PostGIS, preservando o legado 
 
 ## Próxima etapa
 
-Fazer o inventário efetivo do legado no VPS e preparar o mapa de transformação para a estrutura nova. A ordem proposta é:
+O inventário estrutural e quantitativo do backup foi concluído e o modelo lógico de toda a aplicação foi consolidado em `arquitetura-dados.md` e `mer-projetado.md`. A ordem proposta passa a ser:
 
-1. Listar schemas, tabelas e contagens das tabelas de origem.
-2. Identificar chaves, datas, fontes, vítimas, autores, violações e coordenadas disponíveis.
-3. Definir o mapeamento para `ocorrencias`, `vitimas`, `agressores`, `violacoes`, tabelas de relação e `ocorrencia_geometrias`.
-4. Implementar um comando CLI de importação com `--dry-run`, logs e registros em `ocorrencia_origens_legado`.
-5. Executar a simulação, conferir totais e validar uma amostra antes da carga definitiva.
+O plano técnico da Etapa 1 está em `plan.md` e o backlog granular versionado está em `tasks.md`.
 
-## Primeiro comando sugerido para retomar
+1. Homologar o mapa de status legado, a finalidade dos atributos sensíveis e os vocabulários ainda pendentes. A política de visibilidade e o tratamento das denúncias no MVP já foram definidos.
+2. Comparar os esquemas `public` e `old` com acesso autenticado de somente leitura ao PostgreSQL local.
+3. Produzir o mapa físico campo a campo origem → destino.
+4. Criar migrations complementares para relações N:N, depoimentos, denúncias, catálogos, auditoria e rastreabilidade por entidade.
+5. Implementar um comando CLI de importação com `--dry-run`, lotes, logs e conciliação de contagens.
+6. Projetar os wireframes das sete seções validadas do cadastro e da curadoria.
 
-Este comando é somente leitura e mostra onde estão as tabelas no banco:
+## Relatórios HTML para acompanhamento
 
-```bash
-sudo -u postgres psql -d observatorio -c "SELECT table_schema, COUNT(*) AS tabelas FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema NOT IN ('pg_catalog', 'information_schema') GROUP BY table_schema ORDER BY table_schema;"
-```
+O ponto de entrada para leitores não técnicos é `public/relatorios.html`. A partir dele estão disponíveis os relatórios atuais:
 
-Em seguida, listar as tabelas do schema que contiver o legado, para elaborar o mapeamento sem suposições.
+- `public/relatorio-01-especificacoes-etapa-1.html` — visão geral do que será construído;
+- `public/relatorio-06-arquitetura-dados.html` — organização e proteção das informações;
+- `public/relatorio-07-plano-etapa-1.html` — módulos e ordem da primeira entrega;
+- `public/relatorio-08-backlog-etapa-1.html` — resumo das 190 tarefas e suas frentes de trabalho.
+
+No VPS, os mesmos documentos serão acessíveis pelos caminhos `/relatorios.html` e `/relatorio-*.html` depois da atualização da cópia de desenvolvimento.
+
+## Estado do ambiente local de desenvolvimento
+
+- O serviço PostgreSQL 18 está instalado e em execução, mas a sessão de desenvolvimento não possui credencial para consultar a instância.
+- O backup custom `bancos/pcvi_backup_260821` pôde ser inspecionado diretamente e confirmou 48 tabelas em `public`, 3.685 ocorrências e as relações registradas no inventário.
+- A aplicação local ainda lê o `.env` MySQL e encontra o banco demonstrativo `ovpdh`, com 12 ocorrências.
+- A troca do `.env` local para PostgreSQL deve ser feita separadamente, após disponibilizar a credencial e definir o destino dos dados demonstrativos.
+
+## Primeiro passo sugerido para retomar
+
+Disponibilizar uma conta PostgreSQL de somente leitura para o banco restaurado. Depois, executar a comparação de `public` e `old` e gerar o mapa de transformação; não é necessário aplicar novamente as migrations já registradas.

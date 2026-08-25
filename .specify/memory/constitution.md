@@ -4,7 +4,7 @@
 
 ### I. Stack tecnológica definida e autossuficiente
 
-O sistema DEVE utilizar PHP 8.2 ou superior, CodeIgniter 4, CodeIgniter Shield, MySQL ou MariaDB e Bootstrap distribuído localmente.
+O sistema DEVE utilizar PHP 8.2 ou superior, CodeIgniter 4, CodeIgniter Shield, PostgreSQL com PostGIS e Bootstrap distribuído localmente.
 
 Bibliotecas de CSS, JavaScript, fontes e imagens necessárias à aplicação DEVEM ser servidas pelo próprio projeto, a partir de `public/assets/`; CDNs e dependências de execução hospedadas na internet NÃO DEVEM ser utilizados. Dependências de backend DEVEM ser declaradas e bloqueadas por `composer.json` e `composer.lock`.
 
@@ -58,4 +58,8 @@ Esta constituição prevalece sobre preferências locais de implementação e so
 
 Emendas DEVEM atualizar este documento com uma versão semântica, a data e uma descrição da alteração relevante. Revisões de código e de especificação DEVEM confirmar sua conformidade.
 
-**Versão**: 1.0.0 | **Ratificada em**: 2026-08-20 | **Última alteração**: 2026-08-20
+### Histórico de emendas
+
+- **1.1.0 — 2026-08-24**: substitui MySQL/MariaDB por PostgreSQL com PostGIS, conforme o modelo canônico e as migrations homologadas.
+
+**Versão**: 1.1.0 | **Ratificada em**: 2026-08-20 | **Última alteração**: 2026-08-24

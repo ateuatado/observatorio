@@ -37,4 +37,4 @@ O PostGIS 3.6 foi ativado no banco PostgreSQL de homologação `observatorio`. O
 
 ## Próxima etapa
 
-Validar os 937 pontos: SRID, limites geográficos, duplicidades, coordenadas fora do território esperado e precisão adequada à política de proteção de dados. Depois disso, o MER será atualizado com a entidade de geometrias e serão definidas as telas de mapa e filtros territoriais.
+Validar os 937 pontos: SRID, limites geográficos, duplicidades, coordenadas fora do território esperado e precisão adequada à política de proteção de dados. O MER já inclui local e geometria; antes das telas de mapa ainda é necessário homologar os níveis `exata`, `aproximada`, `bairro` e `município` e definir qual deles pode ser público em cada classe de ocorrência.
