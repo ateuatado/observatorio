@@ -1,12 +1,12 @@
 # Tarefas: Etapa 1 do OVPDH
 
-**Versão do documento**: 0.1.0
+**Versão do documento**: 0.2.0
 
-**Data**: 24 de agosto de 2026
+**Data**: 25 de agosto de 2026
 
 **Entrada**: `spec.md`, `plan.md`, `arquitetura-dados.md`, `mer-projetado.md`
 
-**Status**: Backlog inicial para revisão e distribuição
+**Status**: Backlog em execução; interface pronta para validação de cenários
 
 ## Formato e uso
 
@@ -27,11 +27,11 @@ Cada item segue `[ID] [P?] [US?] descrição com caminho`.
 - [x] T003 Atualizar PostgreSQL/PostGIS e versão 1.1.0 em `.specify/memory/constitution.md`.
 - [x] T004 Criar plano técnico versionado em `specs/001-core-doc/plan.md`.
 - [x] T005 Criar backlog granular versionado em `specs/001-core-doc/tasks.md`.
-- [ ] T006 [P] Inventariar rotas e telas atuais versus módulos-alvo em `specs/001-core-doc/contracts/routes.md`.
-- [ ] T007 [P] Produzir mapa de navegação por perfil em `specs/001-core-doc/interface/mapa-navegacao.md`.
-- [ ] T008 [P] Produzir wireframes de baixa fidelidade do painel e das sete seções em `specs/001-core-doc/interface/wireframes-internos.md`.
-- [ ] T009 [P] Produzir wireframes da fila, comparação e prévia pública em `specs/001-core-doc/interface/wireframes-curadoria.md`.
-- [ ] T010 [P] Produzir wireframes da busca, coleção e caso público em `specs/001-core-doc/interface/wireframes-publicos.md`.
+- [x] T006 [P] Inventariar rotas e telas atuais versus módulos-alvo em `specs/001-core-doc/contracts/routes.md`.
+- [x] T007 [P] Produzir mapa de navegação por perfil em `specs/001-core-doc/interface/mapa-navegacao.md`.
+- [x] T008 [P] Produzir wireframes de baixa fidelidade do painel e das sete seções em `specs/001-core-doc/interface/wireframes-internos.md`.
+- [x] T009 [P] Produzir wireframes da fila, comparação e prévia pública em `specs/001-core-doc/interface/wireframes-curadoria.md`.
+- [x] T010 [P] Produzir wireframes da busca, coleção e caso público em `specs/001-core-doc/interface/wireframes-publicos.md`.
 - [ ] T011 Validar os wireframes com casos simples, complexo e sensível e registrar decisões em `specs/001-core-doc/interface/validacao-cenarios.md` (depende de T008–T010).
 - [ ] T012 Produzir dicionário físico canônico e mapa legado → destino em `specs/001-core-doc/data-model.md` (depende das decisões bloqueadoras do plano).
 - [ ] T013 Definir contratos dos Services e transições em `specs/001-core-doc/contracts/services.md` (depende de T012).
@@ -383,4 +383,5 @@ Tarefas que alteram `app/Config/Routes.php` devem ser coordenadas ou integradas 
 
 ## Histórico do documento
 
+- **0.2.0 — 2026-08-25**: T006–T010 concluídas com inventário de rotas, mapa de navegação por perfil e wireframes internos, de curadoria e públicos.
 - **0.1.0 — 2026-08-24**: primeira decomposição granular, com 190 tarefas, histórias, dependências, paralelização e critérios de checkpoint.
