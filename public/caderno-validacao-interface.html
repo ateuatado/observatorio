@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="pt-BR" class="validation-no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Caderno de validação dos fluxos e interfaces da Etapa 1 do OVPDH.">
+    <title>Caderno de validação da interface | OVPDH</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/validation-workbook.css">
+    <script src="assets/js/validation-workbook.js" defer></script>
+</head>
+<body>
+    <a class="validation-skip" href="#validation-main">Pular para o conteúdo</a>
+
+    <header class="validation-topbar">
+        <div class="container validation-container validation-topbar-inner">
+            <a class="validation-brand" href="relatorios.html">OVPDH — Validação</a>
+            <span class="validation-version">Caderno 0.1.0</span>
+        </div>
+    </header>
+
+    <div class="validation-progress-shell" aria-hidden="true">
+        <div class="validation-progress-bar" id="validation-progress-bar"></div>
+    </div>
+
+    <main id="validation-main">
+        <header class="validation-hero">
+            <div class="container validation-container">
+                <p class="validation-eyebrow">Consulta ao grupo do OVP</p>
+                <h1>Ajude a tornar o sistema claro, seguro e útil.</h1>
+                <p class="validation-lead">Você percorrerá três situações fictícias e avaliará como o novo sistema deverá funcionar. Não é necessário conhecimento técnico.</p>
+                <div class="validation-meta">
+                    <span>Tempo estimado: 30–40 minutos</span>
+                    <span>As respostas ficam neste navegador</span>
+                    <span>Nenhum caso real é utilizado</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="container validation-container validation-layout">
+            <aside class="validation-sidebar" aria-label="Etapas do caderno">
+                <p class="validation-sidebar-title">Etapas</p>
+                <ol class="validation-steps" id="validation-steps">
+                    <li><button type="button" data-step-target="introducao" aria-current="step"><span>1</span> Antes de começar</button></li>
+                    <li><button type="button" data-step-target="cenario-1"><span>2</span> Registro simples</button></li>
+                    <li><button type="button" data-step-target="cenario-2"><span>3</span> Registro complexo</button></li>
+                    <li><button type="button" data-step-target="cenario-3"><span>4</span> Registro sensível</button></li>
+                    <li><button type="button" data-step-target="conclusao"><span>5</span> Avaliação final</button></li>
+                </ol>
+                <div class="validation-save-status" id="validation-save-status" role="status" aria-live="polite">Pronto para começar.</div>
+            </aside>
+
+            <form id="validation-form" class="validation-form" novalidate>
+                <section class="validation-step-panel" id="introducao" data-step-panel>
+                    <p class="validation-eyebrow">Etapa 1 de 5</p>
+                    <h2>Antes de começar</h2>
+                    <p>Responda pensando no trabalho real do Observatório. Não tente adivinhar como um programa deveria funcionar: registre aquilo que seria natural para você.</p>
+
+                    <div class="validation-callout">
+                        <strong>Como suas respostas serão usadas</strong>
+                        <p>Ao final, você baixará um arquivo e o encaminhará à coordenação. O caderno não envia nada automaticamente.</p>
+                    </div>
+
+                    <fieldset class="validation-fieldset">
+                        <legend>Sobre sua participação</legend>
+                        <div class="validation-field-grid">
+                            <div class="validation-field">
+                                <label for="participant-code">Nome ou código <span class="validation-optional">opcional</span></label>
+                                <input type="text" id="participant-code" name="participant_code" autocomplete="name" maxlength="100">
+                                <p class="validation-help">Você pode usar apenas iniciais ou um código combinado com a coordenação.</p>
+                            </div>
+                            <div class="validation-field">
+                                <label for="participant-role">Papel mais próximo do seu trabalho <span aria-hidden="true">*</span></label>
+                                <select id="participant-role" name="participant_role" required>
+                                    <option value="">Selecione</option>
+                                    <option value="coordenacao">Coordenação</option>
+                                    <option value="curadoria">Curadoria</option>
+                                    <option value="documentacao">Voluntariado ou documentação</option>
+                                    <option value="estudante">Estudante ou pesquisa</option>
+                                    <option value="editorial">Acervo ou produção acadêmica</option>
+                                    <option value="tecnico">Sistema ou banco de dados</option>
+                                    <option value="outro">Outro papel</option>
+                                </select>
+                            </div>
+                            <div class="validation-field validation-field-wide">
+                                <label for="participant-experience">Sua experiência com o sistema ou com a documentação de casos</label>
+                                <select id="participant-experience" name="participant_experience">
+                                    <option value="">Prefiro não informar</option>
+                                    <option value="nenhuma">Ainda não utilizei</option>
+                                    <option value="inicial">Pouca experiência</option>
+                                    <option value="frequente">Uso ou participo com frequência</option>
+                                    <option value="avancada">Conheço profundamente o trabalho atual</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="validation-actions">
+                        <span></span>
+                        <button class="validation-button validation-button-primary" type="button" data-next-step>Começar o primeiro cenário</button>
+                    </div>
+                </section>
+
+                <section class="validation-step-panel" id="cenario-1" data-step-panel>
+                    <p class="validation-eyebrow">Etapa 2 de 5 · Cenário fictício</p>
+                    <h2>Registro simples a partir de uma notícia</h2>
+                    <div class="validation-story">
+                        <p>Uma notícia pública relata uma possível violência durante abordagem policial em São Paulo. A data é aproximada. A vítima não foi identificada. A instituição policial é conhecida e há um link para a matéria.</p>
+                    </div>
+
+                    <h3>O percurso proposto</h3>
+                    <ol class="validation-flow">
+                        <li><strong>Criar rascunho</strong><span>Título provisório, data aproximada, UF e município.</span></li>
+                        <li><strong>Completar as seções</strong><span>Violação, vítima anônima, instituição e fonte pública.</span></li>
+                        <li><strong>Conferir pendências</strong><span>O sistema informa o que falta antes da revisão.</span></li>
+                        <li><strong>Enviar para revisão</strong><span>Um curador diferente do autor avaliará o caso.</span></li>
+                    </ol>
+
+                    <fieldset class="validation-fieldset">
+                        <legend>Suas respostas</legend>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">1. Quão claro é esse percurso?</p>
+                            <div class="validation-scale" role="radiogroup" aria-label="Clareza do cenário simples">
+                                <label><input type="radio" name="s1_clarity" value="1" required><span><strong>1</strong> Nada claro</span></label>
+                                <label><input type="radio" name="s1_clarity" value="2"><span><strong>2</strong> Pouco claro</span></label>
+                                <label><input type="radio" name="s1_clarity" value="3"><span><strong>3</strong> Razoável</span></label>
+                                <label><input type="radio" name="s1_clarity" value="4"><span><strong>4</strong> Claro</span></label>
+                                <label><input type="radio" name="s1_clarity" value="5"><span><strong>5</strong> Muito claro</span></label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <label for="s1-minimum">2. Quais dados deveriam bastar para criar o rascunho?</label>
+                            <select id="s1-minimum" name="s1_minimum" required>
+                                <option value="">Selecione</option>
+                                <option value="proposto">Título, data aproximada, UF e município</option>
+                                <option value="menos">Título e fonte já seriam suficientes</option>
+                                <option value="mais">Deveria exigir mais dados antes de criar</option>
+                                <option value="duvida">Não tenho certeza</option>
+                            </select>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">3. O que deve ser obrigatório antes de enviar para revisão? <span class="validation-optional">marque tudo que considerar necessário</span></p>
+                            <div class="validation-check-list">
+                                <label><input type="checkbox" name="s1_review_required" value="identificacao"> Identificação mínima do fato</label>
+                                <label><input type="checkbox" name="s1_review_required" value="violacao"> Ao menos uma violação</label>
+                                <label><input type="checkbox" name="s1_review_required" value="vitima"> Vítima ou grupo atingido</label>
+                                <label><input type="checkbox" name="s1_review_required" value="agente"> Agente ou instituição relacionada</label>
+                                <label><input type="checkbox" name="s1_review_required" value="fonte"> Ao menos uma fonte</label>
+                                <label><input type="checkbox" name="s1_review_required" value="resumo"> Resumo público provisório</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <label for="s1-missing">4. Está faltando alguma informação ou etapa?</label>
+                            <textarea id="s1-missing" name="s1_missing" rows="4" maxlength="1500"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div class="validation-actions">
+                        <button class="validation-button" type="button" data-previous-step>Voltar</button>
+                        <button class="validation-button validation-button-primary" type="button" data-next-step>Continuar</button>
+                    </div>
+                </section>
+
+                <section class="validation-step-panel" id="cenario-2" data-step-panel>
+                    <p class="validation-eyebrow">Etapa 3 de 5 · Cenário fictício</p>
+                    <h2>Um caso com muitas relações</h2>
+                    <div class="validation-story">
+                        <p>Um dossiê reúne três vítimas, duas instituições, quatro violações, cinco notícias e dois depoimentos. Nem toda fonte sustenta todas as violações, e uma das vítimas foi atingida por apenas parte delas.</p>
+                    </div>
+
+                    <h3>O percurso proposto</h3>
+                    <div class="validation-relation-map" aria-label="Exemplo de relações do cenário complexo">
+                        <div><strong>Violação A</strong><span>Vítima 1 · Instituição X · Fontes 1 e 2</span></div>
+                        <div><strong>Violação B</strong><span>Vítimas 1 e 2 · Agente Y · Fontes 2 e 4</span></div>
+                        <div><strong>Violação C</strong><span>Grupo 3 · Instituição X · Depoimento restrito</span></div>
+                    </div>
+                    <p>A proposta é cadastrar cada elemento uma vez e selecionar, dentro de cada violação, quais vítimas, agentes e fontes estão relacionados.</p>
+
+                    <fieldset class="validation-fieldset">
+                        <legend>Suas respostas</legend>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">1. Quão compreensível é essa forma de relacionar as informações?</p>
+                            <div class="validation-scale" role="radiogroup" aria-label="Clareza do cenário complexo">
+                                <label><input type="radio" name="s2_clarity" value="1" required><span><strong>1</strong> Nada clara</span></label>
+                                <label><input type="radio" name="s2_clarity" value="2"><span><strong>2</strong> Pouco clara</span></label>
+                                <label><input type="radio" name="s2_clarity" value="3"><span><strong>3</strong> Razoável</span></label>
+                                <label><input type="radio" name="s2_clarity" value="4"><span><strong>4</strong> Clara</span></label>
+                                <label><input type="radio" name="s2_clarity" value="5"><span><strong>5</strong> Muito clara</span></label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">2. Onde seria mais natural definir essas relações?</p>
+                            <div class="validation-radio-list">
+                                <label><input type="radio" name="s2_relation_place" value="violacao" required> Dentro de cada violação, como proposto</label>
+                                <label><input type="radio" name="s2_relation_place" value="entidades"> Dentro de cada vítima, agente e fonte</label>
+                                <label><input type="radio" name="s2_relation_place" value="resumo"> Em uma tela final exclusiva para relacionamentos</label>
+                                <label><input type="radio" name="s2_relation_place" value="duvida"> Não tenho certeza</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">3. Que recursos ajudariam a evitar erros? <span class="validation-optional">marque os necessários</span></p>
+                            <div class="validation-check-list">
+                                <label><input type="checkbox" name="s2_helpers" value="resumo"> Resumo visual dos vínculos</label>
+                                <label><input type="checkbox" name="s2_helpers" value="alerta_sem_fonte"> Alerta para violação sem fonte</label>
+                                <label><input type="checkbox" name="s2_helpers" value="duplicidade"> Alerta de possível duplicidade</label>
+                                <label><input type="checkbox" name="s2_helpers" value="filtro"> Busca e filtro nas listas</label>
+                                <label><input type="checkbox" name="s2_helpers" value="revisao_final"> Conferência geral antes do envio</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <label for="s2-difficulty">4. O que parece mais difícil nesse cenário?</label>
+                            <textarea id="s2-difficulty" name="s2_difficulty" rows="4" maxlength="1500"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div class="validation-actions">
+                        <button class="validation-button" type="button" data-previous-step>Voltar</button>
+                        <button class="validation-button validation-button-primary" type="button" data-next-step>Continuar</button>
+                    </div>
+                </section>
+
+                <section class="validation-step-panel" id="cenario-3" data-step-panel>
+                    <p class="validation-eyebrow">Etapa 4 de 5 · Cenário fictício</p>
+                    <h2>Um caso com informações sensíveis</h2>
+                    <div class="validation-story validation-story-sensitive">
+                        <p>O material contém nome da vítima, nomes de agentes públicos, endereço exato, depoimento de testemunha e um PDF original que permite identificar pessoas. O público deverá conhecer o fato sem receber esses dados.</p>
+                    </div>
+
+                    <h3>O tratamento proposto</h3>
+                    <div class="validation-privacy-grid">
+                        <article><span class="validation-classification">Restrito</span><strong>Nomes individuais</strong><p>Visíveis somente a pessoas autorizadas e com auditoria.</p></article>
+                        <article><span class="validation-classification">Restrito</span><strong>Endereço e ponto exato</strong><p>Substituídos por município, bairro aprovado ou área generalizada.</p></article>
+                        <article><span class="validation-classification">Restrito</span><strong>Documento original</strong><p>Preservado separadamente; uma cópia expurgada pode ser publicada.</p></article>
+                        <article><span class="validation-classification validation-classification-public">Público após revisão</span><strong>Instituições e patentes</strong><p>Podem aparecer quando sustentadas pelas fontes e aprovadas.</p></article>
+                    </div>
+
+                    <fieldset class="validation-fieldset">
+                        <legend>Suas respostas</legend>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">1. Quão clara está a separação entre informações restritas e públicas?</p>
+                            <div class="validation-scale" role="radiogroup" aria-label="Clareza do cenário sensível">
+                                <label><input type="radio" name="s3_clarity" value="1" required><span><strong>1</strong> Nada clara</span></label>
+                                <label><input type="radio" name="s3_clarity" value="2"><span><strong>2</strong> Pouco clara</span></label>
+                                <label><input type="radio" name="s3_clarity" value="3"><span><strong>3</strong> Razoável</span></label>
+                                <label><input type="radio" name="s3_clarity" value="4"><span><strong>4</strong> Clara</span></label>
+                                <label><input type="radio" name="s3_clarity" value="5"><span><strong>5</strong> Muito clara</span></label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">2. Quais elementos poderiam aparecer publicamente depois da revisão? <span class="validation-optional">marque os que considerar seguros</span></p>
+                            <div class="validation-check-list">
+                                <label><input type="checkbox" name="s3_public_elements" value="municipio"> Município e UF</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="resumo"> Resumo público revisado</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="instituicao"> Instituição, unidade, cargo ou patente aprovados</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="nome_vitima"> Nome da vítima</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="nome_agente"> Nome individual do agente público</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="endereco"> Endereço ou coordenada exatos</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="derivado"> Documento derivado com expurgo permanente</label>
+                                <label><input type="checkbox" name="s3_public_elements" value="original"> Documento original identificável</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">3. O que deve bloquear automaticamente a publicação? <span class="validation-optional">marque os casos críticos</span></p>
+                            <div class="validation-check-list">
+                                <label><input type="checkbox" name="s3_blockers" value="nome"> Possível nome individual no resumo</label>
+                                <label><input type="checkbox" name="s3_blockers" value="localizacao"> Localização mais precisa que a autorizada</label>
+                                <label><input type="checkbox" name="s3_blockers" value="direitos"> Direito de divulgação do documento não confirmado</label>
+                                <label><input type="checkbox" name="s3_blockers" value="sem_previa"> Prévia pública ainda não conferida</label>
+                                <label><input type="checkbox" name="s3_blockers" value="sem_fonte"> Informação pública sem fonte de sustentação</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <label for="s3-concern">4. Que risco ou cuidado adicional você gostaria de registrar?</label>
+                            <textarea id="s3-concern" name="s3_concern" rows="4" maxlength="1500"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div class="validation-actions">
+                        <button class="validation-button" type="button" data-previous-step>Voltar</button>
+                        <button class="validation-button validation-button-primary" type="button" data-next-step>Continuar</button>
+                    </div>
+                </section>
+
+                <section class="validation-step-panel" id="conclusao" data-step-panel>
+                    <p class="validation-eyebrow">Etapa 5 de 5</p>
+                    <h2>Avaliação final</h2>
+                    <p>Considere os três cenários e indique se os desenhos estão prontos para orientar a implementação.</p>
+
+                    <fieldset class="validation-fieldset">
+                        <legend>Sua conclusão</legend>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">1. De forma geral, quão compreensível é a proposta?</p>
+                            <div class="validation-scale" role="radiogroup" aria-label="Clareza geral">
+                                <label><input type="radio" name="overall_clarity" value="1" required><span><strong>1</strong> Nada clara</span></label>
+                                <label><input type="radio" name="overall_clarity" value="2"><span><strong>2</strong> Pouco clara</span></label>
+                                <label><input type="radio" name="overall_clarity" value="3"><span><strong>3</strong> Razoável</span></label>
+                                <label><input type="radio" name="overall_clarity" value="4"><span><strong>4</strong> Clara</span></label>
+                                <label><input type="radio" name="overall_clarity" value="5"><span><strong>5</strong> Muito clara</span></label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">2. Qual é a sua recomendação?</p>
+                            <div class="validation-radio-list">
+                                <label><input type="radio" name="recommendation" value="aprovada" required> Aprovada como está</label>
+                                <label><input type="radio" name="recommendation" value="ajustes"> Aprovada com ajustes</label>
+                                <label><input type="radio" name="recommendation" value="decisao_institucional"> Há decisão institucional pendente</label>
+                                <label><input type="radio" name="recommendation" value="redesenhar"> Precisa ser redesenhada antes da implementação</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <p class="validation-question-title">3. Quais pontos devem receber prioridade?</p>
+                            <div class="validation-check-list">
+                                <label><input type="checkbox" name="priorities" value="termos"> Nomes, termos e orientações</label>
+                                <label><input type="checkbox" name="priorities" value="navegacao"> Navegação entre módulos e seções</label>
+                                <label><input type="checkbox" name="priorities" value="relacoes"> Relações entre violações, pessoas e fontes</label>
+                                <label><input type="checkbox" name="priorities" value="privacidade"> Privacidade e publicação</label>
+                                <label><input type="checkbox" name="priorities" value="curadoria"> Curadoria e decisões</label>
+                                <label><input type="checkbox" name="priorities" value="acessibilidade"> Acessibilidade e ajuda</label>
+                            </div>
+                        </div>
+
+                        <div class="validation-question">
+                            <label for="final-comments">4. Comentários, propostas ou decisões que o grupo deveria discutir</label>
+                            <textarea id="final-comments" name="final_comments" rows="6" maxlength="3000"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div class="validation-completion" id="validation-completion" role="status" aria-live="polite">
+                        <strong>Complete as perguntas obrigatórias antes de baixar.</strong>
+                        <span id="validation-completion-detail">Seu progresso é salvo automaticamente neste navegador.</span>
+                    </div>
+
+                    <div class="validation-export-actions">
+                        <button class="validation-button" type="button" data-previous-step>Voltar</button>
+                        <button class="validation-button" type="button" id="validation-print">Imprimir ou salvar em PDF</button>
+                        <button class="validation-button validation-button-primary" type="button" id="validation-download">Baixar minhas respostas</button>
+                    </div>
+
+                    <details class="validation-reset">
+                        <summary>Recomeçar o caderno neste navegador</summary>
+                        <p>Essa ação apagará apenas as respostas salvas localmente neste dispositivo.</p>
+                        <button class="validation-button validation-button-danger" type="button" id="validation-reset">Apagar respostas e recomeçar</button>
+                    </details>
+                </section>
+
+                <div class="validation-error-summary" id="validation-error-summary" role="alert" hidden></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="validation-footer">
+        <div class="container validation-container">
+            <span>Observatório de Violência Policial e Direitos Humanos</span>
+            <a href="relatorios.html">Central de relatórios</a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,768 @@
+:root {
+    --validation-wine: #4f0d18;
+    --validation-wine-light: #781b2b;
+    --validation-ink: #261e20;
+    --validation-muted: #6d5d60;
+    --validation-paper: #fffdfb;
+    --validation-ground: #f3eee8;
+    --validation-line: #ddd1cc;
+    --validation-soft: #f7f2ed;
+    --validation-success: #17623a;
+    --validation-success-soft: #eaf6ee;
+    --validation-warning: #865d00;
+    --validation-warning-soft: #fff5d9;
+    --validation-danger: #a1262f;
+    --validation-focus: #0a67a3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--validation-ground);
+    color: var(--validation-ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+select,
+input[type="radio"],
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+a {
+    color: var(--validation-wine-light);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+    outline: 3px solid var(--validation-focus);
+    outline-offset: 3px;
+}
+
+.validation-container {
+    max-width: 1180px;
+}
+
+.validation-skip {
+    background: var(--validation-paper);
+    left: 1rem;
+    padding: .75rem 1rem;
+    position: fixed;
+    top: -10rem;
+    z-index: 1000;
+}
+
+.validation-skip:focus {
+    top: 1rem;
+}
+
+.validation-topbar {
+    background: var(--validation-wine);
+    color: #fff;
+}
+
+.validation-topbar-inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    min-height: 58px;
+}
+
+.validation-brand,
+.validation-topbar a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.validation-version {
+    color: rgba(255, 255, 255, .78);
+    font-size: .86rem;
+}
+
+.validation-progress-shell {
+    background: #d9c8c4;
+    height: 5px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.validation-progress-bar {
+    background: var(--validation-wine-light);
+    height: 100%;
+    transition: width .2s ease;
+    width: 20%;
+}
+
+.validation-hero {
+    background: linear-gradient(120deg, var(--validation-wine), #761726);
+    color: #fff;
+    padding: 4.5rem 0 4rem;
+}
+
+.validation-eyebrow {
+    color: var(--validation-wine-light);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    margin: 0 0 .75rem;
+    text-transform: uppercase;
+}
+
+.validation-hero .validation-eyebrow {
+    color: #e7bdc4;
+}
+
+.validation-hero h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -.025em;
+    line-height: 1.06;
+    margin: 0;
+    max-width: 780px;
+}
+
+.validation-lead {
+    color: rgba(255, 255, 255, .88);
+    font-size: 1.15rem;
+    margin: 1.25rem 0 1.5rem;
+    max-width: 760px;
+}
+
+.validation-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem 1.5rem;
+    font-size: .87rem;
+}
+
+.validation-meta span {
+    align-items: center;
+    display: inline-flex;
+    gap: .45rem;
+}
+
+.validation-meta span::before {
+    background: #e7bdc4;
+    border-radius: 50%;
+    content: "";
+    height: .45rem;
+    width: .45rem;
+}
+
+.validation-layout {
+    align-items: start;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 250px minmax(0, 1fr);
+    padding-bottom: 5rem;
+    padding-top: 2.5rem;
+}
+
+.validation-sidebar {
+    background: var(--validation-paper);
+    border: 1px solid var(--validation-line);
+    border-radius: .45rem;
+    padding: 1.25rem;
+    position: sticky;
+    top: 2rem;
+}
+
+.validation-sidebar-title {
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    margin: 0 0 .8rem;
+    text-transform: uppercase;
+}
+
+.validation-steps {
+    display: grid;
+    gap: .25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.validation-steps button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: .35rem;
+    color: var(--validation-muted);
+    display: grid;
+    font-size: .9rem;
+    gap: .65rem;
+    grid-template-columns: 1.75rem 1fr;
+    padding: .65rem;
+    text-align: left;
+    width: 100%;
+}
+
+.validation-steps button span {
+    align-items: center;
+    border: 1px solid var(--validation-line);
+    border-radius: 50%;
+    display: inline-flex;
+    height: 1.7rem;
+    justify-content: center;
+    width: 1.7rem;
+}
+
+.validation-steps button:hover {
+    background: var(--validation-soft);
+}
+
+.validation-steps button[aria-current="step"] {
+    background: #f2e5e6;
+    color: var(--validation-wine);
+    font-weight: 700;
+}
+
+.validation-steps button[aria-current="step"] span {
+    background: var(--validation-wine);
+    border-color: var(--validation-wine);
+    color: #fff;
+}
+
+.validation-steps button.validation-step-complete span {
+    background: var(--validation-success);
+    border-color: var(--validation-success);
+    color: #fff;
+}
+
+.validation-save-status {
+    border-top: 1px solid var(--validation-line);
+    color: var(--validation-muted);
+    font-size: .8rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.validation-form {
+    min-width: 0;
+}
+
+.validation-step-panel {
+    background: var(--validation-paper);
+    border: 1px solid var(--validation-line);
+    border-radius: .45rem;
+    padding: clamp(1.4rem, 4vw, 3rem);
+}
+
+.validation-js .validation-step-panel[hidden] {
+    display: none;
+}
+
+.validation-no-js .validation-step-panel + .validation-step-panel {
+    margin-top: 2rem;
+}
+
+.validation-step-panel h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.12;
+    margin: 0 0 1rem;
+}
+
+.validation-step-panel h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    margin: 2rem 0 1rem;
+}
+
+.validation-callout,
+.validation-story {
+    background: var(--validation-soft);
+    border-left: 4px solid var(--validation-wine-light);
+    margin: 1.5rem 0;
+    padding: 1rem 1.15rem;
+}
+
+.validation-callout p,
+.validation-story p {
+    margin: .25rem 0 0;
+}
+
+.validation-story-sensitive {
+    background: var(--validation-warning-soft);
+    border-left-color: var(--validation-warning);
+}
+
+.validation-fieldset {
+    border: 0;
+    margin: 2rem 0 0;
+    padding: 0;
+}
+
+.validation-fieldset > legend {
+    border-bottom: 1px solid var(--validation-line);
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: .75rem;
+    width: 100%;
+}
+
+.validation-field-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.validation-field,
+.validation-question {
+    display: grid;
+    gap: .5rem;
+}
+
+.validation-field-wide {
+    grid-column: 1 / -1;
+}
+
+.validation-field label,
+.validation-question > label,
+.validation-question-title {
+    font-weight: 700;
+    margin: 0;
+}
+
+.validation-optional {
+    color: var(--validation-muted);
+    font-size: .8rem;
+    font-weight: 400;
+}
+
+.validation-help {
+    color: var(--validation-muted);
+    font-size: .82rem;
+    margin: 0;
+}
+
+.validation-field input,
+.validation-field select,
+.validation-question select,
+.validation-question textarea {
+    background: #fff;
+    border: 1px solid #a99691;
+    border-radius: .35rem;
+    color: var(--validation-ink);
+    min-height: 2.8rem;
+    padding: .65rem .75rem;
+    width: 100%;
+}
+
+.validation-question textarea {
+    resize: vertical;
+}
+
+.validation-question {
+    border-bottom: 1px solid var(--validation-line);
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.6rem;
+}
+
+.validation-question:last-child {
+    border-bottom: 0;
+}
+
+.validation-scale {
+    display: grid;
+    gap: .55rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.validation-scale label {
+    display: block;
+    position: relative;
+}
+
+.validation-scale input {
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.validation-scale span {
+    align-items: center;
+    background: var(--validation-soft);
+    border: 1px solid var(--validation-line);
+    border-radius: .35rem;
+    display: flex;
+    flex-direction: column;
+    font-size: .75rem;
+    gap: .2rem;
+    justify-content: center;
+    min-height: 4.4rem;
+    padding: .55rem .25rem;
+    text-align: center;
+}
+
+.validation-scale span strong {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+}
+
+.validation-scale input:checked + span {
+    background: var(--validation-wine);
+    border-color: var(--validation-wine);
+    color: #fff;
+}
+
+.validation-scale input:focus-visible + span {
+    outline: 3px solid var(--validation-focus);
+    outline-offset: 3px;
+}
+
+.validation-radio-list,
+.validation-check-list {
+    display: grid;
+    gap: .5rem;
+}
+
+.validation-radio-list label,
+.validation-check-list label {
+    align-items: start;
+    background: var(--validation-soft);
+    border-radius: .3rem;
+    display: grid;
+    gap: .7rem;
+    grid-template-columns: 1.1rem 1fr;
+    padding: .7rem .8rem;
+}
+
+.validation-radio-list input,
+.validation-check-list input {
+    height: 1.05rem;
+    margin-top: .2rem;
+    width: 1.05rem;
+}
+
+.validation-flow {
+    display: grid;
+    gap: .75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.validation-flow li {
+    align-items: start;
+    background: var(--validation-soft);
+    border-left: 4px solid var(--validation-wine-light);
+    display: grid;
+    gap: .2rem;
+    padding: .8rem 1rem;
+}
+
+.validation-flow span,
+.validation-relation-map span {
+    color: var(--validation-muted);
+}
+
+.validation-relation-map {
+    display: grid;
+    gap: .75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.validation-relation-map div {
+    background: var(--validation-soft);
+    border-top: 3px solid var(--validation-wine-light);
+    display: grid;
+    gap: .35rem;
+    padding: 1rem;
+}
+
+.validation-privacy-grid {
+    display: grid;
+    gap: .85rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.validation-privacy-grid article {
+    background: var(--validation-soft);
+    border: 1px solid var(--validation-line);
+    border-radius: .35rem;
+    padding: 1rem;
+}
+
+.validation-privacy-grid strong {
+    display: block;
+    margin: .5rem 0 .2rem;
+}
+
+.validation-privacy-grid p {
+    color: var(--validation-muted);
+    font-size: .9rem;
+    margin: 0;
+}
+
+.validation-classification {
+    color: var(--validation-danger);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.validation-classification-public {
+    color: var(--validation-success);
+}
+
+.validation-actions,
+.validation-export-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.validation-export-actions {
+    justify-content: flex-end;
+}
+
+.validation-button {
+    background: transparent;
+    border: 1px solid var(--validation-wine);
+    border-radius: .3rem;
+    color: var(--validation-wine);
+    font-weight: 700;
+    min-height: 2.7rem;
+    padding: .65rem 1rem;
+}
+
+.validation-button:hover {
+    background: #f1e4e5;
+}
+
+.validation-button-primary {
+    background: var(--validation-wine);
+    color: #fff;
+}
+
+.validation-button-primary:hover {
+    background: var(--validation-wine-light);
+}
+
+.validation-button-danger {
+    border-color: var(--validation-danger);
+    color: var(--validation-danger);
+}
+
+.validation-completion {
+    background: var(--validation-warning-soft);
+    border-left: 4px solid var(--validation-warning);
+    display: grid;
+    gap: .3rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.validation-completion.validation-complete {
+    background: var(--validation-success-soft);
+    border-left-color: var(--validation-success);
+}
+
+.validation-error-summary {
+    background: #fff0f0;
+    border: 2px solid var(--validation-danger);
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.validation-error-summary a {
+    display: block;
+    margin-top: .35rem;
+}
+
+.validation-reset {
+    border-top: 1px solid var(--validation-line);
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+}
+
+.validation-reset summary {
+    color: var(--validation-muted);
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.validation-footer {
+    background: var(--validation-wine);
+    color: rgba(255, 255, 255, .82);
+    font-size: .85rem;
+    padding: 1.5rem 0;
+}
+
+.validation-footer .validation-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.validation-footer a {
+    color: #fff;
+}
+
+.validation-invalid {
+    border-color: var(--validation-danger) !important;
+}
+
+@media (max-width: 900px) {
+    .validation-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .validation-sidebar {
+        position: static;
+    }
+
+    .validation-steps {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .validation-steps button {
+        align-items: center;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .validation-relation-map {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .validation-hero {
+        padding: 3rem 0;
+    }
+
+    .validation-layout {
+        padding-top: 1rem;
+    }
+
+    .validation-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .validation-steps button {
+        grid-template-columns: 1.75rem 1fr;
+        justify-items: start;
+        text-align: left;
+    }
+
+    .validation-field-grid,
+    .validation-privacy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .validation-field-wide {
+        grid-column: auto;
+    }
+
+    .validation-scale {
+        grid-template-columns: 1fr;
+    }
+
+    .validation-scale span {
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+        min-height: 3rem;
+        padding: .6rem 1rem;
+    }
+
+    .validation-export-actions,
+    .validation-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .validation-actions span {
+        display: none;
+    }
+
+    .validation-button {
+        width: 100%;
+    }
+}
+
+@media print {
+    body {
+        background: #fff;
+    }
+
+    .validation-topbar,
+    .validation-progress-shell,
+    .validation-sidebar,
+    .validation-actions,
+    .validation-export-actions,
+    .validation-reset,
+    .validation-footer,
+    .validation-skip {
+        display: none !important;
+    }
+
+    .validation-hero {
+        background: #fff;
+        color: #000;
+        padding: 1rem 0;
+    }
+
+    .validation-hero .validation-eyebrow,
+    .validation-lead {
+        color: #333;
+    }
+
+    .validation-layout {
+        display: block;
+        padding: 0;
+    }
+
+    .validation-step-panel,
+    .validation-js .validation-step-panel[hidden] {
+        border: 0;
+        break-inside: avoid;
+        display: block;
+        margin: 0 0 1.5rem;
+        padding: 0;
+    }
+
+    .validation-field input,
+    .validation-field select,
+    .validation-question select,
+    .validation-question textarea {
+        border-color: #777;
+    }
+}
