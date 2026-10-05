@@ -40,7 +40,7 @@ class OcorrenciaModel extends Model
     public function getComVitimas(int $id): ?array
     {
         return $this->db->table('ocorrencias o')
-            ->select('o.*, GROUP_CONCAT(v.nome SEPARATOR ", ") as nomes_vitimas')
+            ->select("o.*, STRING_AGG(v.nome, ', ' ORDER BY v.nome) AS nomes_vitimas", false)
             ->join('vitimas v', 'v.ocorrencia_id = o.id', 'left')
             ->where('o.id', $id)
             ->where('o.deleted_at IS NULL')
@@ -85,10 +85,10 @@ class OcorrenciaModel extends Model
     public function countByMes(int $meses = 12): array
     {
         return $this->db->table('ocorrencias')
-            ->select('DATE_FORMAT(data_ocorrencia, "%Y-%m") as mes, COUNT(*) as total')
+            ->select("TO_CHAR(data_ocorrencia, 'YYYY-MM') AS mes, COUNT(*) AS total", false)
             ->where('data_ocorrencia >=', date('Y-m-d', strtotime("-{$meses} months")))
             ->where('deleted_at IS NULL')
-            ->groupBy('mes')
+            ->groupBy("TO_CHAR(data_ocorrencia, 'YYYY-MM')", false)
             ->orderBy('mes', 'ASC')
             ->get()->getResultArray();
     }
