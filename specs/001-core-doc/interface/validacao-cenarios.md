@@ -1,9 +1,12 @@
 # Consolidação da validação dos cenários — Etapa 1
 
-**Versão:** 0.1.0  
-**Atualizado em:** 25 de agosto de 2026  
-**Tarefa:** T011  
-**Estado:** em coleta; primeira aplicação-piloto recebida
+**Versão:** 1.0.0
+
+**Atualizado em:** 5 de outubro de 2026
+
+**Tarefa:** T011
+
+**Estado:** concluída por decisão da autoridade do projeto, com ressalva de representatividade
 
 ## 1. Método
 
@@ -17,7 +20,7 @@ Estados possíveis: aprovada, aprovada com ajuste, pendente institucional, rejei
 | --- | --- | --- | --- |
 | P001 | Curadoria | Inicial | Recebida e analisada |
 
-Total atual: **1 resposta**. Não produzir percentuais enquanto a amostra for insuficiente.
+Total final desta rodada: **1 resposta**. Não produzir percentuais nem apresentar o resultado como pesquisa representativa.
 
 ## 3. Resultado de P001
 
@@ -56,7 +59,23 @@ P001 não definiu o local mais natural para criar as relações entre violaçõe
 
 Essas ausências são dúvidas a investigar, não aprovação para publicar.
 
-## 4. Hipótese de melhoria para o caderno 0.2.0
+## 4. Decisão de governança
+
+Em 5 de outubro de 2026, a coordenação decidiu prosseguir com o planejamento usando P001 como validação da autoridade mais influente nas decisões do sistema. A resposta possui peso para definição de produto e curadoria, mas não substitui uma amostra de usuários.
+
+A baseline é classificada como **aprovada com ajustes**. Os seguintes princípios tornam-se obrigatórios para T012–T014 e para a implementação:
+
+- usar linguagem orientada à tarefa e explicar termos no próprio contexto;
+- manter contexto e posição visíveis durante o preenchimento;
+- tornar as relações entre violações, vítimas, agentes e fontes visualmente verificáveis;
+- oferecer alertas de fonte ausente e possível duplicidade;
+- oferecer busca/filtro em listas longas;
+- incluir conferência geral antes do envio para revisão;
+- tratar nome individual, localização precisa, direito de divulgação, prévia pública e sustentação por fonte como verificações explícitas antes de publicar.
+
+Ressalva: a facilidade de uso deverá ser validada novamente com usuários durante a implementação da ficha e antes da liberação da Etapa 1. Essa rodada futura não reabre decisões institucionais já aprovadas, salvo descoberta de risco de privacidade ou impedimento operacional.
+
+## 5. Melhorias previstas para a implementação
 
 - inserir sequência visual de telas em cada cenário;
 - mostrar onde a ação ocorre e o efeito esperado;
@@ -67,26 +86,20 @@ Essas ausências são dúvidas a investigar, não aprovação para publicar.
 - incluir glossário curto de termos;
 - perguntar separadamente sobre cada bloqueio de publicação.
 
-Não implementar a versão 0.2.0 antes de receber mais respostas, salvo se surgir problema funcional que impeça a coleta.
+Essas melhorias serão aplicadas nos componentes e protótipos de implementação. Não é necessário bloquear T012–T014 aguardando uma nova versão do caderno.
 
-## 5. Portão para concluir T011
+## 6. Encerramento de T011
 
-T011 permanece aberta. Para concluí-la:
+T011 está concluída com a ressalva registrada. Evidências:
 
-1. receber amostra representativa dos papéis do OVP;
-2. anonimizar e consolidar as respostas;
-3. discutir divergências em reunião do grupo;
-4. classificar cada decisão;
-5. atualizar os wireframes;
-6. aprovar ou rejeitar formalmente a baseline de interface.
+1. três cenários foram disponibilizados e percorridos;
+2. a única resposta foi anonimizada como P001;
+3. a autoridade do projeto aprovou a continuidade com ajustes;
+4. ajustes e dúvidas foram transformados em regras de planejamento;
+5. o risco de baixa representatividade foi registrado;
+6. uma rodada de usabilidade foi transferida para a fase de implementação.
 
-## 6. Próximo ponto de retomada
+## 7. Próximo ponto de retomada
 
-Aguardar novas respostas JSON. Para cada arquivo recebido:
-
-1. não versionar o arquivo bruto;
-2. atribuir código sequencial P002, P003 etc.;
-3. registrar notas por cenário e recomendação;
-4. agregar ajustes, divergências e alertas de privacidade;
-5. somente depois da amostra, decidir o escopo do caderno 0.2.0.
+Prosseguir para T012–T014: dicionário físico canônico, contratos dos Services e checklist de privacidade/publicação. Respostas tardias podem ser registradas como evidência complementar, sem reabrir automaticamente T011.
 
