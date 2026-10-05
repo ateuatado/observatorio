@@ -8,10 +8,10 @@ O resultado é aceito como **validação de autoridade do projeto**, não como p
 
 ## Estado do backlog
 
-- versão: 0.3.0;
+- versão: 0.3.1;
 - total: 190 tarefas;
-- concluídas: 11;
-- próxima sequência: T012, T013 e T014.
+- concluídas: 12;
+- próxima sequência: T013 e T014.
 
 ## Ajustes obrigatórios herdados da validação
 
@@ -29,7 +29,7 @@ Uma nova rodada de usabilidade deve ocorrer quando a ficha funcional estiver dis
 
 ## Próxima ação
 
-Executar T012: produzir `specs/001-core-doc/data-model.md`, com o dicionário físico canônico e o mapa campo a campo do legado para o destino.
+T012 concluída em `specs/001-core-doc/data-model.md`, com dicionário físico canônico, classes de acesso, compatibilidade das tabelas existentes e mapa campo a campo do legado para o destino.
 
 Na sequência:
 
@@ -40,5 +40,5 @@ Na sequência:
 
 ## Gancho de retomada
 
-> Retome o status de 5 de outubro e comece a T012, produzindo o dicionário físico canônico e o mapa legado → destino.
+> Retome o status de 5 de outubro e comece a T013, definindo os contratos dos Services e as transições de estado.
 

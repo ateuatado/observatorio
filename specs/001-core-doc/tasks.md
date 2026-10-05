@@ -1,6 +1,6 @@
 # Tarefas: Etapa 1 do OVPDH
 
-**Versão do documento**: 0.3.0
+**Versão do documento**: 0.3.1
 
 **Data**: 5 de outubro de 2026
 
@@ -33,7 +33,7 @@ Cada item segue `[ID] [P?] [US?] descrição com caminho`.
 - [x] T009 [P] Produzir wireframes da fila, comparação e prévia pública em `specs/001-core-doc/interface/wireframes-curadoria.md`.
 - [x] T010 [P] Produzir wireframes da busca, coleção e caso público em `specs/001-core-doc/interface/wireframes-publicos.md`.
 - [x] T011 Validar os wireframes com casos simples, complexo e sensível e registrar decisões em `specs/001-core-doc/interface/validacao-cenarios.md` (depende de T008–T010).
-- [ ] T012 Produzir dicionário físico canônico e mapa legado → destino em `specs/001-core-doc/data-model.md` (depende das decisões bloqueadoras do plano).
+- [x] T012 Produzir dicionário físico canônico e mapa legado → destino em `specs/001-core-doc/data-model.md` (depende das decisões bloqueadoras do plano).
 - [ ] T013 Definir contratos dos Services e transições em `specs/001-core-doc/contracts/services.md` (depende de T012).
 - [ ] T014 Criar checklist de privacidade/publicação em `specs/001-core-doc/checklists/privacidade-publicacao.md`.
 
@@ -383,6 +383,7 @@ Tarefas que alteram `app/Config/Routes.php` devem ser coordenadas ou integradas 
 
 ## Histórico do documento
 
+- **0.3.1 — 2026-10-05**: T012 concluída com dicionário físico canônico, classes de acesso, estratégia aditiva e mapa campo a campo do legado para o destino.
 - **0.3.0 — 2026-10-05**: T011 concluída por validação da autoridade do projeto, com ajustes incorporados ao planejamento e nova validação de usabilidade prevista durante a implementação.
 - **0.2.0 — 2026-08-25**: T006–T010 concluídas com inventário de rotas, mapa de navegação por perfil e wireframes internos, de curadoria e públicos.
 - **0.1.0 — 2026-08-24**: primeira decomposição granular, com 190 tarefas, histórias, dependências, paralelização e critérios de checkpoint.
