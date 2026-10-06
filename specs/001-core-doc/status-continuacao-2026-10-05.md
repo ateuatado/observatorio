@@ -8,10 +8,11 @@ O resultado é aceito como **validação de autoridade do projeto**, não como p
 
 ## Estado do backlog
 
-- versão: 0.3.1;
+- versão: 0.4.0;
 - total: 190 tarefas;
-- concluídas: 12;
-- próxima sequência: T013 e T014.
+- concluídas: 14;
+- Checkpoint 0: concluído;
+- próxima sequência: T015–T019.
 
 ## Ajustes obrigatórios herdados da validação
 
@@ -29,16 +30,16 @@ Uma nova rodada de usabilidade deve ocorrer quando a ficha funcional estiver dis
 
 ## Próxima ação
 
-T012 concluída em `specs/001-core-doc/data-model.md`, com dicionário físico canônico, classes de acesso, compatibilidade das tabelas existentes e mapa campo a campo do legado para o destino.
+T012–T014 concluídas: dicionário físico, contratos dos Services e checklist bloqueador de privacidade/publicação estão versionados. A máquina de estados, a separação de responsabilidades e as condições de publicação estão fechadas para implementação.
 
 Na sequência:
 
-1. T013 — contratos dos Services e transições;
-2. T014 — checklist de privacidade/publicação;
-3. fechar o Checkpoint 0;
-4. iniciar T015–T019, ambiente e banco PostgreSQL de teste.
+1. T015 — grupo PostgreSQL de teste sem credenciais versionadas;
+2. T016 — quickstart do banco PostgreSQL/PostGIS de teste;
+3. T017–T018 — helpers de autenticação e limpeza transacional;
+4. T019 — teste de saúde PostgreSQL/PostGIS.
 
 ## Gancho de retomada
 
-> Retome o status de 5 de outubro e comece a T013, definindo os contratos dos Services e as transições de estado.
+> Retome o status de 5 de outubro e inicie T015–T019, preparando o banco PostgreSQL/PostGIS de teste e seus helpers.
 

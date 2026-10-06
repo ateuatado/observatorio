@@ -182,7 +182,7 @@ Estados da ocorrência são códigos controlados no domínio, não catálogo edi
 | `id`, `ocorrencia_id` | bigint PK/FK | interno | E |
 | `nome`, `observacoes` | texto existente | restrito | E/C; migrar para tabela restrita e não expor em consultas gerais |
 | `tipo_entidade_id` | FK `tipos_entidade_vitima` NOT NULL | interno | N |
-| `idade` | `smallint NULL CHECK (idade BETWEEN 0 AND 130)` | restrito | N |
+| `idade` | `smallint NULL CHECK (idade BETWEEN 0 AND 120)` | restrito | N |
 | `faixa_etaria` | `varchar(30) NULL` | público após análise de reidentificação | E |
 | `raca_cor_id`, `genero_id`, `escolaridade_id` | FKs NULL | interno; projeção pública curada | N |
 | `habitacao_id`, `nacionalidade_id`, `ocupacao_id` | FKs NULL | interno/restrito | N |
@@ -327,7 +327,7 @@ Como o legado não possui título, gerar apenas um **título interno provisório
 | `fk_ocorrencia_id` | `vitimas.ocorrencia_id` | resolver pelo rastreamento |
 | `nome` | `vitima_dados_restritos.nome` | nunca copiar para projeção pública |
 | `obs` | `vitima_dados_restritos.observacoes` | restrito por padrão |
-| `idade` | `vitimas.idade` | validar 0–130; fora da faixa gera pendência |
+| `idade` | `vitimas.idade` | validar 0–120; fora da faixa gera pendência |
 | `tutelo_estado` | `vitimas.tutela_estado` | preservar nome semântico corrigido no destino |
 | `pessoa_com_deficiencia` | campo homônimo | cópia booleana |
 | `fk_entidade_tipo_id` | `tipo_entidade_id` | mapa `main_entidadetipo` |
@@ -437,6 +437,6 @@ Essas pendências não impedem criar o esquema. Elas impedem apenas transformaç
 9. Consultas públicas usam exclusivamente `ocorrencia_publicacoes.projecao_publica` e entidades editoriais públicas.
 10. O teste de integridade compara contagens das entidades e relações com o inventário legado.
 
-## 17. Próxima dependência
+## 17. Dependências liberadas
 
-Este contrato libera a T013 para definir Services, comandos, respostas e transições. A implementação física começa apenas nas T040–T046, depois do fechamento do Checkpoint 0.
+Este contrato liberou a T013, concluída em `contracts/services.md`. Com T013 e T014 concluídas, o Checkpoint 0 está fechado. A implementação física permanece nas T040–T046, depois da preparação do ambiente automatizado de testes nas T015–T019.
